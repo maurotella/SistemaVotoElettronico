@@ -2,7 +2,7 @@ package ar1;
 
 import java.util.GregorianCalendar;
 
-public class Persona {
+public abstract class Persona {
 
 	private final String nome;
 	private final String cognome;
