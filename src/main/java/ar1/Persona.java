@@ -10,10 +10,10 @@ public class Persona {
 	private final String codiceFiscale;
 	
 	public Persona (String n, String c, GregorianCalendar dn, String cf) {
-		nome = n;
-		cognome = c;
-		dataNascita = new GregorianCalendar(dn.YEAR, dn.MONTH, dn.DATE);
-		codiceFiscale = cf;
+		this.nome = n;
+		this.cognome = c;
+		this.dataNascita = new GregorianCalendar(dn.YEAR, dn.MONTH, dn.DATE);
+		this.codiceFiscale = cf;
 	}
 	
 }
