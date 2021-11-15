@@ -1,5 +1,3 @@
-package ar1;
-
 import java.util.GregorianCalendar;
 
 public class Scrutatore extends Persona{

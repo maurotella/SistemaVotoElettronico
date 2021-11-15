@@ -1,4 +1,4 @@
-package ar1;
+
 import java.util.GregorianCalendar;
 
 // Definire una classe Elettore che contenga i seguenti attributi e metodi:
@@ -31,10 +31,18 @@ import java.util.GregorianCalendar;
 
 public class Elettore extends Persona {
     public final char sesso;
-    public final String comune, nazione;
-    public final boolean voto;
-    public Elettore (String nome, String cognome, GregorianCalendar dataNascita, String cf, char sesso, String comune, String nazione, boolean voto){
+    public final String comune;
+    public final String nazione;
+    public boolean voto;
+    public Elettore (String nome, String cognome, GregorianCalendar dataNascita, String cf, char sesso, String comune, String nazione){
             super(nome, cognome, dataNascita, cf);
-                
+            this.sesso = sesso;
+            this.comune = comune;
+            this.nazione = nazione;
+            this.voto = false;
+    }
+
+    public void esprimi_voto (boolean voto){
+        this.voto = voto;
     }
 }
