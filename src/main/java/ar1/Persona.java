@@ -14,4 +14,10 @@ public class Persona {
 		this.codiceFiscale = cf;
 	}
 	
+    public getDataNascita toString(){
+        String str = "";
+        str += dataNascita.get(Calendar.DAY_OF_MONTH) + "-" + dataNascita.get(Calendar.MONTH) + "-" + dataNascita.get(Calendar.YEAR);
+        return str;
+    }
+	
 }

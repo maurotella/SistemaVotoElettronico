@@ -1,4 +1,3 @@
-
 import java.util.GregorianCalendar;
 
 // Definire una classe Elettore che contenga i seguenti attributi e metodi:
@@ -28,12 +27,28 @@ import java.util.GregorianCalendar;
 //     5 caratteri alfanumerici del codice fiscale, controllando solo che (i) lettere e numeri compaiano
 //     nella giusta posizione e che (ii) per chi è nato all’estero la lettera sia Z).
 
+//________________
+
+	precondizioni ai metodi
+//	//@ requires <espressione booleana>;
+//	postcondizioni ai metodi
+//	//@ ensures <espressione booleana>;
+//	invarianti di classe
+//	//@ invariant <espressione booleana>;
 
 public class Elettore extends Persona {
     public final char sesso;
     public final String comune;
     public final String nazione;
     public boolean voto;
+    //@ requires nome != NULL && cognome != NULL
+    //@ requires (sesso == 'M' || sesso == 'F')
+    //@ requires ((Calendar.getInstance().get(Calendar.YEAR) - dataNascita.get(Calendar.YEAR)) >= 18)
+    //@ requires Italia + comune
+    /*@ requires (dataCorrente - dataInserita) > 0 
+    	@*/
+    //@requires cF_corretto
+    
     public Elettore (String nome, String cognome, GregorianCalendar dataNascita, String cf, char sesso, String comune, String nazione){
             super(nome, cognome, dataNascita, cf);
             this.sesso = sesso;
@@ -41,8 +56,10 @@ public class Elettore extends Persona {
             this.nazione = nazione;
             this.voto = false;
     }
-
+    
+    //@ requires this.voto == false;
     public void esprimi_voto (boolean voto){
         this.voto = voto;
     }
+    
 }

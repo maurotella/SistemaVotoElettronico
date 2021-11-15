@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<libraryInfos>
+<libraryInfo home="C:\Users\Marco\Desktop\eclipsePSS_win\Java" version="1.7.0_75">
+<bootpath>
+<entry path="C:\Users\Marco\Desktop\eclipsePSS_win\Java\lib\resources.jar"/>
+<entry path="C:\Users\Marco\Desktop\eclipsePSS_win\Java\lib\rt.jar"/>
+<entry path="C:\Users\Marco\Desktop\eclipsePSS_win\Java\lib\sunrsasign.jar"/>
+<entry path="C:\Users\Marco\Desktop\eclipsePSS_win\Java\lib\jsse.jar"/>
+<entry path="C:\Users\Marco\Desktop\eclipsePSS_win\Java\lib\jce.jar"/>
+<entry path="C:\Users\Marco\Desktop\eclipsePSS_win\Java\lib\charsets.jar"/>
+<entry path="C:\Users\Marco\Desktop\eclipsePSS_win\Java\lib\jfr.jar"/>
+<entry path="C:\Users\Marco\Desktop\eclipsePSS_win\Java\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="C:\Users\Marco\Desktop\eclipsePSS_win\Java\lib\ext"/>
+<entry path="C:\WINDOWS\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="C:\Users\Marco\Desktop\eclipsePSS_win\Java\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+</libraryInfos>
