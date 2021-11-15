@@ -1,4 +1,5 @@
 package ar1;
+import java.util.GregorianCalendar;
 
 // Definire una classe Elettore che contenga i seguenti attributi e metodi:
 //     • nome e cognome
@@ -14,15 +15,25 @@ package ar1;
 //     interessa sapere cosa abbia votato l’elettore, ma che abbia votato. Serve solo per poter specificare
 //     alcune condizioni JML)
 
+//_________________
+
+// Esprimere in JML le seguenti proprietà (sta a voi decidere se come invarianti, pre- o post- condizioni):
+//     • il nome e il cognome non possono essere nulli
+//     • un elettore può essere o maschio o femmina
+//     • un elettore può votare solo se maggiorenne
+//     • un elettore può votare al più una volta
+//     • se l’elettore è nato in Italia, allora deve essere indicato anche il comune di nascita
+//     • la data di nascita deve essere valida (ovvero non successiva alla data corrente)
+//     • il codice fiscale deve essere valido (nel vostro caso potete fare un controllo semplificato degli ultimi
+//     5 caratteri alfanumerici del codice fiscale, controllando solo che (i) lettere e numeri compaiano
+//     nella giusta posizione e che (ii) per chi è nato all’estero la lettera sia Z).
+
 
 public class Elettore extends Persona {
     public final char sesso;
     public final String comune, nazione;
     public final boolean voto;
-    public Elettore (
-        String nome, String cognome, GregorianCalendar dataNascita, String cf, 
-            char sesso, String comune, String nazione, boolean voto
-        ){
+    public Elettore (String nome, String cognome, GregorianCalendar dataNascita, String cf, char sesso, String comune, String nazione, boolean voto){
             super(nome, cognome, dataNascita, cf);
                 
     }
