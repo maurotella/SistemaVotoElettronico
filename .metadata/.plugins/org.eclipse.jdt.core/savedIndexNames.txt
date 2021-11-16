@@ -1,16 +1,1 @@
 INDEX VERSION 1.127+C:\Users\Marco\Desktop\SistemaVotoElettronico\.metadata\.plugins\org.eclipse.jdt.core
-1473155763.index
-1251331252.index
-1356445257.index
-3665721064.index
-4192847038.index
-224079133.index
-3776634249.index
-639611591.index
-588270845.index
-1662453672.index
-3507581124.index
-3040624394.index
-2949338174.index
-784507239.index
-2139662360.index

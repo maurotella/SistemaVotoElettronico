@@ -23,13 +23,14 @@ import java.util.GregorianCalendar;
 //     • un elettore può votare al più una volta
 //     • se l’elettore è nato in Italia, allora deve essere indicato anche il comune di nascita
 //     • la data di nascita deve essere valida (ovvero non successiva alla data corrente)
-//     • il codice fiscale deve essere valido (nel vostro caso potete fare un controllo semplificato degli ultimi
-//     5 caratteri alfanumerici del codice fiscale, controllando solo che (i) lettere e numeri compaiano
-//     nella giusta posizione e che (ii) per chi è nato all’estero la lettera sia Z).
+//     • il codice fiscale deve essere valido 
+//	   (nel vostro caso potete fare un controllo semplificato degli ultimi
+//     5 caratteri alfanumerici del codice fiscale, controllando solo che 
+//		(i) lettere e numeri compaiano nella giusta posizione e che 
+//		(ii) per chi è nato all’estero la lettera sia Z).
 
 //________________
-
-	precondizioni ai metodi
+//	precondizioni ai metodi
 //	//@ requires <espressione booleana>;
 //	postcondizioni ai metodi
 //	//@ ensures <espressione booleana>;
@@ -41,10 +42,10 @@ public class Elettore extends Persona {
     public final String comune;
     public final String nazione;
     public boolean voto;
-    //@ requires nome != NULL && cognome != NULL
+    //@ requires (nome != NULL && cognome != NULL)
     //@ requires (sesso == 'M' || sesso == 'F')
     //@ requires ((Calendar.getInstance().get(Calendar.YEAR) - dataNascita.get(Calendar.YEAR)) >= 18)
-    //@ requires Italia + comune
+    //@ requires (nazione == 'ITA' <==> comune != NULL
     /*@ requires (dataCorrente - dataInserita) > 0 
     	@*/
     //@requires cF_corretto
