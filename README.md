@@ -1,7 +1,7 @@
 # SistemaVotoElettronico
 Progetto di Ingegneria del Software che ha come obiettivo la creazione di un sistema di voto elettronico.
 
-//<!---
+<!---
 ### Esempi di JML
 - Condizioni per il metodo ```sqrt```: 
 ```java
@@ -13,4 +13,4 @@ Progetto di Ingegneria del Software che ha come obiettivo la creazione di un sis
 @ && \result >= 0;
 @*/```
 
-//-->
+-->
