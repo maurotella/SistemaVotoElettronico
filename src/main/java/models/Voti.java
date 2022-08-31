@@ -1,0 +1,33 @@
+package models;
+/**
+ * Classe astratta usata dalle varie classi che tengono conto
+ * delle votazioni
+ */
+public abstract class Voti {
+
+    // sessione relativa ai voti
+    private Sessione sessione;
+    // numero di votazioni effetuate dagli elettori
+    private int numeroVoti;
+
+    /**
+     * Costruttore astratto di un contatore di voti
+     *
+     * @param s sessione relativa
+     */
+    public Voti (Sessione s) {
+        if (s==null)
+            throw new IllegalArgumentException("Sessione null");
+        numeroVoti = 0;
+    }
+
+    /**
+     * Restituisce il numero di votazioni effetuate
+     *
+     * @return numero di votazioni
+     */
+    public int getNumeroVoti () {
+        return numeroVoti;
+    }
+
+}
