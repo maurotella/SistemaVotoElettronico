@@ -18,7 +18,17 @@ public abstract class Voti {
     public Voti (Sessione s) {
         if (s==null)
             throw new IllegalArgumentException("Sessione null");
+        sessione = s;
         numeroVoti = 0;
+    }
+
+    /**
+     * Restituisce la sessione relativa ai voti
+     *
+     * @return la sessione
+     */
+    public Sessione getSessione () {
+        return sessione;
     }
 
     /**

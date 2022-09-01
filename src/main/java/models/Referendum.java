@@ -71,7 +71,7 @@ public class Referendum extends Voti {
     @Override
     public String toString () {
         return String.format(
-          "Referendum: %s\nsì:%d\nno%d",
+          "Referendum: %s\nsi: %d\nno: %d",
                 quesito,
                 votiFavorevoli,
                 votiSfavorevoli

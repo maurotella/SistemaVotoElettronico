@@ -4,14 +4,14 @@ import java.time.LocalDate;
 
 public class Sessione {
 
-    private int id;
-    private String titolo;
-    private LocalDate dataApertura;
-    private LocalDate dataChiusura;
-    private TipoVotazione tipoVotazione;
-    private TipoScrutinio tipoScrutinio;
+    private final int id;
+    private final String titolo;
+    private final LocalDate dataApertura;
+    private final LocalDate dataChiusura;
+    private final TipoVotazione tipoVotazione;
+    private final TipoScrutinio tipoScrutinio;
     private boolean chiusa;
-    private Gestore gestore;
+    private final Gestore gestore;
 
     public Sessione (
             int i,
@@ -36,6 +36,10 @@ public class Sessione {
             throw new IllegalArgumentException("tipoScrutinio null");
         if (g==null)
             throw new IllegalArgumentException("gestore null");
+        if (tv==TipoVotazione.REFERENDUM && !(ts==TipoScrutinio.REFERENDUM || ts==TipoScrutinio.REFERENDUM_QUORUM))
+            throw new IllegalArgumentException("Tipo votazione e scrutinio incompatibili");
+        if (tv!=TipoVotazione.REFERENDUM && (ts==TipoScrutinio.REFERENDUM || ts==TipoScrutinio.REFERENDUM_QUORUM))
+            throw new IllegalArgumentException("Tipo votazione e scrutinio incompatibili");
         id = i;
         titolo = t;
         dataApertura = da;
@@ -48,29 +52,16 @@ public class Sessione {
 
     @Override
     public String toString() {
-        return "Sessione{" +
-                "id=" + id +
-                ", titolo='" + titolo + '\'' +
-                ", dataApertura=" + dataApertura +
-                ", dataChiusura=" + dataChiusura +
-                ", tipoVotazione=" + tipoVotazione +
-                ", tipoScrutinio=" + tipoScrutinio +
-                ", chiusa=" + chiusa +
-                ", gestore=" + gestore.getPersona().getNominativo() +
+        return "Sessione{" + "\n" +
+                "  id=" + id + "\n" +
+                "  titolo='" + titolo + "\'\n" +
+                "  dataApertura=" + dataApertura + "\n" +
+                "  dataChiusura=" + dataChiusura + "\n" +
+                "  tipoVotazione=" + tipoVotazione + "\n" +
+                "  tipoScrutinio=" + tipoScrutinio + "\n" +
+                "  chiusa=" + chiusa + "\n" +
+                "  gestore=" + gestore.getPersona().getNominativo() + "\n" +
                 '}';
     }
 
-    public static void main (String[] args) {
-        Persona P = new Persona("Mario","Rossi","0123456789ABDEFG","Rho",LocalDate.of(1999,07,13));
-        Sessione S = SessioneBuilder.newBuilder(1)
-                .titolo("Prova")
-                .dataApertura(LocalDate.of(2022,9,10))
-                .dataChiusura(LocalDate.of(2022,10,10))
-                .tipoVotazione(TipoVotazione.CATEGORICO)
-                .tipoScrutinio(TipoScrutinio.REFERENDUM)
-                .gestore(new Gestore(P,"Gino"))
-                .build();
-
-        System.out.println(S.toString());
-    }
 }

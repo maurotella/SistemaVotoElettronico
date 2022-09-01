@@ -11,6 +11,12 @@ public class Gestore {
     //Sessioni create dal gestore
     private ArrayList<Integer> sessioni;
 
+    /**
+     * Crea il gestore di persona p e username u
+     *
+     * @param p persona
+     * @param u username
+     */
     public Gestore (Persona p, String u){
         if (p==null)
             throw new IllegalArgumentException("Persona null");
