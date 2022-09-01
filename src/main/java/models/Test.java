@@ -16,7 +16,7 @@ public class Test {
                 .gestore(new Gestore(P,"Gino"))
                 .build();
 
-        Referendum R = new Referendum(S, "Eutanasia legele?");
+        Referendum R = new Referendum(S, "Eutanasia legale?");
 
         R.addNo();
 
