@@ -8,16 +8,15 @@ public class Elettore extends Utente {
     private final boolean dirittoVotoDistanza;
 
     /**
-     * Crea l'elettore con codice fiscale cf, username u
+     * Crea l'elettore con codice fiscale cf,
      * diritto di voto dv e diritto di voto a distanza dvd
      *
      * @param cf codice fiscale
-     * @param u username
      * @param dv diritto di voto
      * @param dvd diritto di voto a distanza
      */
-    public Elettore (String cf, String u, boolean dv, boolean dvd){
-        super(cf,u);
+    public Elettore (String cf, boolean dv, boolean dvd){
+        super(cf);
         dirittoVoto = dv;
         dirittoVotoDistanza = dvd;
     }
@@ -49,7 +48,6 @@ public class Elettore extends Utente {
     public String toString() {
         return "Elettore{\n" +
                 "    CF=" + super.getCF() + "\n" +
-                "    username=" + super.getUsername() + "\n" +
                 "    dirittoVoto=" + dirittoVoto + "\n" +
                 "    dirittoVotoDistanza=" + dirittoVotoDistanza + "\n" +
                 '}';

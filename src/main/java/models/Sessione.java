@@ -68,16 +68,15 @@ public class Sessione {
 
     @Override
     public String toString() {
-        return "Sessione{" + "\n" +
-                "  id=" + id + "\n" +
-                "  titolo='" + titolo + "\'\n" +
-                "  dataApertura=" + dataApertura + "\n" +
-                "  dataChiusura=" + dataChiusura + "\n" +
-                "  tipoVotazione=" + tipoVotazione + "\n" +
-                "  tipoScrutinio=" + tipoScrutinio + "\n" +
-                "  chiusa=" + chiusa + "\n" +
-                "  gestore=" + gestore.getUsername() + "\n" +
+        return "Sessione{\n" +
+                "    id=" + id + "\n" +
+                "    titolo='" + titolo + '\'' + "\n" +
+                "    dataApertura=" + dataApertura + "\n" +
+                "    dataChiusura=" + dataChiusura + "\n" +
+                "    tipoVotazione=" + tipoVotazione + "\n" +
+                "    tipoScrutinio=" + tipoScrutinio + "\n" +
+                "    chiusa=" + chiusa + "\n" +
+                "    gestore=" + gestore + "\n" +
                 '}';
     }
-
 }

@@ -3,13 +3,12 @@ package models;
 public class Gestore extends Utente {
 
     /**
-     * Crea il gestore con codice fiscale CF e username u
+     * Crea il gestore con codice fiscale CF
      *
      * @param CF codice fiscale
-     * @param u username
      */
-    public Gestore (String CF, String u){
-        super(CF, u);
+    public Gestore (String CF){
+        super(CF);
     }
 
     @Override
