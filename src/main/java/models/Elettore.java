@@ -1,23 +1,23 @@
 package models;
 
-public class Elettore {
+public class Elettore extends Utente {
 
-    //Persona relativa all'elettore
-    private Persona P;
-    //Username dell'elettore
-    private String username;
     //Indica se ha diritto di voto
-    private boolean dirittoVoto;
+    private final boolean dirittoVoto;
     //Indica se ha diritto di voto a distanza
-    private boolean dirittoVotoDistanza;
+    private final boolean dirittoVotoDistanza;
 
-    public Elettore (Persona p, String u, boolean dv, boolean dvd){
-        if (p==null)
-            throw new IllegalArgumentException("Persona null");
-        if (u==null || u.length()==0)
-            throw new IllegalArgumentException("Username vuoto o null");
-        username = u;
-        P = p;
+    /**
+     * Crea l'elettore con codice fiscale cf, username u
+     * diritto di voto dv e diritto di voto a distanza dvd
+     *
+     * @param cf codice fiscale
+     * @param u username
+     * @param dv diritto di voto
+     * @param dvd diritto di voto a distanza
+     */
+    public Elettore (String cf, String u, boolean dv, boolean dvd){
+        super(cf,u);
         dirittoVoto = dv;
         dirittoVotoDistanza = dvd;
     }
@@ -27,7 +27,7 @@ public class Elettore {
      *
      * @return booleano che indica il diritto di voto
      */
-    public boolean dirittoVoto () {
+    public boolean dirittoVoto() {
         return dirittoVoto;
     }
 
@@ -36,17 +36,22 @@ public class Elettore {
      *
      * @return booleano che indica il diritto di voto
      */
-    public boolean dirittoVotoDistanza () {
+    public boolean dirittoVotoDistanza() {
         return dirittoVotoDistanza;
     }
 
     @Override
-    public String toString (){
-        return String.format(
-                "Elettore: %s\n%s",
-                username,
-                P.getNominativo()
-        );
+    public TipoUtente tipoUtente() {
+        return TipoUtente.ELETTORE;
     }
 
+    @Override
+    public String toString() {
+        return "Elettore{\n" +
+                "    CF=" + super.getCF() + "\n" +
+                "    username=" + super.getUsername() + "\n" +
+                "    dirittoVoto=" + dirittoVoto + "\n" +
+                "    dirittoVotoDistanza=" + dirittoVotoDistanza + "\n" +
+                '}';
+    }
 }

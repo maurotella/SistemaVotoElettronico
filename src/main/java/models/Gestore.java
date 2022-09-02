@@ -1,48 +1,25 @@
 package models;
 
-import java.util.ArrayList;
-
-public class Gestore {
-
-    //Persona relativa all'elettore
-    private final Persona P;
-    //Username dell'elettore
-    private String username;
-    //Sessioni create dal gestore
-    private ArrayList<Integer> sessioni;
+public class Gestore extends Utente {
 
     /**
-     * Crea il gestore di persona p e username u
+     * Crea il gestore con codice fiscale CF e username u
      *
-     * @param p persona
+     * @param CF codice fiscale
      * @param u username
      */
-    public Gestore (Persona p, String u){
-        if (p==null)
-            throw new IllegalArgumentException("Persona null");
-        if (u==null || u.length()==0)
-            throw new IllegalArgumentException("Username vuoto o null");
-        username = u;
-        P = p;
-        sessioni = new ArrayList<Integer>();
-    }
-
-    /**
-     * Resituisce la persona relativa al gestore
-     *
-     * @return persona
-     */
-    public Persona getPersona () {
-        return P;
+    public Gestore (String CF, String u){
+        super(CF, u);
     }
 
     @Override
-    public String toString (){
-        return String.format(
-                "Gestore: %s\n%s",
-                username,
-                P.getNominativo()
-        );
+    public TipoUtente tipoUtente() {
+        return TipoUtente.GESTORE;
+    }
+
+    public String toString() {
+        return super.toString()
+                .replaceFirst("Utente", "Gestore");
     }
 
 }

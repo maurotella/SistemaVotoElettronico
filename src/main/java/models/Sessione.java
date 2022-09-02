@@ -50,6 +50,22 @@ public class Sessione {
         gestore = g;
     };
 
+    /**
+     * Chiude la sessione di voto
+     */
+    public void chiudi () {
+        chiusa = true;
+    }
+
+    /**
+     * Indica se la sessione è chiusa o meno
+     *
+     * @return true se la sessione è chiusa, false altrimenti
+     */
+    public boolean chiusa () {
+        return chiusa;
+    }
+
     @Override
     public String toString() {
         return "Sessione{" + "\n" +
@@ -60,7 +76,7 @@ public class Sessione {
                 "  tipoVotazione=" + tipoVotazione + "\n" +
                 "  tipoScrutinio=" + tipoScrutinio + "\n" +
                 "  chiusa=" + chiusa + "\n" +
-                "  gestore=" + gestore.getPersona().getNominativo() + "\n" +
+                "  gestore=" + gestore.getUsername() + "\n" +
                 '}';
     }
 

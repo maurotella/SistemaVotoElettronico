@@ -4,23 +4,26 @@ import java.time.LocalDate;
 
 public class Test {
 
+    public static void print (Object S) {
+        System.out.println(S.toString());
+    }
+
     public static void main (String[] args) {
 
-        Persona P = new Persona("Mario","Rossi","0123456789ABDEFG",'M',"ITA","Rho", LocalDate.of(1999,07,13));
+        Persona P = new Persona("Mario","Rossi","RSSMRA99L13H264X",'M',"ITA","Rho", LocalDate.of(1999,07,13));
+        Gestore G = new Gestore("RSSMRA99L13H264X","Gino");
         Sessione S = SessioneBuilder.newBuilder(1)
                 .titolo("Prova")
                 .dataApertura(LocalDate.of(2022,9,10))
                 .dataChiusura(LocalDate.of(2022,10,10))
                 .tipoVotazione(TipoVotazione.REFERENDUM)
                 .tipoScrutinio(TipoScrutinio.REFERENDUM)
-                .gestore(new Gestore(P,"Gino"))
+                .gestore(G)
                 .build();
 
         Referendum R = new Referendum(S, "Eutanasia legale?");
 
-        R.addNo();
-
-        System.out.println(R);
+        print(G);
 
     }
 
