@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="64a45fb0-8106-4000-ad83-47322f1606ae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
+=======
+    <list default="true" id="64a45fb0-8106-4000-ad83-47322f1606ae" name="Default Changelist" comment="Aggiunto JavaFX" />
+>>>>>>> marco
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -137,6 +141,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
+=======
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+  }
+}</component>
+>>>>>>> marco
   <component name="RecentsManager">
     <key name="CreateBuilderDialog.RecentsKey">
       <recent name="models" />
@@ -274,12 +287,21 @@
       <option name="project" value="LOCAL" />
       <updated>1662124088463</updated>
     </task>
+<<<<<<< HEAD
     <task id="LOCAL-00008" summary="Tolti spazi">
       <created>1662126882056</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
       <updated>1662126882056</updated>
+=======
+    <task id="LOCAL-00008" summary="Aggiunto JavaFX">
+      <created>1662125681474</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1662125681475</updated>
+>>>>>>> marco
     </task>
     <option name="localTasksCounter" value="9" />
     <servers />
@@ -387,8 +409,13 @@
     <MESSAGE value="Creata classe astratta Utente&#10;+ altre cose" />
     <MESSAGE value="Inziato data" />
     <MESSAGE value="BO" />
+<<<<<<< HEAD
     <MESSAGE value="Tolti spazi" />
     <option name="LAST_COMMIT_MESSAGE" value="Tolti spazi" />
+=======
+    <MESSAGE value="Aggiunto JavaFX" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiunto JavaFX" />
+>>>>>>> marco
   </component>
   <component name="editorHistoryManager">
     <entry file="jar://C:/Program Files/Java/jdk-18.0.2.1/lib/src.zip!/java.base/java/lang/Object.java">
