@@ -5,12 +5,57 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64a45fb0-8106-4000-ad83-47322f1606ae" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/GestoreDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/ImplGestoreDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/Test.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/Candidato.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/Elettore.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/Gestore.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/Partito.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/Persona.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/PersonaBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/Referendum.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/Sessione.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/SessioneBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/Test.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/TipoScrutinio.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/TipoVotazione.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/Utente$TipoUtente.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/Utente.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/Voti.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/VotiCandidati.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/VotoElettore.class" beforeDir="false" />
     </list>
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="346">
+              <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="50">
+              <caret line="2" column="5" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -53,8 +98,9 @@
         <option value="$PROJECT_DIR$/src/main/java/data/GestoreDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/data/ImplGestoreDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/models/Sessione.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/data/Test.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -94,7 +140,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -141,22 +186,29 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
-  }
-}]]></component>
   <component name="RecentsManager">
     <key name="CreateBuilderDialog.RecentsKey">
       <recent name="models" />
     </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager" selected="Application.Test (1)">
     <configuration name="Persona" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -293,7 +345,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19189766" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19402985" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -323,7 +375,28 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
           </value>
         </entry>
       </map>
@@ -337,7 +410,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="BO" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/../../../../Program Files/Java/jdk-18.0.2.1/lib/src.zip!/java.base/java/lang/Object.java">
+    <entry file="jar://C:/Program Files/Java/jdk-18.0.2.1/lib/src.zip!/java.base/java/lang/Object.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="206">
           <caret line="254" column="18" selection-start-line="254" selection-start-column="18" selection-end-line="254" selection-end-column="18" />
@@ -568,13 +641,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="18" column="34" lean-forward="true" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
+        <state relative-caret-position="346">
+          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="2" column="5" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
         </state>
       </provider>
     </entry>
