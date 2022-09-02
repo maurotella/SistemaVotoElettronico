@@ -2,6 +2,7 @@ C:\Users\mauro\Documenti\SVE\src\main\java\models\Test.java
 C:\Users\mauro\Documenti\SVE\src\main\java\models\Sessione.java
 C:\Users\mauro\Documenti\SVE\src\main\java\models\TipoScrutinio.java
 C:\Users\mauro\Documenti\SVE\src\main\java\models\PersonaBuilder.java
+C:\Users\mauro\Documenti\SVE\src\main\java\data\ImplGestoreDAO.java
 C:\Users\mauro\Documenti\SVE\src\main\java\models\Gestore.java
 C:\Users\mauro\Documenti\SVE\src\main\java\models\VotiCandidati.java
 C:\Users\mauro\Documenti\SVE\src\main\java\models\Candidato.java
@@ -10,5 +11,9 @@ C:\Users\mauro\Documenti\SVE\src\main\java\models\Referendum.java
 C:\Users\mauro\Documenti\SVE\src\main\java\models\Partito.java
 C:\Users\mauro\Documenti\SVE\src\main\java\models\Voti.java
 C:\Users\mauro\Documenti\SVE\src\main\java\models\Persona.java
+C:\Users\mauro\Documenti\SVE\src\main\java\data\Test.java
+C:\Users\mauro\Documenti\SVE\src\main\java\models\Utente.java
+C:\Users\mauro\Documenti\SVE\src\main\java\models\VotoElettore.java
 C:\Users\mauro\Documenti\SVE\src\main\java\models\SessioneBuilder.java
+C:\Users\mauro\Documenti\SVE\src\main\java\data\GestoreDAO.java
 C:\Users\mauro\Documenti\SVE\src\main\java\models\TipoVotazione.java

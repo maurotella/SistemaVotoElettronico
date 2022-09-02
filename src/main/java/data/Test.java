@@ -1,6 +1,7 @@
 package data;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import models.Gestore;
 
 public class Test {
 
@@ -14,10 +15,12 @@ public class Test {
         String enc = BCrypt.hashpw(psw, BCrypt.gensalt());
         String enc2 = BCrypt.hashpw(psw2, BCrypt.gensalt());
 
-        print(enc);
-        print(enc2);
-        print("MAGGIORANZA_ASSOLUTA".length());
+        DbManager.getInstance().connect();
 
+        Gestore G = ImplGestoreDAO.getIstance()
+                .login("RBNSRA92R50L113H", "3$ca34");
+
+        System.out.println(G);
     }
 
 }

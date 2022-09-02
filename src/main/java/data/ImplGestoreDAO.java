@@ -2,6 +2,12 @@ package data;
 
 import models.Gestore;
 import models.Sessione;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -26,7 +32,22 @@ public class ImplGestoreDAO implements GestoreDAO {
 
     @Override
     public Gestore login(String username, String password) {
-        return null;
+        Connection db = DbManager.getInstance().getDb();
+        String query = "SELECT * FROM \"Gestori\" WHERE cf=?";
+        String checkPsw = "";
+        try {
+            PreparedStatement stmt = db.prepareStatement(query);
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            checkPsw = rs.getString("password");
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return BCrypt.checkpw(password,checkPsw)? new Gestore(username):null;
     }
 
     @Override
