@@ -20,7 +20,7 @@ public class Test {
         Gestore G = ImplGestoreDAO.getIstance()
                 .login("RBNSRA92R50L113H", "3$ca34");
 
-        System.out.println(G);
+        System.out.println(ImplGestoreDAO.getIstance().getSessioni(G));
     }
 
 }
