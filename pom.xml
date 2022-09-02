@@ -18,6 +18,13 @@
             <artifactId>spring-security-crypto</artifactId>
             <version>5.2.2.RELEASE</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>18.0.2</version>
+        </dependency>
     </dependencies>
 
 </project>
