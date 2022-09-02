@@ -16,6 +16,7 @@ public class Test {
 
         print(enc);
         print(enc2);
+        print("MAGGIORANZA_ASSOLUTA".length());
 
     }
 
