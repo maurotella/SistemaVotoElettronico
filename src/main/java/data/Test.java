@@ -1,5 +1,6 @@
 package data;
 
+import models.TipoUtente;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import models.Gestore;
 
@@ -20,7 +21,7 @@ public class Test {
         Gestore G = ImplGestoreDAO.getIstance()
                 .login("RBNSRA92R50L113H", "3$ca34");
 
-        System.out.println(ImplGestoreDAO.getIstance().getSessioni(G));
+        System.out.println(Auditing.getInstance().registraAzione(AzioniAuditing.APERTURA_SESSIONE, TipoUtente.GESTORE, G));
     }
 
 }

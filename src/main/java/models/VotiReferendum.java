@@ -2,7 +2,7 @@ package models;
 /**
  * Classe che tiene i conti sulle votazioni relative a un referendum
  */
-public class Referendum extends Voti {
+public class VotiReferendum extends Voti {
 
     // quesito referendario
     private String quesito;
@@ -18,7 +18,7 @@ public class Referendum extends Voti {
      * @param s sessione relativa alla votazione
      * @param q quesito referendum
      */
-    public Referendum (Sessione s, String q) {
+    public VotiReferendum (Sessione s, String q) {
         super(s);
         if (q==null || q.length()==0)
             throw new IllegalArgumentException("Quesito mancante");

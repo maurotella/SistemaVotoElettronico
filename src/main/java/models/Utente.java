@@ -36,9 +36,4 @@ public abstract class Utente {
                 '}';
     }
 
-    public enum TipoUtente {
-        ELETTORE,
-        GESTORE
-    }
-
 }
