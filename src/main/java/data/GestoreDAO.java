@@ -7,13 +7,13 @@ import java.util.List;
 public interface GestoreDAO {
 
     /**
-     * Dati username e password, effettua l'accesso
-     * restituendo il Gestore corridpondente
+     * Dati username e password ne verifica la correttezza;
+     * Registra l'eventuale login (se corretto) tramite auditing
      *
      * @param username
      * @param password
-     * @return il Gestore corrispondente se username
-     *  e password corretti, null altrimenti
+     * @return Il Gestore relativo alle credenziali se corrette,
+     *         null altrimenti
      */
     public Gestore login(String username, String password);
 

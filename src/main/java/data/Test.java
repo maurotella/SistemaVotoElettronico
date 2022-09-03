@@ -18,10 +18,12 @@ public class Test {
 
         DbManager.getInstance().connect();
 
-        Gestore G = ImplGestoreDAO.getIstance()
-                .login("RBNSRA92R50L113H", "3$ca34");
+        //Gestore G = ImplGestoreDAO.getIstance()
+        //      .login("RBNSRA92R50L113H", "3$ca34");
 
-        System.out.println(Auditing.getInstance().registraAzione(AzioniAuditing.APERTURA_SESSIONE, TipoUtente.GESTORE, G));
+        System.out.println(
+                ImplElettoreDAO.getInstance().getSessioni()
+        );
     }
 
 }

@@ -3,90 +3,81 @@ package data;
 import models.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Classe che utilizza il pattern SINGLETON
  */
-public class ImplGestoreDAO implements GestoreDAO {
+public class ImplElettoreDAO implements ElettoreDAO {
 
-    private static ImplGestoreDAO istance = null;
+    private static ImplElettoreDAO istance = null;
 
-    private ImplGestoreDAO() {};
+    private ImplElettoreDAO() {}
 
     /**
      * Metodo che implemente il pattern singleton
      *
      * @return l'unica istanza
      */
-    public static ImplGestoreDAO getIstance() {
+    public static ImplElettoreDAO getInstance() {
         if (istance==null)
-            istance = new ImplGestoreDAO();
+            istance = new ImplElettoreDAO();
         return istance;
-    };
+    }
 
     @Override
-    public Gestore login(String username, String password) {
+    public Elettore login(String username, String password) {
         Connection db = DbManager.getInstance().getDb();
-        String query = "SELECT * FROM \"Gestori\" WHERE cf=?";
-        String checkPsw = "";
+        String query = "SELECT * FROM \"Elettori\" WHERE cf=?";
+        String checkPsw;
+        boolean dv;
+        boolean dvd;
         try {
             PreparedStatement stmt = db.prepareStatement(query);
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
             rs.next();
             checkPsw = rs.getString("password");
+            dv = rs.getBoolean("diritto_voto");
+            dvd = rs.getBoolean("diritto_voto_distanza");
             rs.close();
             stmt.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
         }
-        Gestore G = null;
-        if (BCrypt.checkpw(password,checkPsw)) {
-            G = new Gestore(username);
+        Elettore E = null;
+        if (BCrypt.checkpw(password, checkPsw)) {
+            E = new Elettore(username, dv, dvd);
             Auditing.getInstance().registraAzione(
                     AzioniAuditing.LOGIN,
-                    TipoUtente.GESTORE,
-                    G
+                    TipoUtente.ELETTORE,
+                    E
             );
         }
-        return G;
+        return E;
     }
 
-    /**
-     * Trova tutte le sessioni che il Gestore ha creato e che
-     * quindi può gestire
-     *
-     * @param G il gestore
-     * @return una lista di sessioni
-     */
     @Override
-    public List<Sessione> getSessioni(Gestore G) {
+    public List<Sessione> getSessioni() {
         Connection db = DbManager.getInstance().getDb();
-        String query = "SELECT * FROM \"Sessioni\" WHERE gestore=?";
+        String query = "SELECT * FROM \"Sessioni\" WHERE chiusa=false";
         ArrayList<Sessione> res = new ArrayList<>();
         try {
             PreparedStatement stmt = db.prepareStatement(query);
-            stmt.setString(1, G.getCF());
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 res.add(SessioneBuilder.newBuilder(rs.getInt("id"))
-                    .titolo(rs.getString("titolo"))
-                    .dataApertura(dateToLocal(rs.getDate("data_apertura")))
-                    .dataChiusura(dateToLocal(rs.getDate("data_chiusura")))
-                    .tipoVotazione(TipoVotazione.valueOf(rs.getString("tipo_votazione")))
-                    .tipoScrutinio(TipoScrutinio.valueOf(rs.getString("tipo_scrutinio")))
-                    .gestore(rs.getString("gestore"))
-                    .build()
+                        .titolo(rs.getString("titolo"))
+                        .dataApertura(dateToLocal(rs.getDate("data_apertura")))
+                        .dataChiusura(dateToLocal(rs.getDate("data_chiusura")))
+                        .tipoVotazione(TipoVotazione.valueOf(rs.getString("tipo_votazione")))
+                        .tipoScrutinio(TipoScrutinio.valueOf(rs.getString("tipo_scrutinio")))
+                        .gestore(rs.getString("gestore"))
+                        .build()
                 );
             }
             rs.close();
