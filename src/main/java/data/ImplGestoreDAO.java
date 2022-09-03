@@ -23,7 +23,7 @@ public class ImplGestoreDAO implements GestoreDAO {
     private ImplGestoreDAO() {};
 
     /**
-     * Classe che implemente il pattern singleton
+     * Metodo che implemente il pattern singleton
      *
      * @return l'unica istanza
      */
@@ -33,6 +33,15 @@ public class ImplGestoreDAO implements GestoreDAO {
         return istance;
     };
 
+    /**
+     * Dati username e password ne verifica la correttezza;
+     * Registra l'eventuale login (se corretto) tramite auditing
+     *
+     * @param username
+     * @param password
+     * @return Il Gestore relativo alle credenziali se corrette,
+     *         null altrimenti
+     */
     @Override
     public Gestore login(String username, String password) {
         Connection db = DbManager.getInstance().getDb();
@@ -50,9 +59,24 @@ public class ImplGestoreDAO implements GestoreDAO {
             System.out.println(e.getMessage());
             return null;
         }
-        return BCrypt.checkpw(password,checkPsw)? new Gestore(username):null;
+        Gestore G = null;
+        if (BCrypt.checkpw(password,checkPsw))
+            Auditing.getInstance().registraAzione(
+                    AzioniAuditing.LOGIN,
+                    TipoUtente.GESTORE,
+                    G
+            );
+            G = new Gestore(username);
+        return G;
     }
 
+    /**
+     * Trova tutte le sessioni che il Gestore ha creato e che
+     * quindi può gestire
+     *
+     * @param G il gestore
+     * @return una lista di sessioni
+     */
     @Override
     public List<Sessione> getSessioni(Gestore G) {
         Connection db = DbManager.getInstance().getDb();

@@ -5,9 +5,7 @@ import models.Utente;
 
 import java.sql.*;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.HashMap;
-import java.util.Locale;
 
 /**
  * Classe che ha lo scopo di salvare dei log
