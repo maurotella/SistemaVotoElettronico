@@ -108,8 +108,8 @@ ALTER SEQUENCE sve."Azioni_auditing_id_seq" OWNED BY sve."Azioni_auditing".id;
 CREATE TABLE sve."Elettori" (
     cf character varying(16) NOT NULL,
     password character varying(60),
-    dirittovoto boolean,
-    dirittovotodistanza boolean
+    diritto_voto boolean,
+    diritto_voto_distanza boolean
 );
 
 
@@ -191,6 +191,19 @@ ALTER SEQUENCE sve."Sessione_id_seq" OWNED BY sve."Sessioni".id;
 
 
 --
+-- Name: VotiElettori; Type: TABLE; Schema: sve; Owner: postgres
+--
+
+CREATE TABLE sve."VotiElettori" (
+    elettore character varying(16) NOT NULL,
+    sessione integer NOT NULL,
+    orario timestamp without time zone
+);
+
+
+ALTER TABLE sve."VotiElettori" OWNER TO postgres;
+
+--
 -- Name: Auditing id; Type: DEFAULT; Schema: sve; Owner: postgres
 --
 
@@ -216,6 +229,17 @@ ALTER TABLE ONLY sve."Sessioni" ALTER COLUMN id SET DEFAULT nextval('sve."Sessio
 --
 
 COPY sve."Auditing" (id, orario, azione, ruolo_chi, chi) FROM stdin;
+3	2022-09-03 23:28:29.23442	1	GESTORE	RBNSRA92R50L113H
+4	2022-09-03 23:28:29.317393	1	ELETTORE	TLLMRA99L13H2640
+5	2022-09-04 11:17:48.775433	1	ELETTORE	TLLMRA99L13H2640
+6	2022-09-04 11:17:50.656024	1	ELETTORE	TLLMRA99L13H2640
+7	2022-09-04 11:18:10.090636	1	ELETTORE	TLLMRA99L13H2640
+8	2022-09-04 11:18:16.264359	1	ELETTORE	TLLMRA99L13H2640
+9	2022-09-04 11:18:53.715194	1	ELETTORE	TLLMRA99L13H2640
+10	2022-09-04 11:21:32.441496	1	ELETTORE	TLLMRA99L13H2640
+11	2022-09-04 11:21:47.846526	1	ELETTORE	TLLMRA99L13H2640
+12	2022-09-04 11:22:28.66605	1	ELETTORE	TLLMRA99L13H2640
+13	2022-09-04 11:22:41.012165	1	ELETTORE	TLLMRA99L13H2640
 \.
 
 
@@ -235,7 +259,7 @@ COPY sve."Azioni_auditing" (id, azione) FROM stdin;
 -- Data for Name: Elettori; Type: TABLE DATA; Schema: sve; Owner: postgres
 --
 
-COPY sve."Elettori" (cf, password, dirittovoto, dirittovotodistanza) FROM stdin;
+COPY sve."Elettori" (cf, password, diritto_voto, diritto_voto_distanza) FROM stdin;
 TLLMRA99L13H2640	$2a$10$fKo1OxDBeksu4x2acSae4u3JLP2FJ7VDA5DFBhukI1tY3fVHIDtRq	t	f
 \.
 
@@ -272,10 +296,18 @@ COPY sve."Sessioni" (id, titolo, data_apertura, data_chiusura, tipo_votazione, t
 
 
 --
+-- Data for Name: VotiElettori; Type: TABLE DATA; Schema: sve; Owner: postgres
+--
+
+COPY sve."VotiElettori" (elettore, sessione, orario) FROM stdin;
+\.
+
+
+--
 -- Name: Auditing_id_seq; Type: SEQUENCE SET; Schema: sve; Owner: postgres
 --
 
-SELECT pg_catalog.setval('sve."Auditing_id_seq"', 2, true);
+SELECT pg_catalog.setval('sve."Auditing_id_seq"', 13, true);
 
 
 --
@@ -333,6 +365,14 @@ ALTER TABLE ONLY sve."Sessioni"
 
 
 --
+-- Name: VotiElettori VotiElettori_pkey; Type: CONSTRAINT; Schema: sve; Owner: postgres
+--
+
+ALTER TABLE ONLY sve."VotiElettori"
+    ADD CONSTRAINT "VotiElettori_pkey" PRIMARY KEY (elettore, sessione);
+
+
+--
 -- Name: Azioni_auditing azioni_auditing_pkey; Type: CONSTRAINT; Schema: sve; Owner: postgres
 --
 
@@ -378,6 +418,22 @@ ALTER TABLE ONLY sve."Gestori"
 
 ALTER TABLE ONLY sve."Sessioni"
     ADD CONSTRAINT "Sessione_gestore_fkey" FOREIGN KEY (gestore) REFERENCES sve."Gestori"(cf);
+
+
+--
+-- Name: VotiElettori VotiElettori_elettore_fkey; Type: FK CONSTRAINT; Schema: sve; Owner: postgres
+--
+
+ALTER TABLE ONLY sve."VotiElettori"
+    ADD CONSTRAINT "VotiElettori_elettore_fkey" FOREIGN KEY (elettore) REFERENCES sve."Elettori"(cf);
+
+
+--
+-- Name: VotiElettori VotiElettori_sessione_fkey; Type: FK CONSTRAINT; Schema: sve; Owner: postgres
+--
+
+ALTER TABLE ONLY sve."VotiElettori"
+    ADD CONSTRAINT "VotiElettori_sessione_fkey" FOREIGN KEY (sessione) REFERENCES sve."Sessioni"(id);
 
 
 --
