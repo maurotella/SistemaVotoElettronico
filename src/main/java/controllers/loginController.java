@@ -4,10 +4,7 @@ import javafx.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.util.*;
 
@@ -22,12 +19,24 @@ public class loginController extends Application {
     @FXML
     private Label msgLabel;
 
+    Alert a = new Alert(Alert.AlertType.NONE);
+
     @FXML
-    void loginClick(ActionEvent event) {
+    void loginClick() {
         String userString = user.getText().toUpperCase();
         String pswString = psw.getText();
-        if (userString.isEmpty())
-            msgLabel.setText("Inserisci un username non vuoto");
+        if (userString.isEmpty()){
+            a.setAlertType(Alert.AlertType.ERROR);
+            a.setContentText("Inserire un Username");
+            a.show();
+        }
+        if (pswString.isEmpty()){
+            a.setAlertType(Alert.AlertType.ERROR);
+            a.setContentText("Inserire una password");
+            a.show();
+        }
+
+
 
 
 //        if (!Util.check(userString)){
