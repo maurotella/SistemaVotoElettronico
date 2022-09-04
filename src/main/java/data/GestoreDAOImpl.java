@@ -8,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,20 +15,20 @@ import java.util.List;
 /**
  * Classe che utilizza il pattern SINGLETON
  */
-public class ImplGestoreDAO implements GestoreDAO {
+public class GestoreDAOImpl implements GestoreDAO {
 
-    private static ImplGestoreDAO istance = null;
+    private static GestoreDAOImpl istance = null;
 
-    private ImplGestoreDAO() {};
+    private GestoreDAOImpl() {};
 
     /**
      * Metodo che implemente il pattern singleton
      *
      * @return l'unica istanza
      */
-    public static ImplGestoreDAO getIstance() {
+    public static GestoreDAOImpl getIstance() {
         if (istance==null)
-            istance = new ImplGestoreDAO();
+            istance = new GestoreDAOImpl();
         return istance;
     };
 
@@ -42,7 +41,8 @@ public class ImplGestoreDAO implements GestoreDAO {
             PreparedStatement stmt = db.prepareStatement(query);
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
-            rs.next();
+            if (!rs.next())
+                return null;
             checkPsw = rs.getString("password");
             rs.close();
             stmt.close();

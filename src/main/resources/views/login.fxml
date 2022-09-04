@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane prefHeight="234.0" prefWidth="418.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.loginController">
+<AnchorPane prefHeight="234.0" prefWidth="418.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <GridPane layoutX="47.0" layoutY="35.0" prefHeight="164.0" prefWidth="306.0">

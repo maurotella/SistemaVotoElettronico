@@ -11,20 +11,20 @@ import java.util.List;
 /**
  * Classe che utilizza il pattern SINGLETON
  */
-public class ImplElettoreDAO implements ElettoreDAO {
+public class ElettoreDAOImpl implements ElettoreDAO {
 
-    private static ImplElettoreDAO istance = null;
+    private static ElettoreDAOImpl istance = null;
 
-    private ImplElettoreDAO() {}
+    private ElettoreDAOImpl() {}
 
     /**
      * Metodo che implemente il pattern singleton
      *
      * @return l'unica istanza
      */
-    public static ImplElettoreDAO getInstance() {
+    public static ElettoreDAOImpl getInstance() {
         if (istance==null)
-            istance = new ImplElettoreDAO();
+            istance = new ElettoreDAOImpl();
         return istance;
     }
 
@@ -39,7 +39,8 @@ public class ImplElettoreDAO implements ElettoreDAO {
             PreparedStatement stmt = db.prepareStatement(query);
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
-            rs.next();
+            if (!rs.next())
+                return null;
             checkPsw = rs.getString("password");
             dv = rs.getBoolean("diritto_voto");
             dvd = rs.getBoolean("diritto_voto_distanza");

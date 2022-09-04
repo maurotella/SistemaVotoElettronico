@@ -4,23 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="349bfd8f-d9a4-414a-be4e-77e5b164c9a2" name="Changes" comment="merge">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/user.png" afterDir="false" />
+    <list default="true" id="349bfd8f-d9a4-414a-be4e-77e5b164c9a2" name="Changes" comment="Reso più carino il login grafico (PS: bisogna installare ikonli per le icone)">
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/GestoreController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/views/gestore.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/loginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/ImplElettoreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/ElettoreDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/ImplGestoreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/GestoreDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/views/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/ImplGestoreDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data/ImplGestoreDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controllers/loginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controllers/loginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/ImplGestoreDAO.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/data/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data/Test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/models/Sessione.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/models/Sessione.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/models/SessioneBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/models/SessioneBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/models/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/models/Test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/models/Utente$TipoUtente.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/models/Utente.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/models/Utente.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/models/VotoElettore.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/models/VotoElettore.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/views/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +69,7 @@
       <recent name="C:\Users\mauro\Documents\SVE\src\main\resources\img" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="App" />
       <module name="SVE" />
@@ -82,9 +78,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="data.Test" />
+      <module name="SVE" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="data.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Test" />
+      <item itemvalue="Application.App" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.App" />
+        <item itemvalue="Application.Test" />
       </list>
     </recent_temporary>
   </component>
@@ -96,7 +110,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1662287988435</updated>
-      <workItem from="1662304072433" duration="4107000" />
+      <workItem from="1662304072433" duration="6787000" />
     </task>
     <task id="LOCAL-00001" summary="merge">
       <created>1662304163042</created>
@@ -105,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662304163042</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Reso più carino il login grafico (PS: bisogna installare ikonli per le icone)">
+      <created>1662308586204</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1662308586204</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,7 +145,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="merge" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge" />
+    <MESSAGE value="Reso più carino il login grafico (PS: bisogna installare ikonli per le icone)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reso più carino il login grafico (PS: bisogna installare ikonli per le icone)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
