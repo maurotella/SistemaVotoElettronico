@@ -11,6 +11,15 @@ public class VotoElettore {
     // orario in cui si ha votato
     private final LocalDateTime orario;
 
+    /**
+     * Crea il voto dell'elettore con CF elettore
+     * nella sessione con id sessione e come orario
+     * orario
+     *
+     * @param orario orario di voto
+     * @param elettore cf elettore
+     * @param sessione id sessione
+     */
     public VotoElettore(String elettore, int sessione, LocalDateTime orario) {
         if (elettore==null || elettore.length()==0)
             throw new IllegalArgumentException("elettore null o vuoto");
@@ -19,6 +28,18 @@ public class VotoElettore {
         this.elettore = elettore;
         this.sessione = sessione;
         this.orario = orario;
+    }
+
+    /**
+     * Crea il voto dell'elettore con CF elettore
+     * nella sessione con id sessione e come orario
+     * l'orario corrispondente alla chiamata del costruttore
+     *
+     * @param elettore cf elettore
+     * @param sessione id sessione
+     */
+    public VotoElettore(String elettore, int sessione) {
+        this(elettore, sessione, LocalDateTime.now());
     }
 
     public String getElettore() {

@@ -67,6 +67,10 @@ public class Sessione {
         return chiusa;
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Sessione{\n" +

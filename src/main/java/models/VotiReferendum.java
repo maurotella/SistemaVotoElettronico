@@ -55,18 +55,35 @@ public class VotiReferendum extends Voti {
     }
 
     /**
-     * Aggiunge un voto favorevole
+     * Aggiunge un voto favorevole espresso
+     * dall'elettore E
+     *
+     * @param E elettore
+     * @return il VotoElettore corrispondente
      */
-    public void addSi () {
+    public VotoElettore addSi (Elettore E) {
         votiFavorevoli++;
+        return creaVotoElettore(E);
     };
 
     /**
-     * Aggiunge un voto sfavorevole
+     * Aggiunge un voto sfavorevole espresso
+     * dall'elettore E
+     *
+     * @param E elettore
+     * @return il VotoElettore corrispondente
      */
-    public void addNo () {
+    public VotoElettore addNo (Elettore E) {
         votiSfavorevoli++;
+        return creaVotoElettore(E);
     };
+
+    private VotoElettore creaVotoElettore(Elettore E) {
+        return new VotoElettore(
+                E.getCF(),
+                getSessione().getId()
+        );
+    }
 
     @Override
     public String toString () {

@@ -89,6 +89,25 @@ public class ImplElettoreDAO implements ElettoreDAO {
         return res;
     }
 
+    @Override
+    public boolean puoVotare(Elettore E, Sessione S) {
+        if (!E.dirittoVoto())
+            return false;
+        Connection db = DbManager.getInstance().getDb();
+        String query = "SELECT * FROM \"VotiElettori\" WHERE elettore=? AND sessione=?";
+        try {
+            PreparedStatement stmt = db.prepareStatement(query);
+            stmt.setString(1,E.getCF());
+            stmt.setInt(2,S.getId());
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next())
+                return false;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return true;
+    }
+
     /**
      * Presa una Date D la converte il LocalDate
      *
