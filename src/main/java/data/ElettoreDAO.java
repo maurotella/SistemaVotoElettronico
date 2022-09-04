@@ -18,14 +18,14 @@ public interface ElettoreDAO {
      * @return l'Elettore corrispondente se username
      *  e password corretti, null altrimenti
      */
-    public Elettore login(String username, String password);
+    Elettore login(String username, String password);
 
     /**
      * Restituisce tutte le sessioni aperte
      *
      * @return una lista di sessioni
      */
-    public List<Sessione> getSessioni();
+     List<Sessione> getSessioni();
 
     /**
      * Indica se l'elettore E può votare nella sessione S
@@ -34,6 +34,6 @@ public interface ElettoreDAO {
      * @param S sessione
      * @return true se E può votare in S, false altrimenti
      */
-    public boolean puoVotare(Elettore E, Sessione S);
+    boolean puoVotare(Elettore E, Sessione S);
 
 }

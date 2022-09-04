@@ -15,7 +15,7 @@ public interface GestoreDAO {
      * @return Il Gestore relativo alle credenziali se corrette,
      *         null altrimenti
      */
-    public Gestore login(String username, String password);
+    Gestore login(String username, String password);
 
     /**
      * Restituisce tutte le sessioni che il
@@ -23,6 +23,6 @@ public interface GestoreDAO {
      *
      * @return una lista di sessioni
      */
-    public List<Sessione> getSessioni(Gestore G);
+    List<Sessione> getSessioni(Gestore G);
 
 }

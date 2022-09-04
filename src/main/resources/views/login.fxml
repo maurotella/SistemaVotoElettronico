@@ -26,12 +26,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="user" promptText="Codice Fiscale" GridPane.columnIndex="1">
+            <TextField fx:id="user" focusTraversable="false" promptText="Codice Fiscale" GridPane.columnIndex="1">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="psw" prefHeight="17.0" prefWidth="150.0" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <PasswordField fx:id="psw" focusTraversable="false" prefHeight="17.0" prefWidth="150.0" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="18.0" />
                </font>

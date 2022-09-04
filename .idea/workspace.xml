@@ -4,18 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="349bfd8f-d9a4-414a-be4e-77e5b164c9a2" name="Changes" comment="Reso più carino il login grafico (PS: bisogna installare ikonli per le icone)">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/GestoreController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/views/gestore.fxml" afterDir="false" />
+    <list default="true" id="349bfd8f-d9a4-414a-be4e-77e5b164c9a2" name="Changes" comment="Aggiunto login effettivo, avviso credenziali errate&#10;Inizio sviluppo pagina per Gestori">
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/ElettoreController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/data/PersonaDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/data/PersonaDAOImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/views/elettore.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/loginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data/ImplElettoreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/ElettoreDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data/ImplGestoreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/GestoreDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/data/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scene Builder + JavaFX.md" beforeDir="false" afterPath="$PROJECT_DIR$/Scene Builder + JavaFX.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/GestoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/GestoreController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/ElettoreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/ElettoreDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/GestoreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/GestoreDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interfaces/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interfaces/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/views/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/App.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/controllers/loginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controllers/loginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/ImplGestoreDAO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data/Test.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/views/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/login.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +61,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/mauro/Documents/SVE/src/main/resources/img",
+    "last_opened_file_path": "C:/Users/mauro/Documents/SVE/src/main/resources/views",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.22758621",
@@ -66,12 +70,13 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mauro\Documents\SVE\src\main\resources\views" />
       <recent name="C:\Users\mauro\Documents\SVE\src\main\resources\img" />
     </key>
   </component>
   <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="App" />
+      <option name="MAIN_CLASS_NAME" value="controllers.App" />
       <module name="SVE" />
       <option name="VM_PARAMETERS" value="--module-path &quot;C:\Program Files\Java\javafx-sdk-18.0.2\lib&quot; --add-modules javafx.fxml,javafx.controls,javafx.graphics" />
       <method v="2">
@@ -110,7 +115,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1662287988435</updated>
-      <workItem from="1662304072433" duration="6787000" />
+      <workItem from="1662304072433" duration="7029000" />
+      <workItem from="1662323316109" duration="6321000" />
     </task>
     <task id="LOCAL-00001" summary="merge">
       <created>1662304163042</created>
@@ -126,7 +132,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662308586204</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Aggiunto login effettivo, avviso credenziali errate&#10;Inizio sviluppo pagina per Gestori">
+      <created>1662311439061</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1662311439061</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,7 +159,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="merge" />
     <MESSAGE value="Reso più carino il login grafico (PS: bisogna installare ikonli per le icone)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reso più carino il login grafico (PS: bisogna installare ikonli per le icone)" />
+    <MESSAGE value="Aggiunto login effettivo, avviso credenziali errate&#10;Inizio sviluppo pagina per Gestori" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiunto login effettivo, avviso credenziali errate&#10;Inizio sviluppo pagina per Gestori" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

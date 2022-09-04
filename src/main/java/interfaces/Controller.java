@@ -11,20 +11,20 @@
 //    }
 //
 //    public int getTotemId() {
-//        return App.getTotemId();
+//        return controllers.App.getTotemId();
 //    }
 //
 //    public void setTotemId(int id) {
-//        App.setTotemId(id);
+//        controllers.App.setTotemId(id);
 //    }
 //
 //    public boolean isFirstHomeLoad() {
-//        return !App.homeLoaded;
+//        return !controllers.App.homeLoaded;
 //    }
 //
 //    public void navigate(String view, Object parameter) {
 //        try {
-//            App.navigate(this, view, parameter);
+//            controllers.App.navigate(this, view, parameter);
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
