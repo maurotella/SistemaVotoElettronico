@@ -9,5 +9,8 @@
         <module name="SVE" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="SVE" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

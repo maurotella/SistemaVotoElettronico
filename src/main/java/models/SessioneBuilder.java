@@ -9,7 +9,7 @@ public class SessioneBuilder {
     private LocalDate dataChiusura;
     private TipoVotazione tipoVotazione;
     private TipoScrutinio tipoScrutinio;
-    private Gestore gestore;
+    private String gestore;
 
     private SessioneBuilder (int id) {
         this.id = id;
@@ -44,7 +44,7 @@ public class SessioneBuilder {
         return this;
     }
 
-    public SessioneBuilder gestore (Gestore g) {
+    public SessioneBuilder gestore (String g) {
         gestore = g;
         return this;
     }

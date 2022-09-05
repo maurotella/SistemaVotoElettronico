@@ -2,7 +2,7 @@ package models;
 /**
  * Classe che tiene i conti sulle votazioni relative a un referendum
  */
-public class Referendum extends Voti {
+public class VotiReferendum extends Voti {
 
     // quesito referendario
     private String quesito;
@@ -18,7 +18,7 @@ public class Referendum extends Voti {
      * @param s sessione relativa alla votazione
      * @param q quesito referendum
      */
-    public Referendum (Sessione s, String q) {
+    public VotiReferendum (Sessione s, String q) {
         super(s);
         if (q==null || q.length()==0)
             throw new IllegalArgumentException("Quesito mancante");
@@ -55,18 +55,35 @@ public class Referendum extends Voti {
     }
 
     /**
-     * Aggiunge un voto favorevole
+     * Aggiunge un voto favorevole espresso
+     * dall'elettore E
+     *
+     * @param E elettore
+     * @return il VotoElettore corrispondente
      */
-    public void addSi () {
+    public VotoElettore addSi (Elettore E) {
         votiFavorevoli++;
+        return creaVotoElettore(E);
     };
 
     /**
-     * Aggiunge un voto sfavorevole
+     * Aggiunge un voto sfavorevole espresso
+     * dall'elettore E
+     *
+     * @param E elettore
+     * @return il VotoElettore corrispondente
      */
-    public void addNo () {
+    public VotoElettore addNo (Elettore E) {
         votiSfavorevoli++;
+        return creaVotoElettore(E);
     };
+
+    private VotoElettore creaVotoElettore(Elettore E) {
+        return new VotoElettore(
+                E.getCF(),
+                getSessione().getId()
+        );
+    }
 
     @Override
     public String toString () {

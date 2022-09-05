@@ -18,10 +18,10 @@ public class Test {
                 .dataChiusura(LocalDate.of(2022,10,10))
                 .tipoVotazione(TipoVotazione.REFERENDUM)
                 .tipoScrutinio(TipoScrutinio.REFERENDUM)
-                .gestore(G)
+                .gestore(G.getCF())
                 .build();
 
-        Referendum R = new Referendum(S, "Eutanasia legale?");
+        VotiReferendum R = new VotiReferendum(S, "Eutanasia legale?");
 
         print(G);
 

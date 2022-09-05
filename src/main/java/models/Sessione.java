@@ -11,7 +11,8 @@ public class Sessione {
     private final TipoVotazione tipoVotazione;
     private final TipoScrutinio tipoScrutinio;
     private boolean chiusa;
-    private final Gestore gestore;
+    // CF gestore che ha creato la sessione
+    private final String gestore;
 
     public Sessione (
             int i,
@@ -20,7 +21,7 @@ public class Sessione {
             LocalDate dc,
             TipoVotazione tv,
             TipoScrutinio ts,
-            Gestore g
+            String g
     ) {
         if (t==null || t.length()==0)
             throw new IllegalArgumentException("titolo null o vuoto");
@@ -64,6 +65,14 @@ public class Sessione {
      */
     public boolean chiusa () {
         return chiusa;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getTitolo() {
+        return titolo;
     }
 
     @Override
