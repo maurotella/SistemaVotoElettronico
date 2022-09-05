@@ -5,14 +5,12 @@ import data.GestoreDAOImpl;
 import data.PersonaDAOImpl;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import models.TipoUtente;
 import models.Utente;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class LoginController {
 
