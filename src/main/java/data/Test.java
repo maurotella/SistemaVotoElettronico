@@ -12,20 +12,14 @@ public class Test {
     public static void main(String[] args) {
         String psw = "Datem1StaL@urea";
         String psw2 = "3$ca34";
+        String psw3 = "E";
+        String psw4 = "G";
         String enc = BCrypt.hashpw(psw, BCrypt.gensalt());
         String enc2 = BCrypt.hashpw(psw2, BCrypt.gensalt());
+        String enc3 = BCrypt.hashpw(psw3, BCrypt.gensalt());
+        String enc4 = BCrypt.hashpw(psw4, BCrypt.gensalt());
 
-        //Gestore G = ImplGestoreDAO.getIstance()
-        //      .login("RBNSRA92R50L113H", "3$ca34");
-
-        Sessione F = ElettoreDAOImpl.getInstance().getSessioni().get(0);
-
-        System.out.println(
-                ElettoreDAOImpl.getInstance().puoVotare(
-                        ElettoreDAOImpl.getInstance().login("TLLMRA99L13H2640","Datem1StaL@urea"),
-                        F
-                )
-        );
+        print(enc4);
     }
 
 }

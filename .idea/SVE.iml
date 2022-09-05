@@ -7,8 +7,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
-      <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
-      <excludeFolder url="file://$MODULE_DIR$/.idea/libraries" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -26,5 +24,15 @@
     <orderEntry type="library" name="Maven: org.kordamp.ikonli:ikonli-javafx:11.3.5" level="project" />
     <orderEntry type="library" name="Maven: org.kordamp.ikonli:ikonli-core:11.3.5" level="project" />
     <orderEntry type="library" name="Maven: org.kordamp.ikonli:ikonli-materialdesign-pack:11.3.5" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://C:/Program Files/Java/javafx-sdk-18.0.2/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://C:/Program Files/Java/javafx-sdk-18.0.2/lib" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>

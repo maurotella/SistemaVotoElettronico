@@ -71,6 +71,10 @@ public class Sessione {
         return id;
     }
 
+    public String getTitolo() {
+        return titolo;
+    }
+
     @Override
     public String toString() {
         return "Sessione{\n" +
