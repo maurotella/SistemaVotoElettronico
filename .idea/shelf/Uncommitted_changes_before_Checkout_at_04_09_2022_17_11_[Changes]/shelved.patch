@@ -1,0 +1,19 @@
+Index: src/main/java/controllers/loginController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package controllers;\r\n\r\nimport javafx.*;\r\nimport javafx.application.Application;\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXML;\r\nimport javafx.scene.control.*;\r\nimport javafx.stage.Stage;\r\nimport java.util.*;\r\n\r\npublic class loginController extends Application {\r\n\r\n    @FXML\r\n    private Button loginButton;\r\n    @FXML\r\n    private PasswordField psw;\r\n    @FXML\r\n    private TextField user;\r\n    @FXML\r\n    private Label msgLabel;\r\n\r\n    Alert a = new Alert(Alert.AlertType.NONE);\r\n\r\n    @FXML\r\n    void loginClick() {\r\n        String userString = user.getText().toUpperCase();\r\n        String pswString = psw.getText();\r\n        if (userString.isEmpty()){\r\n            a.setAlertType(Alert.AlertType.ERROR);\r\n            a.setContentText(\"Inserire un Username\");\r\n            a.show();\r\n        }\r\n        if (pswString.isEmpty()){\r\n            a.setAlertType(Alert.AlertType.ERROR);\r\n            a.setContentText(\"Inserire una password\");\r\n            a.show();\r\n        }\r\n\r\n\r\n\r\n\r\n//        if (!Util.check(userString)){\r\n//            a.setAlertType(Alert.AlertType.ERROR);\r\n//            a.setContentText(\"Inserire un Codice Fiscale valido\");\r\n//            a.show();\r\n//        }else if(pswString == null || pswString.equals(\"\")){\r\n//            a.setAlertType(Alert.AlertType.ERROR);\r\n//            a.setContentText(\"Inserire una password valida\");\r\n//            a.show();\r\n//        }else if(existInDb(Util.bonify(userString), PassEncTech2.toHexString(PassEncTech2.getSHA(Util.bonify(pswString))))) {\r\n//            logged(new Stage());\r\n//            ((Stage) cf_TextField.getScene().getWindow()).close();\r\n//        }else {\r\n//            a.setAlertType(Alert.AlertType.ERROR);\r\n//            a.setContentText(\"Login non effettuato \" + userString);\r\n//            a.show();\r\n//        }\r\n    }\r\n\r\n    @Override\r\n    public void start(Stage primaryStage) {\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/controllers/loginController.java b/src/main/java/controllers/loginController.java
+--- a/src/main/java/controllers/loginController.java	(revision b59c0e8790f812bdfd1382129e608a06da19f612)
++++ b/src/main/java/controllers/loginController.java	(date 1662304292445)
+@@ -20,7 +20,7 @@
+     private Label msgLabel;
+ 
+     Alert a = new Alert(Alert.AlertType.NONE);
+-
++    //mauro ciao
+     @FXML
+     void loginClick() {
+         String userString = user.getText().toUpperCase();

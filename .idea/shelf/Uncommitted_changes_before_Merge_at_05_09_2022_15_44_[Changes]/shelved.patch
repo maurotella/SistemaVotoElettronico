@@ -1,0 +1,56 @@
+Index: src/main/java/data/Test.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package data;\r\n\r\nimport org.springframework.security.crypto.bcrypt.BCrypt;\r\n\r\npublic class Test {\r\n\r\n    public static void print (Object S) {\r\n        System.out.println(S.toString());\r\n    }\r\n\r\n    public static void main(String[] args) {\r\n        String psw = \"Datem1StaL@urea\";\r\n        String psw2 = \"3$ca34\";\r\n        String enc = BCrypt.hashpw(psw, BCrypt.gensalt());\r\n        String enc2 = BCrypt.hashpw(psw2, BCrypt.gensalt());\r\n\r\n        print(enc);\r\n        print(enc2);\r\n        print(\"MAGGIORANZA_ASSOLUTA\".length());\r\n\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/data/Test.java b/src/main/java/data/Test.java
+--- a/src/main/java/data/Test.java	(revision acaa3b29cf218c57e3394313e7570e78c83df841)
++++ b/src/main/java/data/Test.java	(date 1662385398855)
+@@ -1,5 +1,6 @@
+ package data;
+ 
++import models.Sessione;
+ import org.springframework.security.crypto.bcrypt.BCrypt;
+ 
+ public class Test {
+@@ -11,13 +12,14 @@
+     public static void main(String[] args) {
+         String psw = "Datem1StaL@urea";
+         String psw2 = "3$ca34";
++        String psw3 = "E";
++        String psw4 = "G";
+         String enc = BCrypt.hashpw(psw, BCrypt.gensalt());
+         String enc2 = BCrypt.hashpw(psw2, BCrypt.gensalt());
++        String enc3 = BCrypt.hashpw(psw3, BCrypt.gensalt());
++        String enc4 = BCrypt.hashpw(psw4, BCrypt.gensalt());
+ 
+-        print(enc);
+-        print(enc2);
+-        print("MAGGIORANZA_ASSOLUTA".length());
+-
++        print(enc4);
+     }
+ 
+ }
+Index: Scene Builder + JavaFX.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># Scene Builder + JavaFX\r\n\r\n- Associare elementi a metodi\r\n\r\n- Come fa `App` a fare riferimento al primo stage?\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Scene Builder + JavaFX.md b/Scene Builder + JavaFX.md
+--- a/Scene Builder + JavaFX.md	(revision acaa3b29cf218c57e3394313e7570e78c83df841)
++++ b/Scene Builder + JavaFX.md	(date 1662385398863)
+@@ -2,4 +2,8 @@
+ 
+ - Associare elementi a metodi
+ 
+-- Come fa `App` a fare riferimento al primo stage?
++- Come fa `controllers.App` a fare riferimento al primo stage?
++
++- Path marco: `--module-path ${PATH_TO_JAVAFX} --add-modules javafx.fxml,javafx.controls,javafx.graphics`
++
++- Per cambiare scena bisogna 

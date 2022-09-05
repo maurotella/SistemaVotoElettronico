@@ -1,0 +1,33 @@
+Index: src/main/resources/views/login.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.control.PasswordField?>\r\n<?import javafx.scene.control.TextField?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.text.Text?>\r\n\r\n<AnchorPane prefHeight=\"187.0\" prefWidth=\"392.0\" xmlns=\"http://javafx.com/javafx/18\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"controllers.loginController\">\r\n   <children>\r\n      <PasswordField fx:id=\"psw\" layoutX=\"121.0\" layoutY=\"88.0\" prefHeight=\"17.0\" prefWidth=\"150.0\" promptText=\"Password\" />\r\n      <TextField fx:id=\"user\" layoutX=\"122.0\" layoutY=\"51.0\" promptText=\"Username\" />\r\n      <Button fx:id=\"loginButton\" layoutX=\"174.0\" layoutY=\"123.0\" mnemonicParsing=\"false\" onAction=\"#loginClick\" text=\"Login\" />\r\n      <Text strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Text\" />\r\n   </children>\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/views/login.fxml b/src/main/resources/views/login.fxml
+--- a/src/main/resources/views/login.fxml	(revision b59c0e8790f812bdfd1382129e608a06da19f612)
++++ b/src/main/resources/views/login.fxml	(date 1662304408994)
+@@ -1,6 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ 
+ <?import javafx.scene.control.Button?>
++<?import javafx.scene.control.Label?>
+ <?import javafx.scene.control.PasswordField?>
+ <?import javafx.scene.control.TextField?>
+ <?import javafx.scene.layout.AnchorPane?>
+@@ -8,9 +9,11 @@
+ 
+ <AnchorPane prefHeight="187.0" prefWidth="392.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.loginController">
+    <children>
+-      <PasswordField fx:id="psw" layoutX="121.0" layoutY="88.0" prefHeight="17.0" prefWidth="150.0" promptText="Password" />
+-      <TextField fx:id="user" layoutX="122.0" layoutY="51.0" promptText="Username" />
+-      <Button fx:id="loginButton" layoutX="174.0" layoutY="123.0" mnemonicParsing="false" onAction="#loginClick" text="Login" />
++      <PasswordField fx:id="psw" layoutX="44.0" layoutY="78.0" prefHeight="17.0" prefWidth="150.0" promptText="Password" />
++      <TextField fx:id="user" layoutX="45.0" layoutY="39.0" promptText="Username" />
++      <Button fx:id="loginButton" layoutX="201.0" layoutY="39.0" mnemonicParsing="false" onAction="#loginClick" text="Login" />
+       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
++      <Button fx:id="logAsGestore" layoutX="247.0" layoutY="139.0" mnemonicParsing="false" text="Login come Gestore" />
++      <Label layoutX="44.0" layoutY="14.0" text="Login come Elettore:" />
+    </children>
+ </AnchorPane>

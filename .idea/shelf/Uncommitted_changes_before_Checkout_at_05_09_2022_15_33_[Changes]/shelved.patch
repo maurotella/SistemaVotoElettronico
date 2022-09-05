@@ -1,0 +1,77 @@
+Index: src/main/java/data/Test.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package data;\r\n\r\nimport models.Sessione;\r\nimport org.springframework.security.crypto.bcrypt.BCrypt;\r\n\r\npublic class Test {\r\n\r\n    public static void print (Object S) {\r\n        System.out.println(S.toString());\r\n    }\r\n\r\n    public static void main(String[] args) {\r\n        String psw = \"Datem1StaL@urea\";\r\n        String psw2 = \"3$ca34\";\r\n        String psw3 = \"E\";\r\n        String psw4 = \"G\";\r\n        String enc = BCrypt.hashpw(psw, BCrypt.gensalt());\r\n        String enc2 = BCrypt.hashpw(psw2, BCrypt.gensalt());\r\n        String enc3 = BCrypt.hashpw(psw3, BCrypt.gensalt());\r\n        String enc4 = BCrypt.hashpw(psw4, BCrypt.gensalt());\r\n\r\n        print(enc4);\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/data/Test.java b/src/main/java/data/Test.java
+--- a/src/main/java/data/Test.java	(revision 419f92812cfdebcfaf68a417b2dd51b213e22b63)
++++ b/src/main/java/data/Test.java	(date 1662383881787)
+@@ -19,7 +19,7 @@
+         String enc3 = BCrypt.hashpw(psw3, BCrypt.gensalt());
+         String enc4 = BCrypt.hashpw(psw4, BCrypt.gensalt());
+ 
+-        print(enc4);
++        print(enc3);
+     }
+ 
+ }
+Index: SVE.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/SVE.iml b/SVE.iml
+new file mode 100644
+--- /dev/null	(date 1662362024584)
++++ b/SVE.iml	(date 1662362024584)
+@@ -0,0 +1,29 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
++  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
++    <output url="file://$MODULE_DIR$/target/classes" />
++    <output-test url="file://$MODULE_DIR$/target/test-classes" />
++    <content url="file://$MODULE_DIR$">
++      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
++      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
++      <excludeFolder url="file://$MODULE_DIR$/target" />
++      <excludeFolder url="file://$MODULE_DIR$/.idea/libraries" />
++    </content>
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-crypto:5.5.8" level="project" />
++    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:18.0.2" level="project" />
++    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:win:18.0.2" level="project" />
++    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:18.0.2" level="project" />
++    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:win:18.0.2" level="project" />
++    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:18.0.2" level="project" />
++    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:18.0.2" level="project" />
++    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:18.0.2" level="project" />
++    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:win:18.0.2" level="project" />
++    <orderEntry type="library" name="Maven: org.postgresql:postgresql:42.5.0" level="project" />
++    <orderEntry type="library" scope="RUNTIME" name="Maven: org.checkerframework:checker-qual:3.5.0" level="project" />
++    <orderEntry type="library" name="Maven: org.kordamp.ikonli:ikonli-javafx:11.3.5" level="project" />
++    <orderEntry type="library" name="Maven: org.kordamp.ikonli:ikonli-core:11.3.5" level="project" />
++    <orderEntry type="library" name="Maven: org.kordamp.ikonli:ikonli-materialdesign-pack:11.3.5" level="project" />
++  </component>
++</module>
+\ No newline at end of file
+Index: Scene Builder + JavaFX.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># Scene Builder + JavaFX\r\n\r\n- Associare elementi a metodi\r\n\r\n- Come fa `controllers.App` a fare riferimento al primo stage?\r\n- Path marco: `--module-path ${PATH_TO_JAVAFX} --add-modules javafx.fxml,javafx.controls,javafx.graphics`\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Scene Builder + JavaFX.md b/Scene Builder + JavaFX.md
+--- a/Scene Builder + JavaFX.md	(revision 419f92812cfdebcfaf68a417b2dd51b213e22b63)
++++ b/Scene Builder + JavaFX.md	(date 1662384019892)
+@@ -3,4 +3,7 @@
+ - Associare elementi a metodi
+ 
+ - Come fa `controllers.App` a fare riferimento al primo stage?
++
+ - Path marco: `--module-path ${PATH_TO_JAVAFX} --add-modules javafx.fxml,javafx.controls,javafx.graphics`
++
++- Per cambiare scena bisogna 
