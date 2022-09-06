@@ -56,8 +56,8 @@
                         </TextField>
                         <DatePicker fx:id="dataInizio" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <DatePicker fx:id="dataFine" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Button fx:id="confermaButton" mnemonicParsing="false" text="Conferma Sessione" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
-                        <Button fx:id="backButton" mnemonicParsing="false" text="Indietro" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+                        <Button fx:id="confermaButton" mnemonicParsing="false" onAction="#confermaClick" text="Conferma Sessione" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+                        <Button fx:id="indietroButton" mnemonicParsing="false" onAction="#indietroClick" text="Indietro" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                             <GridPane.margin>
                                 <Insets />
                             </GridPane.margin>

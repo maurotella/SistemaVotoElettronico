@@ -58,7 +58,7 @@ public class LoginController {
                 file = "elettore";
             } else {
                 titolo = "Gestore";
-                file = "gestore";
+                file = "gestoreMain";
             }
             try {
                 FXMLLoader loader = new FXMLLoader(
@@ -76,7 +76,7 @@ public class LoginController {
                 }
                 App.getStage().show();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new RuntimeException("Errore in LoginController:\t" + e);
             }
         }
     }

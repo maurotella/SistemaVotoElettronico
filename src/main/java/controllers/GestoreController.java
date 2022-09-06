@@ -37,15 +37,16 @@ public class GestoreController {
     }
 
     @FXML
-    void nuovaSessioneclick() {
+    void nuovaSessioneClick() {
         //cambio scena con gestore_NuovaSessione
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/%gestore_nuovaSessione.fxml"));
             App.getStage().setScene(new Scene(loader.load()));
             App.getStage().setResizable(false);
-            App.getStage().setTitle("Gestione Sessione"); //title a cosa serve???
+            App.getStage().setTitle("Gestione Sessione");
+            App.getStage().show();
         }catch (Exception e){
-            throw new RuntimeException(e);
+            throw new RuntimeException("Errore nuovaSessioneClick():\t" + e.getMessage());
         }
 
     }
