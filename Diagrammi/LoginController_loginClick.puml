@@ -1,0 +1,96 @@
+@startuml
+participant Actor
+Actor -> LoginController : loginClick
+activate LoginController
+LoginController -> ElettoreDAOImpl : login
+activate ElettoreDAOImpl
+create Elettore
+ElettoreDAOImpl -> Elettore : new
+activate Elettore
+create Utente
+Elettore -> Utente : new
+activate Utente
+Utente --> Elettore
+deactivate Utente
+Elettore --> ElettoreDAOImpl
+deactivate Elettore
+
+alt credenziali corrette Elettore
+
+    ElettoreDAOImpl -> Auditing : registraAzione
+    activate Auditing
+    Auditing -> Auditing : getAzioneId
+    activate Auditing
+    Auditing --> Auditing
+    deactivate Auditing
+    Auditing --> ElettoreDAOImpl
+    deactivate Auditing
+    ElettoreDAOImpl --> LoginController
+    deactivate ElettoreDAOImpl
+
+else credenziali errate Elettore
+
+    LoginController -> GestoreDAOImpl : login
+    activate GestoreDAOImpl
+    create Gestore
+    GestoreDAOImpl -> Gestore : new
+    activate Gestore
+    create Utente
+    Gestore -> Utente : new
+    activate Utente
+    Utente --> Gestore
+    deactivate Utente
+    Gestore --> GestoreDAOImpl
+    deactivate Gestore
+
+    break credenziali errate Gestore
+
+        GestoreDAOImpl --> LoginController
+        LoginController -> LoginController : Alert Credenziali errate
+        LoginController --> Actor
+    
+    end
+
+    GestoreDAOImpl -> Auditing : registraAzione
+    activate Auditing
+    Auditing -> Auditing : getAzioneId
+    activate Auditing
+    Auditing --> Auditing
+    deactivate Auditing
+    Auditing --> GestoreDAOImpl
+    deactivate Auditing
+    GestoreDAOImpl --> LoginController
+
+    deactivate GestoreDAOImpl
+
+end
+
+LoginController -> PersonaDAOImpl : getNominativo
+activate PersonaDAOImpl
+PersonaDAOImpl --> LoginController
+deactivate PersonaDAOImpl
+
+alt accesso corretto Gestore
+
+    LoginController -> GestoreController : init
+    activate GestoreController
+    GestoreController --> LoginController
+    LoginController -> GestoreController : cambiaPagina
+    deactivate LoginController
+    GestoreController --> Actor
+    deactivate GestoreController
+
+else accesso corretto Elettore
+
+    LoginController -> ElettoreController : init
+    activate LoginController
+    activate ElettoreController
+    ElettoreController --> LoginController
+    LoginController -> ElettoreController : cambiaPagina
+    deactivate LoginController
+    ElettoreController --> Actor
+    deactivate ElettoreController
+
+end
+
+@enduml

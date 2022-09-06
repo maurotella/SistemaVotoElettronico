@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 import java.util.Objects;
 
 public class App extends Application {
-
     private static Stage pStage;
 
     public static Stage getStage() {
