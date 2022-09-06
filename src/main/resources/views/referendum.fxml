@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="505.0" text="Referendum" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="controllers.ReferendumController">
+<TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="505.0" text="Referendum" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ReferendumController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
          <children>
@@ -59,9 +59,9 @@
                               </CheckBox>
                            </children>
                         </HBox>
-                        <Button mnemonicParsing="false" onAction="#vota" text="Vota">
+                        <Button fx:id="votaButton" mnemonicParsing="false" onAction="#vota" text="Vota">
                            <VBox.margin>
-                              <Insets left="98.0" top="-9.0" />
+                              <Insets left="101.0" top="-9.0" />
                            </VBox.margin>
                            <font>
                               <Font size="24.0" />

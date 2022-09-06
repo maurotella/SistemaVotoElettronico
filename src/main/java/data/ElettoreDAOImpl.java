@@ -4,9 +4,9 @@ import models.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import util.Util;
 
 /**
  * Classe che utilizza il pattern SINGLETON
@@ -73,8 +73,8 @@ public class ElettoreDAOImpl implements ElettoreDAO {
             while (rs.next()) {
                 res.add(SessioneBuilder.newBuilder(rs.getInt("id"))
                         .titolo(rs.getString("titolo"))
-                        .dataApertura(dateToLocal(rs.getDate("data_apertura")))
-                        .dataChiusura(dateToLocal(rs.getDate("data_chiusura")))
+                        .dataApertura(Util.dateToLocal(rs.getDate("data_apertura")))
+                        .dataChiusura(Util.dateToLocal(rs.getDate("data_chiusura")))
                         .tipoVotazione(TipoVotazione.valueOf(rs.getString("tipo_votazione")))
                         .tipoScrutinio(TipoScrutinio.valueOf(rs.getString("tipo_scrutinio")))
                         .gestore(rs.getString("gestore"))
@@ -107,20 +107,6 @@ public class ElettoreDAOImpl implements ElettoreDAO {
             System.out.println(e.getMessage());
         }
         return true;
-    }
-
-    /**
-     * Presa una Date D la converte il LocalDate
-     *
-     * @param D
-     * @return la data in LocalDate
-     */
-    private static LocalDate dateToLocal(Date D) {
-        String[] A = D.toString().split("-");
-        int y = Integer.valueOf(A[0]);
-        int m = Integer.valueOf(A[1]);
-        int d = Integer.valueOf(A[2]);
-        return LocalDate.of(y,m,d);
     }
 
 }

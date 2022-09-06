@@ -1,12 +1,15 @@
 package controllers;
 
 import data.ElettoreDAOImpl;
+import data.PersonaDAOImpl;
+import data.SessioneDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import models.Sessione;
+import javafx.stage.Stage;
+import models.Elettore;
 import models.SessioneSemplice;
 
 import java.util.List;
@@ -23,8 +26,10 @@ public class ElettoreController {
     @FXML
     private Button votaButton;
 
-    public void init(String nominativo) {
-        this.nominativo.setText(nominativo);
+    public void init(Elettore E) {
+        this.nominativo.setText(
+                PersonaDAOImpl.getInstance().getNominativo(E.getCF())
+        );
         List<SessioneSemplice> L = ElettoreDAOImpl.getInstance().getSessioni()
                 .stream().map(x -> new SessioneSemplice(x.getId(), x.getTitolo()))
                         .collect(Collectors.toList());
@@ -33,7 +38,9 @@ public class ElettoreController {
 
     @FXML
     void vota(ActionEvent event) {
-        System.out.println(elenco.getSelectionModel().getSelectedItem().getId());
+        System.out.println(SessioneDAOImpl.getInstance().getSessione(
+                elenco.getSelectionModel().getSelectedItem().getId()
+        ));
     }
 
 }

@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+import models.Elettore;
 import models.TipoUtente;
 import models.Utente;
 
@@ -63,17 +65,19 @@ public class LoginController {
                 FXMLLoader loader = new FXMLLoader(
                         getClass().getResource(String.format("/views/%s.fxml",file))
                 );
-                App.getStage().setScene(new Scene(loader.load()));
-                App.getStage().setTitle(titolo);
-                App.getStage().setResizable(false);
+                Stage pS = App.getStage();
+                pS.setScene(new Scene(loader.load()));
+                pS.setTitle(titolo);
+                pS.setResizable(false);
                 if (U.tipoUtente()==TipoUtente.GESTORE) {
                     GestoreController GC = loader.getController();
                     GC.init(PersonaDAOImpl.getInstance().getNominativo(U.getCF()));
                 } else {
                     ElettoreController EC = loader.getController();
-                    EC.init(PersonaDAOImpl.getInstance().getNominativo(U.getCF()));
+                    //noinspection ConstantConditions
+                    EC.init((Elettore) U);
                 }
-                App.getStage().show();
+                pS.show();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
