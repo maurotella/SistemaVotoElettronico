@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import models.Sessione;
+import models.SessioneSemplice;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 public class ElettoreController {
 
     @FXML
-    private ListView<String> elenco;
+    private ListView<SessioneSemplice> elenco;
 
     @FXML
     private Label nominativo;
@@ -24,15 +25,15 @@ public class ElettoreController {
 
     public void init(String nominativo) {
         this.nominativo.setText(nominativo);
-        List<String> L = ElettoreDAOImpl.getInstance().getSessioni()
-                .stream().map(x -> x.getTitolo())
+        List<SessioneSemplice> L = ElettoreDAOImpl.getInstance().getSessioni()
+                .stream().map(x -> new SessioneSemplice(x.getId(), x.getTitolo()))
                         .collect(Collectors.toList());
         elenco.getItems().addAll(L);
     }
 
     @FXML
     void vota(ActionEvent event) {
-        System.out.println(event);
+        System.out.println(elenco.getSelectionModel().getSelectedItem().getId());
     }
 
 }
