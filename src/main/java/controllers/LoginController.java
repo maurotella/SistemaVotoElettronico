@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import models.Gestore;
 import models.TipoUtente;
 import models.Utente;
 
@@ -42,7 +43,7 @@ public class LoginController {
             // Login
             Utente U = ElettoreDAOImpl.getInstance().login(userString,pswString);
             if (U==null) {
-                U = GestoreDAOImpl.getIstance().login(userString,pswString);
+                U = GestoreDAOImpl.getInstance().login(userString,pswString);
                 if (U==null) {
                     a.setAlertType(Alert.AlertType.ERROR);
                     a.setContentText("Credenziali errate");
@@ -68,7 +69,7 @@ public class LoginController {
                 App.getStage().setResizable(false);
                 if (U.tipoUtente()==TipoUtente.GESTORE) {
                     GestoreController GC = loader.getController();
-                    GC.init(PersonaDAOImpl.getInstance().getNominativo(U.getCF()));
+                    GC.init((Gestore)U);
                 } else {
                     ElettoreController EC = loader.getController();
                     EC.init(PersonaDAOImpl.getInstance().getNominativo(U.getCF()));

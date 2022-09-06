@@ -26,11 +26,13 @@ public class GestoreDAOImpl implements GestoreDAO {
      *
      * @return l'unica istanza
      */
-    public static GestoreDAOImpl getIstance() {
+    public static GestoreDAOImpl getInstance() {
         if (istance==null)
             istance = new GestoreDAOImpl();
         return istance;
     };
+
+
 
     @Override
     public Gestore login(String username, String password) {
