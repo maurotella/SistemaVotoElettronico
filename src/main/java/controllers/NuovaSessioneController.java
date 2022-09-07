@@ -62,7 +62,7 @@ public class NuovaSessioneController {
      * Inizializza il Gestore corrente e le choiceBox con i tipi di votazione e scrutini supportati
      */
     @FXML
-    void init(Gestore G, Scene genitore){
+    void    init(Gestore G, Scene genitore){
         this.G = G;
         //setto il nominativo
         this.nominativo.setText(PersonaDAOImpl.getInstance().getNominativo(G.getCF()));
