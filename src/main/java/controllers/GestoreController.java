@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 public class GestoreController {
 
-    private Gestore G = null;
+    private Gestore G ;
     @FXML
     private Label nominativo;
 
@@ -35,7 +35,7 @@ public class GestoreController {
         this.G = G;
         this.nominativo.setText(PersonaDAOImpl.getInstance().getNominativo(G.getCF()));
         //devo prendere le sessioni aperte e renderle selezionabili per poi (eventualmente) modificarle
-        List<Sessione> sessioniAperte = GestoreDAOImpl.getInstance().getSessioni(this.G);
+        List<Sessione> sessioniAperte = GestoreDAOImpl.getInstance().getSessioni(G);
         sessioniAttiveView.getItems().addAll(sessioniAperte);
     }
 
@@ -43,12 +43,13 @@ public class GestoreController {
     void nuovaSessioneClick() {
         //cambio scena con gestore_NuovaSessione
         try{
+            Scene prev = App.getStage().getScene();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/gestore_nuovaSessione.fxml"));
             App.getStage().setScene(new Scene(loader.load()));
             App.getStage().setResizable(false);
             App.getStage().setTitle("Nuova Sessione di Votazione");
             NuovaSessioneController NEW = loader.getController();
-            NEW.init(G); //per riempire le choicebox, passo come argomento anche il gestore così ho il riferimento
+            NEW.init(G, prev); //per riempire le choicebox, passo come argomento anche il gestore così ho il riferimento
             App.getStage().show();
         }catch (Exception e){
             throw new RuntimeException("Errore nuovaSessioneClick():\t" + e.getMessage());

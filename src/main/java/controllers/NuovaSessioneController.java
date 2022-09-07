@@ -6,6 +6,7 @@ package controllers;
 import data.DbManager;
 import data.ElettoreDAOImpl;
 import data.GestoreDAOImpl;
+import data.PersonaDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -32,6 +33,7 @@ public class NuovaSessioneController {
      * Gestore corrente
      */
     private Gestore G = null;
+    private Scene genitore;
 
     @FXML
     private Button confermaButton;
@@ -102,25 +104,21 @@ public class NuovaSessioneController {
      * Inizializza il Gestore corrente e le choiceBox con i tipi di votazione e scrutini supportati
      */
     @FXML
-    void init(Gestore G){
+    void init(Gestore G, Scene genitore){
         this.G = G;
+        //setto il nominativo
+        this.nominativo.setText(PersonaDAOImpl.getInstance().getNominativo(G.getCF()));
         votazioneChoicebox.getItems().addAll(TipoVotazione.REFERENDUM, TipoVotazione.CATEGORICO, TipoVotazione.CATEGORICO_PREFERENZA, TipoVotazione.ORDINALE);
         scrutinioChoicebox.getItems().addAll(TipoScrutinio.REFERENDUM_QUORUM, TipoScrutinio.REFERENDUM, TipoScrutinio.MAGGIORANZA, TipoScrutinio.MAGGIORANZA_ASSOLUTA);
+        this.genitore = genitore;
     }
 
 
 
     @FXML
     void indietroClick() {
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/gestoreMain.fxml"));
-            App.getStage().setScene(new Scene(loader.load()));
-            App.getStage().setResizable(false);
-            App.getStage().setTitle("Gestore");
-            App.getStage().show();
-        }catch (Exception e){
-            throw new RuntimeException("Errore indietroClick()" + e.getMessage());
-        }
+        App.getStage().setScene(genitore);
+
     }
 
 }
