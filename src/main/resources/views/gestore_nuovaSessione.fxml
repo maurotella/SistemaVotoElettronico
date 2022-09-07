@@ -48,13 +48,13 @@
                         <Label alignment="CENTER" text="Lista Candidati" GridPane.rowIndex="6" />
                         <DatePicker fx:id="dataInizio" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <DatePicker fx:id="dataFine" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Button fx:id="confermaButton" mnemonicParsing="false" onAction="#confermaClick" text="Conferma Sessione" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
                         <Button fx:id="indietroButton" mnemonicParsing="false" onAction="#indietroClick" text="Indietro" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                             <GridPane.margin>
                                 <Insets />
                             </GridPane.margin>
                         </Button>
                   <TextField fx:id="titoloVotazione" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <Button fx:id="avantiButton" mnemonicParsing="false" onAction="#avantiClick" text="Avanti" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
                     </children>
                 </GridPane>
             </children></AnchorPane>

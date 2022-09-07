@@ -34,9 +34,13 @@ public class NuovaSessioneController {
      */
     private Gestore G = null;
     private Scene genitore;
+    private SessioneSemplice s;
+
+//    @FXML
+//    private Button confermaButton;
 
     @FXML
-    private Button confermaButton;
+    private Button avantiButton;
 
     @FXML
     private DatePicker dataFine;
@@ -59,38 +63,17 @@ public class NuovaSessioneController {
     @FXML
     private ChoiceBox<TipoVotazione> votazioneChoicebox;
 
-    @FXML
+    //@FXML
 
     /**
      * Crea una nuova sessione con le opzioni scelte.
      * L'id per la nuova sessione è pari al massimo degli id presenti nel db + 1
      */
-    void confermaClick() {
-        Integer idxSessione = null;
-        try {
-            Connection db = DbManager.getInstance().getDb();
-            String query = "SELECT id FROM sve.\"Sessioni\" WHERE ID = (SELECT MAX(ID) FROM sve.\"Sessioni\")";
-            PreparedStatement stmt = db.prepareStatement(query);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next())  {
-                String id = rs.getString(1);
-                idxSessione = Integer.parseInt(id) ;
-            }
-        }catch(Exception e){
-            throw new RuntimeException("Errore in confermaClick():\t" + e.getMessage());
-        }
+   // void confermaClick() {
 
 
-        SessioneSemplice s = new Sessione(
-                idxSessione + 1,
-                titoloVotazione.getText(),
-                dataInizio.getValue(),
-                dataFine.getValue(),
-                votazioneChoicebox.getValue(),
-                scrutinioChoicebox.getValue(),
-                G.toString()
-        );
-        GestoreDAOImpl.getInstance().addSessione(this.G, (Sessione)s);
+
+        //GestoreDAOImpl.getInstance().addSessione(this.G, (Sessione)s);
 
         //pulisco tutti i campi
 
@@ -98,7 +81,7 @@ public class NuovaSessioneController {
 
 //ora devo mettere la sessione all' interno dell'elemento LISTVIEW in gestoreMain.fxml
 
-    }
+//  }
 
     /**
      * Inizializza il Gestore corrente e le choiceBox con i tipi di votazione e scrutini supportati
@@ -120,5 +103,48 @@ public class NuovaSessioneController {
         App.getStage().setScene(genitore);
 
     }
+
+    @FXML
+    void avantiClick(){
+
+        //prima salvo la sessione con i campi che ho inserito, dato che la devo passare alla scena successiva
+        Integer idxSessione = null;
+        try {
+            Connection db = DbManager.getInstance().getDb();
+            String query = "SELECT id FROM sve.\"Sessioni\" WHERE ID = (SELECT MAX(ID) FROM sve.\"Sessioni\")";
+            PreparedStatement stmt = db.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next())  {
+                String id = rs.getString(1);
+                idxSessione = Integer.parseInt(id) ;
+            }
+        }catch(Exception e){
+            throw new RuntimeException("Errore in confermaClick():\t" + e.getMessage());
+        }
+
+        s = new Sessione(
+                idxSessione + 1,
+                titoloVotazione.getText(),
+                dataInizio.getValue(),
+                dataFine.getValue(),
+                votazioneChoicebox.getValue(),
+                scrutinioChoicebox.getValue(),
+                G.toString()
+        );
+
+        try{
+            Scene prev = App.getStage().getScene();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/gestoreSessione.fxml"));
+            App.getStage().setScene(new Scene(loader.load()));
+            App.getStage().setResizable(false);
+            App.getStage().setTitle("Gestione Sessione");
+            GestioneSessioneController NEW = loader.getController();
+            NEW.init(G, prev, s); //per riempire le choicebox, passo come argomento anche il gestore così ho il riferimento
+            App.getStage().show();
+        }catch (Exception e){
+            throw new RuntimeException("Errore nuovaSessioneClick():\t" + e.getMessage());
+        }
+    }
+
 
 }
