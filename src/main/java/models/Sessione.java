@@ -1,5 +1,7 @@
 package models;
 
+
+
 import java.time.LocalDate;
 
 public class Sessione extends SessioneSemplice {
@@ -9,7 +11,6 @@ public class Sessione extends SessioneSemplice {
     private final TipoVotazione tipoVotazione;
     private final TipoScrutinio tipoScrutinio;
     private boolean chiusa;
-    // CF gestore che ha creato la sessione
     private final String gestore;
 
     public Sessione (
@@ -45,6 +46,31 @@ public class Sessione extends SessioneSemplice {
         chiusa = false;
         gestore = g;
     };
+
+    /*Funzioni getter della sessione
+    _________________________________________________________**/
+
+    /**
+     * @return data di apertura della sessione this
+     */
+    public LocalDate getDataApertura(){return this.dataApertura;}
+
+    /**
+     * @return data di chiusura della sessione this
+     */
+    public LocalDate getDataChiusura(){return this.dataChiusura;}
+
+    /**
+     * @return tipo di votazione di this
+     */
+    public TipoVotazione getTipoVotazione(){return this.tipoVotazione;}
+
+    /**
+     * @return tipo di scrutinio di this
+     */
+    public TipoScrutinio getTipoScrutinio(){ return this.tipoScrutinio;}
+    //____________________________________________________________
+
 
     /**
      * Chiude la sessione di voto

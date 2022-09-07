@@ -11,10 +11,20 @@ public class Gestore extends Utente {
         super(CF);
     }
 
+    /**
+     * @return CF di this
+     */
+
     @Override
     public TipoUtente tipoUtente() {
         return TipoUtente.GESTORE;
     }
+
+    /**
+     *
+     * @return CF del Gestore (this)
+     */
+    public String getCF (){return  super.getCF();}
 
     public String toString() {
         return super.toString()

@@ -35,7 +35,7 @@ public class GestoreController {
         this.G = G;
         this.nominativo.setText(PersonaDAOImpl.getInstance().getNominativo(G.getCF()));
         //devo prendere le sessioni aperte e renderle selezionabili per poi (eventualmente) modificarle
-        List<Sessione> sessioniAperte = GestoreDAOImpl.getInstance().getSessioni(G);
+        List<Sessione> sessioniAperte = GestoreDAOImpl.getInstance().getSessioni(this.G);
         sessioniAttiveView.getItems().addAll(sessioniAperte);
     }
 

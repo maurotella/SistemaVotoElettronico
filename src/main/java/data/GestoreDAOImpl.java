@@ -3,12 +3,8 @@ package data;
 import models.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +58,23 @@ public class GestoreDAOImpl implements GestoreDAO {
             );
         }
         return G;
+    }
+
+    /**
+     * Aggiunge una sessione di Votazione al DataBase
+     * @param G Gestore che ha creato la sessione (e che quindi può modificarla)
+     * @param s Sessione da aggiugnere al db
+     */
+    public void addSessione(Gestore G, Sessione s){
+        try {
+            Connection db = DbManager.getInstance().getDb();
+            String query = "INSERT INTO sve.\"Sessioni\" (id, titolo, data_apertura, data_chiusura, tipo_votazione, tipo_scrutinio, chiusa, gestore) VALUES (";
+            query += String.format("%d, '%s', '%s', '%s', '%s', '%s', %s, '%s')", s.getId(), s.getTitolo(), s.getDataApertura().toString(), s.getDataChiusura().toString(), s.getTipoVotazione(), s.getTipoScrutinio(), s.getChiusa(), G.getCF());
+            Statement stmt = db.createStatement();
+            stmt.executeUpdate(query);
+        }catch (Exception e){
+            throw new RuntimeException("Errore in addSessione:\t" + e.getMessage());
+        }
     }
 
     /**

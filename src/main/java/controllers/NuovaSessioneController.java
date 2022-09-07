@@ -3,7 +3,9 @@
 package controllers;
 
 
+import data.DbManager;
 import data.ElettoreDAOImpl;
+import data.GestoreDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,6 +14,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import models.*;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  * Controller di gestore_nuovaSessione.fmxl
@@ -54,12 +60,27 @@ public class NuovaSessioneController {
     @FXML
 
     /**
-     * Crea una nuova sessione con le opzioni scelte
+     * Crea una nuova sessione con le opzioni scelte.
+     * L'id per la nuova sessione è pari al massimo degli id presenti nel db + 1
      */
     void confermaClick() {
+        Integer idxSessione = null;
+        try {
+            Connection db = DbManager.getInstance().getDb();
+            String query = "SELECT id FROM sve.\"Sessioni\" WHERE ID = (SELECT MAX(ID) FROM sve.\"Sessioni\")";
+            PreparedStatement stmt = db.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next())  {
+                String id = rs.getString(1);
+                idxSessione = Integer.parseInt(id) ;
+            }
+        }catch(Exception e){
+            throw new RuntimeException("Errore in confermaClick():\t" + e.getMessage());
+        }
+
 
         SessioneSemplice s = new Sessione(
-                1,  //che id metto?
+                idxSessione + 1,
                 titoloVotazione.getText(),
                 dataInizio.getValue(),
                 dataFine.getValue(),
@@ -67,6 +88,11 @@ public class NuovaSessioneController {
                 scrutinioChoicebox.getValue(),
                 G.toString()
         );
+        GestoreDAOImpl.getInstance().addSessione(this.G, (Sessione)s);
+
+
+//ora devo mettere la sessione all' interno dell'elemento LISTVIEW in gestoreMain.fxml
+
     }
 
     /**
@@ -75,6 +101,7 @@ public class NuovaSessioneController {
     @FXML
     void init(Gestore G){
         this.G = G;
+        //System.out.println("Questo è this.G: " + G.getCF());
         votazioneChoicebox.getItems().addAll(TipoVotazione.REFERENDUM, TipoVotazione.CATEGORICO, TipoVotazione.CATEGORICO_PREFERENZA, TipoVotazione.ORDINALE);
         scrutinioChoicebox.getItems().addAll(TipoScrutinio.REFERENDUM_QUORUM, TipoScrutinio.REFERENDUM, TipoScrutinio.MAGGIORANZA, TipoScrutinio.MAGGIORANZA_ASSOLUTA);
     }
