@@ -90,6 +90,9 @@ public class NuovaSessioneController {
         );
         GestoreDAOImpl.getInstance().addSessione(this.G, (Sessione)s);
 
+        //pulisco tutti i campi
+
+
 
 //ora devo mettere la sessione all' interno dell'elemento LISTVIEW in gestoreMain.fxml
 
@@ -101,7 +104,6 @@ public class NuovaSessioneController {
     @FXML
     void init(Gestore G){
         this.G = G;
-        //System.out.println("Questo è this.G: " + G.getCF());
         votazioneChoicebox.getItems().addAll(TipoVotazione.REFERENDUM, TipoVotazione.CATEGORICO, TipoVotazione.CATEGORICO_PREFERENZA, TipoVotazione.ORDINALE);
         scrutinioChoicebox.getItems().addAll(TipoScrutinio.REFERENDUM_QUORUM, TipoScrutinio.REFERENDUM, TipoScrutinio.MAGGIORANZA, TipoScrutinio.MAGGIORANZA_ASSOLUTA);
     }

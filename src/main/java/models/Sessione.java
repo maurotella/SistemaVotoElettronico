@@ -72,6 +72,8 @@ public class Sessione extends SessioneSemplice {
     //____________________________________________________________
 
 
+
+
     /**
      * Chiude la sessione di voto
      */

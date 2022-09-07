@@ -61,15 +61,25 @@ public class GestoreDAOImpl implements GestoreDAO {
     }
 
     /**
-     * Aggiunge una sessione di Votazione al DataBase
+     * Aggiunge una sessione di Votazione al DataBase, se non è presente una altra sessione con lo stesso titolo e la stessa data di apertura
      * @param G Gestore che ha creato la sessione (e che quindi può modificarla)
      * @param s Sessione da aggiugnere al db
      */
     public void addSessione(Gestore G, Sessione s){
         try {
             Connection db = DbManager.getInstance().getDb();
-            String query = "INSERT INTO sve.\"Sessioni\" (id, titolo, data_apertura, data_chiusura, tipo_votazione, tipo_scrutinio, chiusa, gestore) VALUES (";
-            query += String.format("%d, '%s', '%s', '%s', '%s', '%s', %s, '%s')", s.getId(), s.getTitolo(), s.getDataApertura().toString(), s.getDataChiusura().toString(), s.getTipoVotazione(), s.getTipoScrutinio(), s.getChiusa(), G.getCF());
+            String query = "SELECT * FROM sve.\"Sessioni\" WHERE titolo = ";
+            query += "'" + s.getTitolo() + "' AND data_apertura BETWEEN '" + s.getDataApertura() + "' AND '" + s.getDataApertura() + "'";
+            System.out.println(query);
+            PreparedStatement ps = db.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                System.out.println(String.format("La sessione \"%s\" è già presente nel Database", s.getTitolo()));
+                return;
+            }
+
+            query = "INSERT INTO sve.\"Sessioni\" (id, titolo, data_apertura, data_chiusura, tipo_votazione, tipo_scrutinio, chiusa, gestore) VALUES (";
+            query += String.format("%d, '%s', '%s', '%s', '%s', '%s', %s, '%s')", s.getId(), s.getTitolo(), s.getDataApertura().toString(), s.getDataChiusura().toString(), s.getTipoVotazione(), s.getTipoScrutinio(), s.chiusa(), G.getCF());
             Statement stmt = db.createStatement();
             stmt.executeUpdate(query);
         }catch (Exception e){
