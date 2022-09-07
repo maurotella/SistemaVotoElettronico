@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="505.0" text="Referendum" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ReferendumController">
+<TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="428.0" prefWidth="505.0" text="Referendum" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ReferendumController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
          <children>
@@ -23,8 +23,8 @@
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints maxHeight="178.0" minHeight="10.0" prefHeight="64.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="283.0" minHeight="10.0" prefHeight="127.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="301.0" minHeight="10.0" prefHeight="174.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="283.0" minHeight="10.0" prefHeight="126.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="301.0" minHeight="10.0" prefHeight="175.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Label fx:id="titolo" text="Titolo" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
@@ -62,14 +62,18 @@
                               <Insets top="-7.0" />
                            </VBox.margin>
                         </HBox>
-                        <Button fx:id="votaButton" focusTraversable="false" mnemonicParsing="false" onAction="#vota" text="Vota">
+                        <HBox>
                            <VBox.margin>
-                              <Insets left="101.0" top="-31.0" />
+                              <Insets left="101.0" top="-9.0" />
                            </VBox.margin>
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Button>
+                           <children>
+                              <Button fx:id="votaButton" focusTraversable="false" mnemonicParsing="false" onAction="#vota" text="Vota">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
                </children>

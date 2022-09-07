@@ -3,24 +3,25 @@ package controllers;
 import data.ElettoreDAOImpl;
 import data.PersonaDAOImpl;
 import data.SessioneDAOImpl;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.Elettore;
 import models.Sessione;
 import models.SessioneSemplice;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ElettoreController {
 
     private Elettore E;
+
+    @FXML
+    private Button votaButton;
     @FXML
     private ListView<SessioneSemplice> elenco;
 
@@ -28,7 +29,7 @@ public class ElettoreController {
     private Label nominativo;
 
     @FXML
-    private Button votaButton;
+    private Button refresh;
 
     public void aggiornaSessioni() {
         List<SessioneSemplice> L = ElettoreDAOImpl.getInstance().getSessioni()
@@ -48,9 +49,31 @@ public class ElettoreController {
     }
 
     @FXML
+    void aggiorna() {
+        aggiornaSessioni();
+    }
+
+    @FXML
     void vota() {
+        SessioneSemplice selezione = elenco.getSelectionModel().getSelectedItem();
+        if (selezione==null) {
+            Alert A = new Alert(Alert.AlertType.WARNING);
+            A.setTitle("Errore");
+            A.setHeaderText("Problema durante la votazione");
+            A.setContentText("Selezionare una sessione");
+            A.show();
+            return;
+        }
+        Alert A = new Alert(Alert.AlertType.CONFIRMATION);
+        A.setTitle("Attenzione");
+        A.setHeaderText("Sei sicuro di voler proseguire?");
+        A.setContentText("Una volta entrati non si potrà annullare il voto");
+        A.showAndWait();
+        if (A.getResult() == ButtonType.CANCEL) {
+            return;
+        }
         Scene actualScene = App.getStage().getScene();
-        Sessione S = SessioneDAOImpl.getInstance().getSessione(elenco.getSelectionModel().getSelectedItem().getId());
+        Sessione S = SessioneDAOImpl.getInstance().getSessione(selezione.getId());
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
                 String.format(
                         "/views/%s.fxml",
