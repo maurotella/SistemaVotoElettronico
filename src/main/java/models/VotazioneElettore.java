@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class VotazioneElettore {
 
     // username dell'elettore che ha votato
-    private final String elettore;
+    private final Elettore elettore;
     // id della sessione in cui si è votato
     private final int sessione;
     // orario in cui si ha votato
@@ -20,9 +20,9 @@ public class VotazioneElettore {
      * @param elettore cf elettore
      * @param sessione id sessione
      */
-    public VotazioneElettore(String elettore, int sessione, LocalDateTime orario) {
-        if (elettore==null || elettore.length()==0)
-            throw new IllegalArgumentException("elettore null o vuoto");
+    public VotazioneElettore(Elettore elettore, int sessione, LocalDateTime orario) {
+        if (elettore==null)
+            throw new IllegalArgumentException("elettore null");
         if (orario==null)
             throw new IllegalArgumentException("orario null");
         this.elettore = elettore;
@@ -38,11 +38,11 @@ public class VotazioneElettore {
      * @param elettore cf elettore
      * @param sessione id sessione
      */
-    public VotazioneElettore(String elettore, int sessione) {
+    public VotazioneElettore(Elettore elettore, int sessione) {
         this(elettore, sessione, LocalDateTime.now());
     }
 
-    public String getElettore() {
+    public Elettore getElettore() {
         return elettore;
     }
 

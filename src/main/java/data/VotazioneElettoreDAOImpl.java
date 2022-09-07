@@ -1,5 +1,6 @@
 package data;
 
+import models.TipoUtente;
 import models.VotazioneElettore;
 
 import java.sql.Connection;
@@ -25,7 +26,7 @@ public class VotazioneElettoreDAOImpl implements VotazioneElettoreDAO {
         String query = "INSERT INTO \"VotiElettori\" VALUES (?,?,?)";
         try {
             PreparedStatement stmt = db.prepareStatement(query);
-            stmt.setString(1, VE.getElettore());
+            stmt.setString(1, VE.getElettore().getCF());
             stmt.setInt(2, VE.getSessione());
             stmt.setTimestamp(3, Timestamp.valueOf(VE.getOrario()));
             stmt.execute();
@@ -33,5 +34,10 @@ public class VotazioneElettoreDAOImpl implements VotazioneElettoreDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        Auditing.getInstance().registraAzione(
+                AzioniAuditing.VOTAZIONE,
+                TipoUtente.ELETTORE,
+                VE.getElettore()
+        );
     }
 }

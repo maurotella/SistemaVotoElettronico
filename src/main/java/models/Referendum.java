@@ -85,7 +85,7 @@ public class Referendum extends Votazione {
      */
     public VotazioneElettore addSi (Elettore E) {
         votiFavorevoli++;
-        ReferendumDAOImpl.getInstance().votaSi(getSessione());
+        ReferendumDAOImpl.getInstance().votaSi(getSessione(),E);
         return creaVotoElettore(E);
     };
 
@@ -98,7 +98,7 @@ public class Referendum extends Votazione {
      */
     public VotazioneElettore addNo (Elettore E) {
         votiSfavorevoli++;
-        ReferendumDAOImpl.getInstance().votaNo(getSessione());
+        ReferendumDAOImpl.getInstance().votaNo(getSessione(), E);
         return creaVotoElettore(E);
     };
 
@@ -115,7 +115,7 @@ public class Referendum extends Votazione {
 
     private VotazioneElettore creaVotoElettore(Elettore E) {
         return new VotazioneElettore(
-                E.getCF(),
+                E,
                 getSessione().getId()
         );
     }

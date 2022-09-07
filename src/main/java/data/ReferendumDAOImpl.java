@@ -1,6 +1,9 @@
 package data;
 
+import models.Elettore;
 import models.Sessione;
+import models.TipoUtente;
+import models.Utente;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,7 +22,7 @@ public class ReferendumDAOImpl implements ReferendumDAO {
     }
 
     @Override
-    public void votaSi(Sessione S) {
+    public void votaSi(Sessione S, Elettore E) {
         Connection db = DbManager.getInstance().getDb();
         String query = "UPDATE \"Referendum\" SET si=si+1 WHERE sessione=?";
         try {
@@ -33,7 +36,7 @@ public class ReferendumDAOImpl implements ReferendumDAO {
     }
 
     @Override
-    public void votaNo(Sessione S) {
+    public void votaNo(Sessione S, Elettore E) {
         Connection db = DbManager.getInstance().getDb();
         String query = "UPDATE \"Referendum\" SET no=no+1 WHERE sessione=?";
         try {
