@@ -110,7 +110,7 @@ public class NuovaSessioneController {
             App.getStage().setResizable(false);
             App.getStage().setTitle("Gestione Sessione");
             GestioneSessioneController NEW = loader.getController();
-            NEW.init(G, prev, s);
+            NEW.init(G, prev, (Sessione)s);
             App.getStage().show();
         }catch (Exception e){
             throw new RuntimeException("Errore nuovaSessioneClick():\t" + e.getMessage());

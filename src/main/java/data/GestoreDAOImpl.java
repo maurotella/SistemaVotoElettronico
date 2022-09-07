@@ -1,5 +1,6 @@
 package data;
 
+import javafx.scene.control.Alert;
 import models.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -61,6 +62,24 @@ public class GestoreDAOImpl implements GestoreDAO {
     }
 
     /**
+     * @param s Sessione da cercare nel DB
+     * @return True se la sessione s è già presente nel DB, false altrimenti
+     */
+    public boolean checkSessione (Sessione s) {
+        try {
+            Connection db = DbManager.getInstance().getDb();
+            String query = "SELECT * FROM sve.\"Sessioni\" ";
+            query += String.format("WHERE titolo = '%s' AND data_apertura between '%s' and '%s'", s.getTitolo(), s.getDataApertura(), s.getDataApertura());
+            PreparedStatement ps = db.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) return true;
+            return false;
+        } catch (Exception e) {
+            throw new RuntimeException("Errore in checkSessione: \t" + e.getMessage());
+        }
+    }
+
+    /**
      * Aggiunge una sessione di Votazione al DataBase, se non è presente una altra sessione con lo stesso titolo e la stessa data di apertura
      * @param G Gestore che ha creato la sessione (e che quindi può modificarla)
      * @param s Sessione da aggiugnere al db
@@ -68,17 +87,7 @@ public class GestoreDAOImpl implements GestoreDAO {
     public void addSessione(Gestore G, Sessione s){
         try {
             Connection db = DbManager.getInstance().getDb();
-            String query = "SELECT * FROM sve.\"Sessioni\" WHERE titolo = ";
-            query += "'" + s.getTitolo() + "' AND data_apertura BETWEEN '" + s.getDataApertura() + "' AND '" + s.getDataApertura() + "'";
-            System.out.println(query);
-            PreparedStatement ps = db.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()){
-                System.out.println(String.format("La sessione \"%s\" è già presente nel Database", s.getTitolo()));
-                return;
-            }
-
-            query = "INSERT INTO sve.\"Sessioni\" (id, titolo, data_apertura, data_chiusura, tipo_votazione, tipo_scrutinio, chiusa, gestore) VALUES (";
+            String query = "INSERT INTO sve.\"Sessioni\" (id, titolo, data_apertura, data_chiusura, tipo_votazione, tipo_scrutinio, chiusa, gestore) VALUES (";
             query += String.format("%d, '%s', '%s', '%s', '%s', '%s', %s, '%s')", s.getId(), s.getTitolo(), s.getDataApertura().toString(), s.getDataChiusura().toString(), s.getTipoVotazione(), s.getTipoScrutinio(), s.chiusa(), G.getCF());
             Statement stmt = db.createStatement();
             stmt.executeUpdate(query);

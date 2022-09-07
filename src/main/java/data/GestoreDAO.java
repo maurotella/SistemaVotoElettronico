@@ -1,7 +1,12 @@
 package data;
 
+import javafx.scene.control.Alert;
 import models.Gestore;
 import models.Sessione;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 
 public interface GestoreDAO {
@@ -25,4 +30,4 @@ public interface GestoreDAO {
      */
     List<Sessione> getSessioni(Gestore G);
 
-}
+    }
