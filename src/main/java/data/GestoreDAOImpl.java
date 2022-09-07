@@ -63,7 +63,7 @@ public class GestoreDAOImpl implements GestoreDAO {
 
     /**
      * @param s Sessione da cercare nel DB
-     * @return True se la sessione s è già presente nel DB, false altrimenti
+     * @return True se s è già presente nellle sessioni nel DB , false altrimenti
      */
     public boolean checkSessione (Sessione s) {
         try {
