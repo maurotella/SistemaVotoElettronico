@@ -12,10 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import models.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
 public class GestioneSessioneController {
 
     private Gestore G;
@@ -34,6 +30,10 @@ public class GestioneSessioneController {
     @FXML
     private Label nominativo;
 
+    @FXML
+    private Label domandaLabel;
+
+
     /**
      * Aggiunge la sessione s (ricevuta dalla scena precedente) alla lista delle sessioni nel db.
      * Se è già presente una sessione con lo stesso titolo e la stessa data di apertura mostra un messaggio di errore
@@ -47,9 +47,17 @@ public class GestioneSessioneController {
                 a.setHeaderText(null);
                 a.setContentText(String.format("La sessione '%s' con data di apertura %s è già presente nel database. Inserire una nuova sessione valida", s.getTitolo(), s.getDataApertura()));
                 a.show();
+                App.getStage().setScene(genitore); //NON RESETTA I FIELDS
                 return;
             }
             GestoreDAOImpl.getInstance().addSessione(G, s);
+            Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+            a.setTitle("Sessione aggiunta");
+            a.setHeaderText(null);
+            a.setContentText(String.format("La sessione \"%s\" è stata aggiunta correttamente alle sessioni", s.getTitolo()));
+            a.show();
+            App.getStage().setScene(genitore);
+
         }catch (Exception e){
             throw new RuntimeException("Errore in confermaClick():\t" + e.getMessage());
         }
@@ -60,13 +68,26 @@ public class GestioneSessioneController {
         App.getStage().setScene(genitore);
     }
 
+
+    /**
+     * Inizializza la sessione impostando la Label con il nome e cognome del gestore,
+     *          memorizza la scena precedente e abilita ulteriori campi se lo scrutinio scelto è REFERENDUM
+     * @param G Gestore del sistema
+     * @param genitore Scena genitore
+     * @param s Impostazioni della sessione
+     */
     @FXML
     void init(Gestore G, Scene genitore, Sessione s){
         this.G = G;
         this.nominativo.setText(PersonaDAOImpl.getInstance().getNominativo(G.getCF()));
         this.genitore = genitore;
         this.s = s;
-        System.out.println(s.toString());
+        if (s.getTipoScrutinio().equals(TipoScrutinio.REFERENDUM)){
+            domandaField.setVisible(true);
+            domandaLabel.setVisible(true);
+        }
+
+
     }
 
 }
