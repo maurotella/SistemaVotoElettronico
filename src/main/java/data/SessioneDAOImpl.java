@@ -1,9 +1,6 @@
 package data;
 
-import models.Sessione;
-import models.SessioneBuilder;
-import models.TipoScrutinio;
-import models.TipoVotazione;
+import models.*;
 import util.Util;
 
 import java.sql.Connection;
@@ -41,6 +38,31 @@ public class SessioneDAOImpl implements SessioneDAO {
                     .tipoScrutinio(TipoScrutinio.valueOf(rs.getString("tipo_scrutinio")))
                     .gestore(rs.getString("gestore"))
                     .build();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public Referendum getReferendum(int id) {
+        Connection db = DbManager.getInstance().getDb();
+        String query = "SELECT * FROM \"Referendum\" WHERE sessione=?";
+        try {
+            PreparedStatement stmt = db.prepareStatement(query);
+            stmt.setInt(1,id);
+            ResultSet rs = stmt.executeQuery();
+            if (!rs.next())
+                return null;
+            Referendum R = new Referendum(
+                    getSessione(
+                            rs.getInt("sessione")),
+                            rs.getString("quesito"),
+                            rs.getInt("si"),
+                            rs.getInt("no")
+                    );
+            stmt.close();
+            rs.close();
+            return R;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

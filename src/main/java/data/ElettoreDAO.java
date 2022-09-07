@@ -3,6 +3,7 @@ package data;
 import models.Elettore;
 import models.Gestore;
 import models.Sessione;
+import models.SessioneSemplice;
 
 import java.util.List;
 
@@ -34,6 +35,6 @@ public interface ElettoreDAO {
      * @param S sessione
      * @return true se E può votare in S, false altrimenti
      */
-    boolean puoVotare(Elettore E, Sessione S);
+    boolean puoVotare(Elettore E, SessioneSemplice S);
 
 }

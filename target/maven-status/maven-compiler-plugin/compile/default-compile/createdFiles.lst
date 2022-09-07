@@ -9,7 +9,9 @@ models\Elettore.class
 models\Gestore.class
 controllers\LoginController.class
 data\GestoreDAOImpl.class
+models\SessioneSemplice.class
 models\VotiCandidati.class
+data\SessioneDAO.class
 models\VotiReferendum.class
 models\TipoScrutinio.class
 controllers\ElettoreController.class
@@ -18,10 +20,13 @@ models\Persona.class
 models\Utente.class
 data\GestoreDAO.class
 data\PersonaDAO.class
+data\SessioneDAOImpl.class
 models\Test.class
+util\Util.class
 data\PersonaDAOImpl.class
 data\Auditing.class
 data\DbManager.class
+controllers\ReferendumController.class
 models\TipoUtente.class
 models\Sessione.class
 data\AzioniAuditing.class

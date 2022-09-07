@@ -21,7 +21,7 @@ public class Test {
                 .gestore(G.getCF())
                 .build();
 
-        VotiReferendum R = new VotiReferendum(S, "Eutanasia legale?");
+        Referendum R = new Referendum(S, "Eutanasia legale?");
 
         print(G);
 

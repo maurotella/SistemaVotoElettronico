@@ -2,7 +2,7 @@ package models;
 
 import java.time.LocalDateTime;
 
-public class VotoElettore {
+public class VotazioneElettore {
 
     // username dell'elettore che ha votato
     private final String elettore;
@@ -20,7 +20,7 @@ public class VotoElettore {
      * @param elettore cf elettore
      * @param sessione id sessione
      */
-    public VotoElettore(String elettore, int sessione, LocalDateTime orario) {
+    public VotazioneElettore(String elettore, int sessione, LocalDateTime orario) {
         if (elettore==null || elettore.length()==0)
             throw new IllegalArgumentException("elettore null o vuoto");
         if (orario==null)
@@ -38,7 +38,7 @@ public class VotoElettore {
      * @param elettore cf elettore
      * @param sessione id sessione
      */
-    public VotoElettore(String elettore, int sessione) {
+    public VotazioneElettore(String elettore, int sessione) {
         this(elettore, sessione, LocalDateTime.now());
     }
 

@@ -25,7 +25,7 @@ public class LoginController {
     @FXML
     private Label msgLabel;
 
-    Alert a = new Alert(Alert.AlertType.NONE);
+    private Alert a = new Alert(Alert.AlertType.NONE);
 
     @FXML
     void loginClick() {

@@ -1,8 +1,12 @@
 package models;
+
+import data.ReferendumDAOImpl;
+import data.VotazioneElettoreDAOImpl;
+
 /**
  * Classe che tiene i conti sulle votazioni relative a un referendum
  */
-public class VotiReferendum extends Voti {
+public class Referendum extends Votazione {
 
     // quesito referendario
     private String quesito;
@@ -18,13 +22,31 @@ public class VotiReferendum extends Voti {
      * @param s sessione relativa alla votazione
      * @param q quesito referendum
      */
-    public VotiReferendum (Sessione s, String q) {
+    public Referendum(Sessione s, String q) {
         super(s);
         if (q==null || q.length()==0)
             throw new IllegalArgumentException("Quesito mancante");
         quesito = q;
         votiFavorevoli = 0;
         votiSfavorevoli = 0;
+    }
+
+    /**
+     * Costruttore del referendum inizializzato con
+     * p voti positivi e n voti negativi.
+     *
+     * @param s sessione relativa alla votazione
+     * @param q quesito referendum
+     */
+    public Referendum(Sessione s, String q, int p, int n) {
+        super(s);
+        if (q==null || q.length()==0)
+            throw new IllegalArgumentException("Quesito mancante");
+        if (p<0 || n<0)
+            throw new IllegalArgumentException("Il numero di voti non può essere negativo");
+        quesito = q;
+        votiFavorevoli = p;
+        votiSfavorevoli = n;
     }
 
     /**
@@ -61,8 +83,9 @@ public class VotiReferendum extends Voti {
      * @param E elettore
      * @return il VotoElettore corrispondente
      */
-    public VotoElettore addSi (Elettore E) {
+    public VotazioneElettore addSi (Elettore E) {
         votiFavorevoli++;
+        ReferendumDAOImpl.getInstance().votaSi(getSessione());
         return creaVotoElettore(E);
     };
 
@@ -73,13 +96,25 @@ public class VotiReferendum extends Voti {
      * @param E elettore
      * @return il VotoElettore corrispondente
      */
-    public VotoElettore addNo (Elettore E) {
+    public VotazioneElettore addNo (Elettore E) {
         votiSfavorevoli++;
+        ReferendumDAOImpl.getInstance().votaNo(getSessione());
         return creaVotoElettore(E);
     };
 
-    private VotoElettore creaVotoElettore(Elettore E) {
-        return new VotoElettore(
+    /**
+     * Restituisce la VotazioneElettore senza aggiungere
+     * nessun voto al Referendum
+     *
+     * @param E Elettore
+     * @return la VotazioneElettore
+     */
+    public VotazioneElettore schedaBianca (Elettore E) {
+        return creaVotoElettore(E);
+    }
+
+    private VotazioneElettore creaVotoElettore(Elettore E) {
+        return new VotazioneElettore(
                 E.getCF(),
                 getSessione().getId()
         );
@@ -93,6 +128,12 @@ public class VotiReferendum extends Voti {
                 votiFavorevoli,
                 votiSfavorevoli
         );
+    }
+
+    public static enum Risposte {
+        SI,
+        NO,
+        SCHEDA_BIANCA
     }
 
 }

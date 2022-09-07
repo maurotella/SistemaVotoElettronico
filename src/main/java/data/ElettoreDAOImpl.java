@@ -91,7 +91,7 @@ public class ElettoreDAOImpl implements ElettoreDAO {
     }
 
     @Override
-    public boolean puoVotare(Elettore E, Sessione S) {
+    public boolean puoVotare(Elettore E, SessioneSemplice S) {
         if (!E.dirittoVoto())
             return false;
         Connection db = DbManager.getInstance().getDb();

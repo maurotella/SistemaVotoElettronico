@@ -22,17 +22,17 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                  <RowConstraints maxHeight="178.0" minHeight="10.0" prefHeight="79.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="178.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="301.0" minHeight="10.0" prefHeight="216.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="178.0" minHeight="10.0" prefHeight="64.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="283.0" minHeight="10.0" prefHeight="127.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="301.0" minHeight="10.0" prefHeight="174.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Titolo" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Label fx:id="titolo" text="Titolo" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font size="27.0" />
                      </font>
                   </Label>
-                  <Label text="Domanda" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                  <Label fx:id="quesito" focusTraversable="false" text="Domanda" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -44,7 +44,7 @@
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <CheckBox fx:id="favorevoleCheck" mnemonicParsing="false" text="SÌ">
+                              <CheckBox fx:id="favorevoleCheck" focusTraversable="false" mnemonicParsing="false" onAction="#onlyOne" text="SÌ">
                                  <padding>
                                     <Insets left="47.0" right="76.0" />
                                  </padding>
@@ -52,16 +52,19 @@
                                     <Font size="25.0" />
                                  </font>
                               </CheckBox>
-                              <CheckBox fx:id="sfavorevoleCheck" mnemonicParsing="false" text="NO">
+                              <CheckBox fx:id="sfavorevoleCheck" focusTraversable="false" mnemonicParsing="false" onAction="#onlyOne" text="NO">
                                  <font>
                                     <Font size="25.0" />
                                  </font>
                               </CheckBox>
                            </children>
-                        </HBox>
-                        <Button fx:id="votaButton" mnemonicParsing="false" onAction="#vota" text="Vota">
                            <VBox.margin>
-                              <Insets left="101.0" top="-9.0" />
+                              <Insets top="-7.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Button fx:id="votaButton" focusTraversable="false" mnemonicParsing="false" onAction="#vota" text="Vota">
+                           <VBox.margin>
+                              <Insets left="101.0" top="-31.0" />
                            </VBox.margin>
                            <font>
                               <Font size="24.0" />

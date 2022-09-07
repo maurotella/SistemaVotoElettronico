@@ -3,7 +3,7 @@ package models;
  * Classe astratta usata dalle varie classi che tengono conto
  * delle votazioni
  */
-public abstract class Voti {
+public abstract class Votazione {
 
     // sessione relativa ai voti
     private Sessione sessione;
@@ -15,7 +15,7 @@ public abstract class Voti {
      *
      * @param s sessione relativa
      */
-    public Voti (Sessione s) {
+    public Votazione(Sessione s) {
         if (s==null)
             throw new IllegalArgumentException("Sessione null");
         sessione = s;

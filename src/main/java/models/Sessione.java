@@ -12,6 +12,10 @@ public class Sessione extends SessioneSemplice {
     // CF gestore che ha creato la sessione
     private final String gestore;
 
+    public TipoVotazione getTipoVotazione() {
+        return tipoVotazione;
+    }
+
     public Sessione (
             int i,
             String t,
