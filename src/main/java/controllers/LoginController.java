@@ -30,6 +30,8 @@ public class LoginController {
     void loginClick() {
         String userString = user.getText().toUpperCase();
         String pswString = psw.getText();
+        a.setHeaderText(null);
+        a.setTitle("Errore");
         // Controllo campi non vuoti
         if (userString.isEmpty()){
             a.setAlertType(Alert.AlertType.ERROR);
@@ -47,6 +49,7 @@ public class LoginController {
                 if (U==null) {
                     a.setAlertType(Alert.AlertType.ERROR);
                     a.setContentText("Credenziali errate");
+
                     a.show();
                     return;
                 }
