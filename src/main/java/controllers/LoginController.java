@@ -27,6 +27,11 @@ public class LoginController {
 
     private Alert a = new Alert(Alert.AlertType.NONE);
 
+    void initialize() {
+        System.out.println("Initialize");
+        user.clear();
+        psw.clear();
+    }
     @FXML
     void loginClick() {
         String userString = user.getText().toUpperCase();
@@ -61,6 +66,7 @@ public class LoginController {
                 titolo = "Gestore";
                 file = "gestore";
             }
+            Scene G = App.getStage().getScene();;
             try {
                 FXMLLoader loader = new FXMLLoader(
                         getClass().getResource(String.format("/views/%s.fxml",file))
@@ -75,7 +81,7 @@ public class LoginController {
                 } else {
                     ElettoreController EC = loader.getController();
                     //noinspection ConstantConditions
-                    EC.init((Elettore) U);
+                    EC.init((Elettore) U, G, this);
                 }
                 pS.show();
             } catch (IOException e) {

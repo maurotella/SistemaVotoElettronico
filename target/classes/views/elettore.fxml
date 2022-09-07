@@ -62,6 +62,14 @@
                                     <Insets top="11.0" />
                                  </HBox.margin>
                               </Button>
+                              <Button fx:id="logout" focusTraversable="false" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: #f24b35;" text="Esci" textFill="WHITE">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="465.0" top="11.0" />
+                                 </HBox.margin>
+                              </Button>
                            </children>
                         </HBox>
                      </children>

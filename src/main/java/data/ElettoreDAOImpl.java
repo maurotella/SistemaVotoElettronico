@@ -91,6 +91,15 @@ public class ElettoreDAOImpl implements ElettoreDAO {
     }
 
     @Override
+    public void logout(Elettore E) {
+        Auditing.getInstance().registraAzione(
+                AzioniAuditing.LOGOUT,
+                TipoUtente.ELETTORE,
+                E
+        );
+    }
+
+    @Override
     public boolean puoVotare(Elettore E, SessioneSemplice S) {
         if (!E.dirittoVoto())
             return false;

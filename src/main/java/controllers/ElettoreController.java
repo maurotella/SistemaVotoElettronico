@@ -13,15 +13,22 @@ import models.Sessione;
 import models.SessioneSemplice;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ElettoreController {
+
+    private Scene genitore;
+
+    private LoginController genitoreController;
 
     private Elettore E;
 
     @FXML
     private Button votaButton;
+
+    @FXML
+    private Button logout;
+
     @FXML
     private ListView<SessioneSemplice> elenco;
 
@@ -40,8 +47,10 @@ public class ElettoreController {
         elenco.getItems().addAll(L);
     }
 
-    public void init(Elettore E) {
+    public void init(Elettore E, Scene g, LoginController gc) {
         this.E = E;
+        this.genitore = g;
+        this.genitoreController = gc;
         this.nominativo.setText(
                 PersonaDAOImpl.getInstance().getNominativo(E.getCF())
         );
@@ -93,6 +102,13 @@ public class ElettoreController {
                 ((ReferendumController)loader.getController()).init(actualScene,this, S, E);
                 break;
         }
+    }
+
+    @FXML
+    void logout() {
+        ElettoreDAOImpl.getInstance().logout(E);
+        App.getStage().setScene(genitore);
+        genitoreController.initialize();
     }
 
 }

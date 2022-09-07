@@ -29,6 +29,14 @@ public interface ElettoreDAO {
      List<Sessione> getSessioni();
 
     /**
+     * Effettua il logout dell'elettore E,
+     * segnalando l'azione al Auditing
+     *
+     * @param E l'elettore
+     */
+     void logout(Elettore E);
+
+    /**
      * Indica se l'elettore E può votare nella sessione S
      *
      * @param E elettore
