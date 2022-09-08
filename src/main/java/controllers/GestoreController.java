@@ -41,7 +41,6 @@ public class GestoreController {
 
     @FXML
     void nuovaSessioneClick() {
-        //cambio scena con gestore_NuovaSessione
         try{
             Scene prev = App.getStage().getScene();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/gestore_nuovaSessione.fxml"));

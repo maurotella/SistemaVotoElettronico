@@ -5,6 +5,7 @@ import data.GestoreDAOImpl;
 import data.PersonaDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -16,6 +17,7 @@ public class GestioneSessioneController {
 
     private Gestore G;
     private Scene genitore;
+    private NuovaSessioneController ctrl;
     Sessione s;
 
     @FXML
@@ -47,7 +49,7 @@ public class GestioneSessioneController {
                 a.setHeaderText(null);
                 a.setContentText(String.format("La sessione '%s' con data di apertura %s è già presente nel database. Inserire una nuova sessione valida", s.getTitolo(), s.getDataApertura()));
                 a.show();
-                App.getStage().setScene(genitore); //NON RESETTA I FIELDS
+                App.getStage().setScene(genitore);
                 return;
             }
             GestoreDAOImpl.getInstance().addSessione(G, s);
@@ -55,6 +57,7 @@ public class GestioneSessioneController {
             a.setTitle("Sessione aggiunta");
             a.setHeaderText(null);
             a.setContentText(String.format("La sessione \"%s\" è stata aggiunta correttamente alle sessioni", s.getTitolo()));
+            ctrl.svuota();
             a.show();
             App.getStage().setScene(genitore);
 
@@ -68,20 +71,22 @@ public class GestioneSessioneController {
         App.getStage().setScene(genitore);
     }
 
-
     /**
      * Inizializza la sessione impostando la Label con il nome e cognome del gestore,
      *          memorizza la scena precedente e abilita ulteriori campi se lo scrutinio scelto è REFERENDUM
      * @param G Gestore del sistema
      * @param genitore Scena genitore
      * @param s Impostazioni della sessione
+     * @param ctrl Controller della scena precedente
      */
     @FXML
-    void init(Gestore G, Scene genitore, Sessione s){
+    void init(Gestore G, Scene genitore, Sessione s, NuovaSessioneController ctrl){
         this.G = G;
         this.nominativo.setText(PersonaDAOImpl.getInstance().getNominativo(G.getCF()));
         this.genitore = genitore;
         this.s = s;
+        this.ctrl = ctrl;
+
         if (s.getTipoScrutinio().equals(TipoScrutinio.REFERENDUM)){
             domandaField.setVisible(true);
             domandaLabel.setVisible(true);

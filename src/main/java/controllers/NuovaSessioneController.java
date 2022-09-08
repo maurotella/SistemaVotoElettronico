@@ -59,16 +59,27 @@ public class NuovaSessioneController {
     private ChoiceBox<TipoVotazione> votazioneChoicebox;
 
     /**
+     * Svota tutti i campi di questa scena
+     */
+    public void svuota(){
+        scrutinioChoicebox.setValue(null);
+        votazioneChoicebox.setValue(null);
+        titoloVotazione.setText("");
+        dataFine.setValue(null);
+        dataInizio.setValue(null);
+    }
+
+    /**
      * Inizializza il Gestore corrente e le choiceBox con i tipi di votazione e scrutini supportati
      */
     @FXML
-    void    init(Gestore G, Scene genitore){
+    void init(Gestore G, Scene genitore){
         this.G = G;
-        //setto il nominativo
         this.nominativo.setText(PersonaDAOImpl.getInstance().getNominativo(G.getCF()));
         votazioneChoicebox.getItems().addAll(TipoVotazione.REFERENDUM, TipoVotazione.CATEGORICO, TipoVotazione.CATEGORICO_PREFERENZA, TipoVotazione.ORDINALE);
         scrutinioChoicebox.getItems().addAll(TipoScrutinio.REFERENDUM_QUORUM, TipoScrutinio.REFERENDUM, TipoScrutinio.MAGGIORANZA, TipoScrutinio.MAGGIORANZA_ASSOLUTA);
         this.genitore = genitore;
+
     }
 
 
@@ -77,7 +88,6 @@ public class NuovaSessioneController {
 
     @FXML
     void avantiClick(){
-
         //prima salvo la sessione con i campi che ho inserito, dato che la devo passare alla scena successiva
         Integer idxSessione = null;
         try {
@@ -102,6 +112,7 @@ public class NuovaSessioneController {
                 scrutinioChoicebox.getValue(),
                 G.toString()
         );
+       
 
         try{
             Scene prev = App.getStage().getScene();
@@ -110,7 +121,7 @@ public class NuovaSessioneController {
             App.getStage().setResizable(false);
             App.getStage().setTitle("Gestione Sessione");
             GestioneSessioneController NEW = loader.getController();
-            NEW.init(G, prev, (Sessione)s);
+            NEW.init(G, prev, (Sessione)s, this);
             App.getStage().show();
         }catch (Exception e){
             throw new RuntimeException("Errore nuovaSessioneClick():\t" + e.getMessage());
