@@ -99,7 +99,10 @@ public class ElettoreController {
         pStage.setResizable(false);
         switch (S.getTipoVotazione()) {
             case REFERENDUM:
-                ((ReferendumController)loader.getController()).init(actualScene,this, S, E);
+                ((ReferendumController) loader.getController()).init(actualScene,this, S, E);
+                break;
+            case ORDINALE:
+                ((VotoOrdinaleController) loader.getController()).init(actualScene, this, S, E);
                 break;
         }
     }

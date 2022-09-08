@@ -53,14 +53,15 @@ public class ReferendumController {
      */
     private static String aCapo (String text) {
         StringBuilder res = new StringBuilder();
+        int len = 65;
         int j = 0;
-        int i = 55;
+        int i = len;
         while ( i<text.length() ) {
             while ( text.charAt(i) != ' ' )
                 i++;
             res.append(text.substring(j,i)+"\n");
             j=i+1;
-            i += 55;
+            i += len;
         }
         res.append(text.substring(j));
         return res.toString();

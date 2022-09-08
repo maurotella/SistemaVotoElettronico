@@ -7,6 +7,7 @@ public class Sessione extends SessioneSemplice {
     private final LocalDate dataApertura;
     private final LocalDate dataChiusura;
     private final TipoVotazione tipoVotazione;
+    private final boolean votazionePartiti;
     private final TipoScrutinio tipoScrutinio;
     private boolean chiusa;
     // CF gestore che ha creato la sessione
@@ -22,6 +23,7 @@ public class Sessione extends SessioneSemplice {
             LocalDate da,
             LocalDate dc,
             TipoVotazione tv,
+            boolean vP,
             TipoScrutinio ts,
             String g
     ) {
@@ -45,6 +47,7 @@ public class Sessione extends SessioneSemplice {
         dataApertura = da;
         dataChiusura = dc;
         tipoVotazione = tv;
+        votazionePartiti = vP;
         tipoScrutinio = ts;
         chiusa = false;
         gestore = g;
@@ -66,6 +69,26 @@ public class Sessione extends SessioneSemplice {
         return chiusa;
     }
 
+    public LocalDate getDataApertura() {
+        return dataApertura;
+    }
+
+    public LocalDate getDataChiusura() {
+        return dataChiusura;
+    }
+
+    public boolean isVotazionePartiti() {
+        return votazionePartiti;
+    }
+
+    public TipoScrutinio getTipoScrutinio() {
+        return tipoScrutinio;
+    }
+
+    public String getGestore() {
+        return gestore;
+    }
+
     @Override
     public String toString() {
         return "Sessione{\n" +
@@ -74,9 +97,11 @@ public class Sessione extends SessioneSemplice {
                 "    dataApertura=" + dataApertura + "\n" +
                 "    dataChiusura=" + dataChiusura + "\n" +
                 "    tipoVotazione=" + tipoVotazione + "\n" +
+                "    votazionePartiti=" + votazionePartiti + "\n" +
                 "    tipoScrutinio=" + tipoScrutinio + "\n" +
                 "    chiusa=" + chiusa + "\n" +
                 "    gestore=" + gestore + "\n" +
                 '}';
     }
+
 }

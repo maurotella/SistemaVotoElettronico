@@ -19,7 +19,9 @@ public class Test {
         String enc3 = BCrypt.hashpw(psw3, BCrypt.gensalt());
         String enc4 = BCrypt.hashpw(psw4, BCrypt.gensalt());
 
-        print(enc4);
+        print(SessioneDAOImpl.getInstance().getListaCandidati(
+                SessioneDAOImpl.getInstance().getSessione(4)
+        ));
     }
 
 }

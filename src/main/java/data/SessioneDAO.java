@@ -1,7 +1,12 @@
 package data;
 
+import models.Candidato;
+import models.Partito;
 import models.Referendum;
 import models.Sessione;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface SessioneDAO {
 
@@ -14,13 +19,22 @@ public interface SessioneDAO {
     Sessione getSessione(int id);
 
     /**
-     * Dato l'id della Sessione, restituisce
-     * l'eventuale Referendum corrispondente
+     * Dato l'id della sessione,
+     * restituisce l'evetnuale referendum collegato
      *
-     * @param id l'id della sessione
-     * @return il referendum con quell'id se la sessione
-     *         è un referendum, null altrimenti
+     * @param id id della sessione
+     * @return il referendum della sessione se di tipo referendum,
+     *         null altrimenti
      */
     Referendum getReferendum(int id);
+
+    /**
+     * Restituisce una mappa contenente la lista dei partiti
+     * i cui membri si candidano alla sessione S
+     *
+     * @param S la sessione
+     * @return la mappa dei partiti-candidati
+     */
+    HashMap<Partito, ArrayList<Candidato>> getListaCandidati(Sessione S);
 
 }

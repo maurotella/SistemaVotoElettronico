@@ -2,6 +2,8 @@ package util;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Util {
 
@@ -17,6 +19,21 @@ public class Util {
         int m = Integer.parseInt(A[1]);
         int d = Integer.parseInt(A[2]);
         return LocalDate.of(y,m,d);
+    }
+
+    /**
+     * Preso un ArrayList<E> e un elemento e,
+     * aggiunge l'elemento alla lista e
+     * la restituisce
+     *
+     * @param L la lista
+     * @param e l'elemento
+     * @return la lista a cui è stato aggiunto l'elemento
+     * @param <E> il tipo dell'elemento
+     */
+    public static <E> ArrayList<E> addAndReturnList (ArrayList<E> L, E e) {
+        L.add(e);
+        return L;
     }
 
 }

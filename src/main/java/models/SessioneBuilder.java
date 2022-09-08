@@ -8,6 +8,8 @@ public class SessioneBuilder {
     private LocalDate dataApertura;
     private LocalDate dataChiusura;
     private TipoVotazione tipoVotazione;
+
+    private boolean votazionePartiti;
     private TipoScrutinio tipoScrutinio;
     private String gestore;
 
@@ -39,6 +41,11 @@ public class SessioneBuilder {
         return this;
     }
 
+    public SessioneBuilder votazionePartiti (boolean vP) {
+        votazionePartiti = vP;
+        return this;
+    }
+
     public SessioneBuilder tipoScrutinio (TipoScrutinio t) {
         tipoScrutinio = t;
         return this;
@@ -51,7 +58,7 @@ public class SessioneBuilder {
 
     public Sessione build() {
         return new Sessione(id, titolo, dataApertura, dataChiusura,
-                tipoVotazione, tipoScrutinio, gestore);
+                tipoVotazione, votazionePartiti, tipoScrutinio, gestore);
     }
 
 }

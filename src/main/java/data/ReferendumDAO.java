@@ -9,4 +9,5 @@ public interface ReferendumDAO {
 
     void votaNo (Sessione S, Elettore E);
 
+
 }

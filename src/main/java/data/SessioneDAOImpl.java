@@ -3,10 +3,10 @@ package data;
 import models.*;
 import util.Util;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class SessioneDAOImpl implements SessioneDAO {
 
@@ -54,12 +54,11 @@ public class SessioneDAOImpl implements SessioneDAO {
             if (!rs.next())
                 return null;
             Referendum R = new Referendum(
-                    getSessione(
-                            rs.getInt("sessione")),
-                            rs.getString("quesito"),
-                            rs.getInt("si"),
-                            rs.getInt("no")
-                    );
+                    SessioneDAOImpl.getInstance().getSessione(rs.getInt("sessione")),
+                    rs.getString("quesito"),
+                    rs.getInt("si"),
+                    rs.getInt("no")
+            );
             stmt.close();
             rs.close();
             return R;
@@ -67,4 +66,50 @@ public class SessioneDAOImpl implements SessioneDAO {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public HashMap<Partito, ArrayList<Candidato>> getListaCandidati(Sessione S) {
+        Connection db = DbManager.getInstance().getDb();
+        String query =
+                "SELECT " +
+                        "P.nome as partito," +
+                        "P.id as idPartito," +
+                        "C.id as idCandidato," +
+                        "C.persona as persona," +
+                        "C.ruolo as ruolo " +
+                "FROM \"VotiCandidati\" AS VC " +
+                "JOIN \"Candidati\" AS C ON VC.candidato=C.id " +
+                "JOIN \"Partiti\" AS P ON C.partito=P.id " +
+                "WHERE VC.sessione = ?";
+        HashMap<Partito, ArrayList<Candidato>> res = new HashMap<>();
+        try {
+            PreparedStatement stmt = db.prepareStatement(query);
+            stmt.setInt(1,S.getId());
+            ResultSet rs = stmt.executeQuery();
+            Partito P;
+            Candidato C;
+            while (rs.next()) {
+                P = new Partito(
+                        rs.getInt("idPartito"),
+                        rs.getString("partito")
+                );
+                C = new Candidato(
+                        rs.getInt("idCandidato"),
+                        rs.getString("persona"),
+                        P.getId(),
+                        rs.getString("ruolo")
+                );
+                res.put(
+                        P,
+                        res.containsKey(P) ? Util.addAndReturnList(res.get(P), C) : new ArrayList<>(List.of(C))
+                );
+            }
+            stmt.close();
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+
 }

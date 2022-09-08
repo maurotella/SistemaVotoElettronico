@@ -1,12 +1,10 @@
 package data;
 
-import models.Elettore;
-import models.Sessione;
-import models.TipoUtente;
-import models.Utente;
+import models.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ReferendumDAOImpl implements ReferendumDAO {
@@ -48,4 +46,5 @@ public class ReferendumDAOImpl implements ReferendumDAO {
             throw new RuntimeException(e);
         }
     }
+
 }
