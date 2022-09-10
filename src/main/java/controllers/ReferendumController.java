@@ -15,7 +15,6 @@ import java.util.Optional;
 public class ReferendumController {
 
     private Elettore E;
-    private Sessione S;
     private Referendum R;
 
     Scene genitore;
@@ -36,13 +35,6 @@ public class ReferendumController {
     @FXML
     private Button votaButton;
 
-    private Alert a = new Alert(
-            Alert.AlertType.CONFIRMATION,
-            "",
-            new ButtonType("Conferma"),
-            new ButtonType("Cambia voto")
-    );
-
     /**
      * Formatta il il testo text mandando degli a
      * capo che non spezzano le parole per non sforare
@@ -59,7 +51,7 @@ public class ReferendumController {
         while ( i<text.length() ) {
             while ( text.charAt(i) != ' ' )
                 i++;
-            res.append(text.substring(j,i)+"\n");
+            res.append(text.substring(j, i)).append("\n");
             j=i+1;
             i += len;
         }
@@ -70,7 +62,6 @@ public class ReferendumController {
     void init(Scene G, ElettoreController EC, Sessione S, Elettore E) {
         this.genitore = G;
         this.genitoreController = EC;
-        this.S = S;
         this.E = E;
         R = SessioneDAOImpl.getInstance().getReferendum(S.getId());
         quesito.setText(aCapo(R.getQuesito()));
@@ -99,6 +90,12 @@ public class ReferendumController {
 
     @FXML
     void vota(ActionEvent event) {
+        Alert a = new Alert(
+                Alert.AlertType.CONFIRMATION,
+                "",
+                new ButtonType("Conferma"),
+                new ButtonType("Cambia voto")
+        );
         a.setTitle("Conferma");
         a.setHeaderText("Vuoi confermare il seguente voto:");
         a.setContentText(

@@ -1,7 +1,6 @@
 package controllers;
 
-import data.PersonaDAOImpl;
-import data.SessioneDAOImpl;
+import data.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -9,9 +8,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -29,6 +26,8 @@ public class VotoOrdinaleController {
     Sessione S;
     Elettore E;
     HashMap<Partito, ArrayList<Candidato>> lista;
+
+    static int numeroCandidati;
 
     static LinkedList<ChoiceBox<CandidatoStringato>> choiceBoxes;
 
@@ -61,14 +60,14 @@ public class VotoOrdinaleController {
         E = e;
         lista = SessioneDAOImpl.getInstance().getListaCandidati(s);
         choiceBoxes = new LinkedList<>();
-        insertChoice();
+        insertChoices();
         insertElenco();
     }
 
     /**
      * Inserisce tutte le choiceBox per selezionare l'ordine
      */
-    void insertChoice () {
+    void insertChoices () {
         if (!S.isVotazionePartiti()) {
             List<CandidatoStringato> candidati =
                     lista.values().stream().flatMap(List::stream).map(
@@ -97,6 +96,7 @@ public class VotoOrdinaleController {
                         new CBListener(cb)
                 );
             }
+            numeroCandidati = i-1;
         } else {
 
         }
@@ -124,9 +124,39 @@ public class VotoOrdinaleController {
 
     @FXML
     void vota() {
-        choiceBoxes.getFirst().getItems().remove(1);
-        System.out.println(choiceBoxes.getFirst());
+        HashMap<Candidato, Integer> mappa = new HashMap<>();
+        int i = numeroCandidati;
+        StringBuilder testoConferma = new StringBuilder();
+        for (ChoiceBox<CandidatoStringato> cb: choiceBoxes) {
+            mappa.put(cb.getValue().candidato, i--);
+            testoConferma.append(
+                    String.format("%d°: %s\n", numeroCandidati-i, cb.getValue().toString())
+            );
+        }
+        Alert a = new Alert(
+                Alert.AlertType.CONFIRMATION,
+                "",
+                new ButtonType("Conferma"),
+                new ButtonType("Cambia voto")
+        );
+        a.setTitle("Conferma");
+        a.setHeaderText("Vuoi confermare il seguente voto:");
+        a.setContentText(testoConferma.toString());
+        Optional<ButtonType> res = a.showAndWait();
+        if (res.get().getText().equals("Conferma")) {
+            confermaVoto(mappa);
+        }
     }
+
+    void confermaVoto(HashMap<Candidato, Integer> votiCandidati) {
+        VotazioneCandidatiDAOImpl.getInstance().votaCandidato(votiCandidati, S, E);
+        VotazioneElettoreDAOImpl.getInstance().votoElettore(
+                new VotazioneElettore(E, S.getId())
+        );
+        genitoreController.aggiornaSessioni();
+        App.getStage().setScene(genitore);
+    }
+
     private static class CandidatoStringato {
         private final Candidato candidato;
 

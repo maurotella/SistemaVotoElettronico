@@ -98,12 +98,8 @@ public class ElettoreController {
         pStage.setTitle("Votazione");
         pStage.setResizable(false);
         switch (S.getTipoVotazione()) {
-            case REFERENDUM:
-                ((ReferendumController) loader.getController()).init(actualScene,this, S, E);
-                break;
-            case ORDINALE:
-                ((VotoOrdinaleController) loader.getController()).init(actualScene, this, S, E);
-                break;
+            case REFERENDUM -> ((ReferendumController) loader.getController()).init(actualScene, this, S, E);
+            case ORDINALE -> ((VotoOrdinaleController) loader.getController()).init(actualScene, this, S, E);
         }
     }
 
