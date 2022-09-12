@@ -12,7 +12,7 @@ import models.Sessione;
 
 import java.util.Optional;
 
-public class ReferendumController {
+public class ReferendumController implements VotazioneController{
 
     private Elettore E;
     private Referendum R;
@@ -89,7 +89,7 @@ public class ReferendumController {
     }
 
     @FXML
-    void vota(ActionEvent event) {
+    public void vota() {
         Alert a = new Alert(
                 Alert.AlertType.CONFIRMATION,
                 "",
@@ -105,14 +105,14 @@ public class ReferendumController {
         );
         Optional<ButtonType> res = a.showAndWait();
         if (res.get().getText().equals("Conferma"))
-             confermaVoto(
-                     favorevoleCheck.isSelected() ? Referendum.Risposte.SI :
-                             sfavorevoleCheck.isSelected() ? Referendum.Risposte.NO :
-                                     Referendum.Risposte.SCHEDA_BIANCA
-             );
+             confermaVoto();
     }
 
-    void confermaVoto(Referendum.Risposte Ris) {
+    public void confermaVoto() {
+        Referendum.Risposte Ris =
+                favorevoleCheck.isSelected() ? Referendum.Risposte.SI :
+                sfavorevoleCheck.isSelected() ? Referendum.Risposte.NO :
+                        Referendum.Risposte.SCHEDA_BIANCA;
         switch (Ris) {
             case SI:
                 VotazioneElettoreDAOImpl.getInstance().votoElettore(

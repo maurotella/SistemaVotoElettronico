@@ -19,7 +19,7 @@ import models.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class VotoOrdinaleController {
+public class VotoOrdinaleController implements VotazioneController {
 
     Scene genitore;
     ElettoreController genitoreController;
@@ -39,6 +39,9 @@ public class VotoOrdinaleController {
 
     @FXML
     private VBox opzioni;
+
+    @FXML
+    private Button clean;
 
     @FXML
     private Label titolo;
@@ -97,8 +100,6 @@ public class VotoOrdinaleController {
                 );
             }
             numeroCandidati = i-1;
-        } else {
-
         }
     }
 
@@ -123,15 +124,22 @@ public class VotoOrdinaleController {
     }
 
     @FXML
-    void vota() {
-        HashMap<Candidato, Integer> mappa = new HashMap<>();
-        int i = numeroCandidati;
+    public void vota() {
+        int i = numeroCandidati-1;
         StringBuilder testoConferma = new StringBuilder();
-        for (ChoiceBox<CandidatoStringato> cb: choiceBoxes) {
-            mappa.put(cb.getValue().candidato, i--);
-            testoConferma.append(
-                    String.format("%d°: %s\n", numeroCandidati-i, cb.getValue().toString())
-            );
+        if ( campiVuoti() ) { // SCHEDA BIANCA
+            testoConferma.append("Scheda bianca");
+        } else if ( choiceBoxes.stream().map(ChoiceBox::getValue).anyMatch(Objects::isNull) ) { // SCHEDA NE BIANCA NE COMPLETA
+            Alert a = new Alert( Alert.AlertType.ERROR );
+            a.setContentText("Selezionare tutte le posizioni o lasciare la scheda bianca (premendo il tasto sopra Vota)");
+            a.show();
+            return;
+        } else { // SCHEDA COMPLETA
+            for (ChoiceBox<CandidatoStringato> cb: choiceBoxes) {
+                testoConferma.append(
+                        String.format("%d°: %s\n", numeroCandidati-(i--), cb.getValue().toString())
+                );
+            }
         }
         Alert a = new Alert(
                 Alert.AlertType.CONFIRMATION,
@@ -144,12 +152,31 @@ public class VotoOrdinaleController {
         a.setContentText(testoConferma.toString());
         Optional<ButtonType> res = a.showAndWait();
         if (res.get().getText().equals("Conferma")) {
-            confermaVoto(mappa);
+            confermaVoto();
         }
     }
 
-    void confermaVoto(HashMap<Candidato, Integer> votiCandidati) {
-        VotazioneCandidatiDAOImpl.getInstance().votaCandidato(votiCandidati, S, E);
+    /**
+     * Valuta se tutte le choiceBox sono vuote
+     *
+     * @return true se tutte le choiceBox sono vuote, false altrimenti
+     */
+    boolean campiVuoti () {
+        return choiceBoxes.stream()
+                .map(ChoiceBox::getValue)
+                .allMatch(Objects::isNull);
+    }
+
+    public void confermaVoto() {
+        if ( !campiVuoti() ) {
+            HashMap<Candidato, Integer> votiCandidati = new HashMap<>();
+            int i = numeroCandidati;
+            StringBuilder testoConferma = new StringBuilder();
+            for (ChoiceBox<CandidatoStringato> cb: choiceBoxes) {
+                votiCandidati.put(cb.getValue().candidato, i--);
+            }
+            VotazioneCandidatiDAOImpl.getInstance().votaCandidato(votiCandidati, S, E);
+        }
         VotazioneElettoreDAOImpl.getInstance().votoElettore(
                 new VotazioneElettore(E, S.getId())
         );
@@ -157,8 +184,19 @@ public class VotoOrdinaleController {
         App.getStage().setScene(genitore);
     }
 
-    private static class CandidatoStringato {
+    @FXML
+    void pulisci() {
+        for (ChoiceBox<CandidatoStringato> cb : choiceBoxes ) {
+            cb.setValue(null);
+        }
+    }
+
+    public static class CandidatoStringato {
         private final Candidato candidato;
+
+        public Candidato getCandidato() {
+            return candidato;
+        }
 
         @Override
         public boolean equals(Object o) {

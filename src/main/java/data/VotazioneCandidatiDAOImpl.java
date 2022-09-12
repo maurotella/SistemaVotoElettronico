@@ -8,6 +8,7 @@ import models.TipoUtente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
 
 public class VotazioneCandidatiDAOImpl implements VotazioneCandidatiDAO {
@@ -40,4 +41,11 @@ public class VotazioneCandidatiDAOImpl implements VotazioneCandidatiDAO {
             }
         }
     }
+
+    public void votaCandidato(Candidato C, Sessione S, Elettore E) {
+        HashMap<Candidato, Integer> M = new HashMap<>(1);
+        M.put(C,1);
+        votaCandidato(M, S, E);
+    }
+
 }

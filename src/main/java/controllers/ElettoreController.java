@@ -100,6 +100,7 @@ public class ElettoreController {
         switch (S.getTipoVotazione()) {
             case REFERENDUM -> ((ReferendumController) loader.getController()).init(actualScene, this, S, E);
             case ORDINALE -> ((VotoOrdinaleController) loader.getController()).init(actualScene, this, S, E);
+            case CATEGORICO -> ((VotoCategoricoController) loader.getController()).init(actualScene, this, S, E);
         }
     }
 
