@@ -303,9 +303,10 @@ ALTER SEQUENCE sve."Sessione_id_seq" OWNED BY sve."Sessioni".id;
 --
 
 CREATE TABLE sve."VotiCandidati" (
-    sessione integer,
-    candidato integer,
-    voti integer DEFAULT 0
+    candidato integer NOT NULL,
+    sessione integer NOT NULL,
+    voti integer DEFAULT 0,
+    CONSTRAINT "VotiCandidati_voti_check" CHECK ((voti >= 0))
 );
 
 
@@ -323,6 +324,20 @@ CREATE TABLE sve."VotiElettori" (
 
 
 ALTER TABLE sve."VotiElettori" OWNER TO postgres;
+
+--
+-- Name: VotiPartiti; Type: TABLE; Schema: sve; Owner: postgres
+--
+
+CREATE TABLE sve."VotiPartiti" (
+    partito integer NOT NULL,
+    sessione integer NOT NULL,
+    voti integer,
+    CONSTRAINT "VotiPartiti_voti_check" CHECK ((voti >= 0))
+);
+
+
+ALTER TABLE sve."VotiPartiti" OWNER TO postgres;
 
 --
 -- Name: Auditing id; Type: DEFAULT; Schema: sve; Owner: postgres
@@ -587,6 +602,62 @@ COPY sve."Auditing" (id, orario, azione, ruolo_chi, chi) FROM stdin;
 223	2022-09-08 22:44:24.300326	1	ELETTORE	E
 224	2022-09-08 23:09:42.074972	1	ELETTORE	E
 225	2022-09-08 23:11:21.371778	1	ELETTORE	E
+226	2022-09-10 21:36:09.86025	1	ELETTORE	E
+227	2022-09-10 21:49:05.662378	1	ELETTORE	E
+228	2022-09-10 21:50:19.088691	1	ELETTORE	E
+229	2022-09-10 22:06:41.31911	1	ELETTORE	E
+230	2022-09-10 22:07:15.498942	1	ELETTORE	E
+231	2022-09-10 22:09:26.451904	1	ELETTORE	E
+232	2022-09-10 22:48:02.257215	1	ELETTORE	E
+233	2022-09-10 22:48:55.884548	1	ELETTORE	E
+234	2022-09-10 22:50:28.77699	1	ELETTORE	E
+235	2022-09-10 22:51:49.086909	1	ELETTORE	E
+236	2022-09-10 22:52:02.081309	2	ELETTORE	E
+237	2022-09-10 22:52:13.588879	2	ELETTORE	E
+238	2022-09-10 23:04:57.109484	1	ELETTORE	E
+239	2022-09-10 23:05:17.164811	2	ELETTORE	E
+240	2022-09-10 23:06:30.331296	1	ELETTORE	E
+241	2022-09-10 23:17:24.952111	1	ELETTORE	E
+242	2022-09-10 23:17:34.219042	2	ELETTORE	E
+243	2022-09-10 23:18:05.609019	1	ELETTORE	E
+244	2022-09-10 23:18:14.387762	2	ELETTORE	E
+245	2022-09-12 13:48:47.642891	1	ELETTORE	E
+246	2022-09-12 13:49:08.376736	1	ELETTORE	E
+247	2022-09-12 13:50:58.957003	1	ELETTORE	E
+248	2022-09-12 14:13:30.61347	1	ELETTORE	E
+249	2022-09-12 14:13:54.537606	1	ELETTORE	E
+250	2022-09-12 14:15:38.110102	1	ELETTORE	E
+251	2022-09-12 14:16:20.299637	1	ELETTORE	E
+252	2022-09-12 14:17:21.164803	1	ELETTORE	E
+253	2022-09-12 14:18:37.797489	1	ELETTORE	E
+254	2022-09-12 14:29:25.701319	1	ELETTORE	E
+255	2022-09-12 14:35:14.704355	1	ELETTORE	E
+256	2022-09-12 14:35:38.158162	1	ELETTORE	E
+257	2022-09-12 14:37:20.25486	1	ELETTORE	E
+258	2022-09-12 14:38:39.037701	1	ELETTORE	E
+259	2022-09-12 14:43:39.678442	1	ELETTORE	E
+260	2022-09-12 14:44:20.666109	1	ELETTORE	E
+261	2022-09-12 14:47:31.434411	1	ELETTORE	E
+262	2022-09-12 14:49:02.302624	1	ELETTORE	E
+263	2022-09-12 14:49:52.40184	1	ELETTORE	E
+264	2022-09-12 14:51:07.576135	1	ELETTORE	E
+265	2022-09-12 14:51:53.207907	1	ELETTORE	E
+266	2022-09-12 14:52:22.935716	1	ELETTORE	E
+267	2022-09-12 14:53:19.416892	1	ELETTORE	E
+268	2022-09-12 15:00:09.888334	1	ELETTORE	E
+269	2022-09-12 15:00:19.497102	1	ELETTORE	E
+270	2022-09-12 15:00:39.69151	2	ELETTORE	E
+271	2022-09-12 15:02:33.00423	1	ELETTORE	E
+272	2022-09-12 15:18:27.700538	1	ELETTORE	E
+273	2022-09-12 15:18:38.710133	1	ELETTORE	E
+274	2022-09-12 15:26:57.003664	1	ELETTORE	E
+275	2022-09-12 15:49:43.697543	1	ELETTORE	E
+276	2022-09-12 15:52:16.725498	1	ELETTORE	E
+277	2022-09-12 15:52:55.055999	1	ELETTORE	E
+278	2022-09-12 15:53:39.261387	1	ELETTORE	E
+279	2022-09-12 15:54:25.715549	1	ELETTORE	E
+280	2022-09-12 16:06:15.316161	1	ELETTORE	E
+281	2022-09-12 16:06:22.34059	2	ELETTORE	E
 \.
 
 
@@ -682,6 +753,7 @@ COPY sve."Sessioni" (id, titolo, data_apertura, data_chiusura, tipo_votazione, t
 2	Indipendenza nord	2022-09-06	2022-09-16	REFERENDUM	REFERENDUM_QUORUM	f	TLLMRA99L13H2640	f
 3	Reddito di cittadinanza	2022-09-13	2022-09-18	REFERENDUM	REFERENDUM	f	RBNSRA92R50L113H	f
 4	Elezioni ordinale maggioranza	2022-09-13	2022-09-16	ORDINALE	MAGGIORANZA	f	TLLMRA99L13H2640	f
+5	Elezioni categorico maggioranza assoluta	2022-09-22	2022-09-28	CATEGORICO	MAGGIORANZA_ASSOLUTA	f	RBNSRA92R50L113H	f
 \.
 
 
@@ -689,11 +761,15 @@ COPY sve."Sessioni" (id, titolo, data_apertura, data_chiusura, tipo_votazione, t
 -- Data for Name: VotiCandidati; Type: TABLE DATA; Schema: sve; Owner: postgres
 --
 
-COPY sve."VotiCandidati" (sessione, candidato, voti) FROM stdin;
-4	1	0
+COPY sve."VotiCandidati" (candidato, sessione, voti) FROM stdin;
+1	5	0
+3	5	0
+4	5	0
+2	4	0
 4	4	0
-4	3	0
-4	2	0
+1	4	0
+3	4	0
+2	5	1
 \.
 
 
@@ -702,7 +778,15 @@ COPY sve."VotiCandidati" (sessione, candidato, voti) FROM stdin;
 --
 
 COPY sve."VotiElettori" (elettore, sessione, orario) FROM stdin;
-E	1	2022-09-08 11:56:44.436655
+E	5	2022-09-12 16:06:22.338591
+\.
+
+
+--
+-- Data for Name: VotiPartiti; Type: TABLE DATA; Schema: sve; Owner: postgres
+--
+
+COPY sve."VotiPartiti" (partito, sessione, voti) FROM stdin;
 \.
 
 
@@ -710,7 +794,7 @@ E	1	2022-09-08 11:56:44.436655
 -- Name: Auditing_id_seq; Type: SEQUENCE SET; Schema: sve; Owner: postgres
 --
 
-SELECT pg_catalog.setval('sve."Auditing_id_seq"', 225, true);
+SELECT pg_catalog.setval('sve."Auditing_id_seq"', 281, true);
 
 
 --
@@ -738,7 +822,7 @@ SELECT pg_catalog.setval('sve."Partiti_id_seq"', 3, true);
 -- Name: Sessione_id_seq; Type: SEQUENCE SET; Schema: sve; Owner: postgres
 --
 
-SELECT pg_catalog.setval('sve."Sessione_id_seq"', 6, true);
+SELECT pg_catalog.setval('sve."Sessione_id_seq"', 7, true);
 
 
 --
@@ -806,11 +890,27 @@ ALTER TABLE ONLY sve."Sessioni"
 
 
 --
+-- Name: VotiCandidati VotiCandidati_pkey; Type: CONSTRAINT; Schema: sve; Owner: postgres
+--
+
+ALTER TABLE ONLY sve."VotiCandidati"
+    ADD CONSTRAINT "VotiCandidati_pkey" PRIMARY KEY (candidato, sessione);
+
+
+--
 -- Name: VotiElettori VotiElettori_pkey; Type: CONSTRAINT; Schema: sve; Owner: postgres
 --
 
 ALTER TABLE ONLY sve."VotiElettori"
     ADD CONSTRAINT "VotiElettori_pkey" PRIMARY KEY (elettore, sessione);
+
+
+--
+-- Name: VotiPartiti VotiPartiti_pkey; Type: CONSTRAINT; Schema: sve; Owner: postgres
+--
+
+ALTER TABLE ONLY sve."VotiPartiti"
+    ADD CONSTRAINT "VotiPartiti_pkey" PRIMARY KEY (partito, sessione);
 
 
 --
@@ -915,6 +1015,22 @@ ALTER TABLE ONLY sve."VotiElettori"
 
 ALTER TABLE ONLY sve."VotiElettori"
     ADD CONSTRAINT "VotiElettori_sessione_fkey" FOREIGN KEY (sessione) REFERENCES sve."Sessioni"(id);
+
+
+--
+-- Name: VotiPartiti VotiPartiti_partito_fkey; Type: FK CONSTRAINT; Schema: sve; Owner: postgres
+--
+
+ALTER TABLE ONLY sve."VotiPartiti"
+    ADD CONSTRAINT "VotiPartiti_partito_fkey" FOREIGN KEY (partito) REFERENCES sve."Partiti"(id);
+
+
+--
+-- Name: VotiPartiti VotiPartiti_sessione_fkey; Type: FK CONSTRAINT; Schema: sve; Owner: postgres
+--
+
+ALTER TABLE ONLY sve."VotiPartiti"
+    ADD CONSTRAINT "VotiPartiti_sessione_fkey" FOREIGN KEY (sessione) REFERENCES sve."Sessioni"(id);
 
 
 --

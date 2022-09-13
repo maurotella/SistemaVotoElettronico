@@ -1,0 +1,18 @@
+@startuml
+
+Elettore --|> Utente
+Gestore --|> Utente
+Utente --|> Persona
+Gestore "1" -- "1" Votazione: apri >
+Gestore "1" -- "1" Votazione: chiudi >
+Votazione <|-- Elezione
+Votazione <|-- Referendum
+Persona <|-- Candidato
+Candidato "1..*" -- "1" Partito
+Elezione "1" -- "1..*" Candidato
+SessioneVoto "1..*" -- "1" Votazione
+SessioneVoto "1" -- "1..*" Scheda
+Scheda <|-- SchedaReferendum
+Scheda <|-- SchedaElezione
+
+@enduml
