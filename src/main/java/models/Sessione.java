@@ -54,33 +54,6 @@ public class Sessione extends SessioneSemplice {
         gestore = g;
     };
 
-    /*Funzioni getter della sessione
-    _________________________________________________________**/
-
-    /**
-     * @return data di apertura della sessione this
-     */
-    public LocalDate getDataApertura(){return this.dataApertura;}
-
-    /**
-     * @return data di chiusura della sessione this
-     */
-    public LocalDate getDataChiusura(){return this.dataChiusura;}
-
-    /**
-     * @return tipo di votazione di this
-     */
-    public TipoVotazione getTipoVotazione(){return this.tipoVotazione;}
-
-    /**
-     * @return tipo di scrutinio di this
-     */
-    public TipoScrutinio getTipoScrutinio(){ return this.tipoScrutinio;}
-    //____________________________________________________________
-
-
-
-
     /**
      * Chiude la sessione di voto
      */

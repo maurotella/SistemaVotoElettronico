@@ -4,16 +4,11 @@ package controllers;
 
 
 import data.DbManager;
-import data.ElettoreDAOImpl;
-import data.GestoreDAOImpl;
 import data.PersonaDAOImpl;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
 import models.*;
 
 import java.sql.Connection;
@@ -106,6 +101,7 @@ public class NuovaSessioneController {
                 dataInizio.getValue(),
                 dataFine.getValue(),
                 votazioneChoicebox.getValue(),
+                false,
                 scrutinioChoicebox.getValue(),
                 G.toString()
         );

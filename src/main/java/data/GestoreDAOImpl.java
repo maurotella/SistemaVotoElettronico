@@ -2,7 +2,6 @@ package data;
 
 import models.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -128,8 +127,9 @@ public class GestoreDAOImpl implements GestoreDAO {
                 TipoScrutinio scrutinio = TipoScrutinio.valueOf(rs.getString(5));
                 Boolean chiusa = rs.getBoolean(6);
                 Gestore g = new Gestore(rs.getString(7));
+                Boolean votazioniPartiti = rs.getBoolean(9);
                 //System.out.printf("%s\n%s\n%s\n%s\n%s\n%s\n%s\n", titolo, apertura.toString(), chiusura.toString(), votazione, scrutinio, chiusa, g.toString());
-                res.add(new Sessione(id, titolo, apertura, chiusura, votazione, scrutinio, g.toString() ));
+                res.add(new Sessione(id, titolo, apertura, chiusura, votazione,votazioniPartiti, scrutinio, g.toString() ));
 
             }
             rs.close();

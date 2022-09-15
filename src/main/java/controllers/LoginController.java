@@ -2,11 +2,13 @@ package controllers;
 
 import data.ElettoreDAOImpl;
 import data.GestoreDAOImpl;
-import data.PersonaDAOImpl;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+import models.Elettore;
+import models.Gestore;
 import models.TipoUtente;
 import models.Utente;
 
