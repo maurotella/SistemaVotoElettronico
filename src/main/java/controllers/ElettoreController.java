@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import models.Elettore;
 import models.Sessione;
 import models.SessioneSemplice;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
