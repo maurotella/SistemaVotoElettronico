@@ -1,7 +1,9 @@
 package controllers;
 
+import data.ElettoreDAOImpl;
 import data.GestoreDAOImpl;
 import data.PersonaDAOImpl;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import models.Elettore;
 import models.Gestore;
 import models.Sessione;
 import models.SessioneSemplice;
@@ -26,7 +29,7 @@ public class GestoreController {
     private Button nuovaSessioneButton;
 
     @FXML
-    private ListView<Sessione> sessioniAttiveView;
+    private ListView<SessioneSemplice> sessioniAttiveView;
 
     @FXML
     private ListView<Sessione> sessioniChiuseView;
@@ -34,9 +37,13 @@ public class GestoreController {
     public void  init(Gestore G) {
         this.G = G;
         this.nominativo.setText(PersonaDAOImpl.getInstance().getNominativo(G.getCF()));
-        //devo prendere le sessioni aperte e renderle selezionabili per poi (eventualmente) modificarle
-        List<Sessione> sessioniAperte = GestoreDAOImpl.getInstance().getSessioni(G);
-        sessioniAttiveView.getItems().addAll(sessioniAperte);
+
+        sessioniAttiveView.getItems().addAll(
+                ElettoreDAOImpl.getInstance().getSessioni().stream()
+                        .map(x -> new SessioneSemplice(x.getId(), x.getTitolo()))
+                        .collect(Collectors.toList())
+        );
+
     }
 
     @FXML

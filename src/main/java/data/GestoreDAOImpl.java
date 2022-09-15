@@ -1,6 +1,5 @@
 package data;
 
-import javafx.scene.control.Alert;
 import models.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -61,6 +60,11 @@ public class GestoreDAOImpl implements GestoreDAO {
         return G;
     }
 
+    @Override
+    public List<Sessione> getSessioniAperte(Gestore G) {
+        return null;
+    }
+
     /**
      * @param s Sessione da cercare nel DB
      * @return True se s è già presente nellle sessioni nel DB , false altrimenti
@@ -96,6 +100,10 @@ public class GestoreDAOImpl implements GestoreDAO {
         }
     }
 
+    public List<Sessione> getSessioniChiuse(Gestore G) {
+        return null;
+    }
+
     /**
      * Trova tutte le sessioni che il Gestore ha creato e che
      * quindi può gestire
@@ -104,24 +112,25 @@ public class GestoreDAOImpl implements GestoreDAO {
      * @return una lista di sessioni
      */
     @Override
-    public List<Sessione> getSessioni(Gestore G) {
+    public List<Sessione> getSessioni() {
         Connection db = DbManager.getInstance().getDb();
-        String query = "SELECT * FROM \"Sessioni\" WHERE gestore=?";
+        String query = "SELECT * FROM sve.\"Sessioni\" WHERE chiusa=false";
         ArrayList<Sessione> res = new ArrayList<>();
         try {
             PreparedStatement stmt = db.prepareStatement(query);
-            stmt.setString(1, G.getCF());
             ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                res.add(SessioneBuilder.newBuilder(rs.getInt("id"))
-                    .titolo(rs.getString("titolo"))
-                    .dataApertura(dateToLocal(rs.getDate("data_apertura")))
-                    .dataChiusura(dateToLocal(rs.getDate("data_chiusura")))
-                    .tipoVotazione(TipoVotazione.valueOf(rs.getString("tipo_votazione")))
-                    .tipoScrutinio(TipoScrutinio.valueOf(rs.getString("tipo_scrutinio")))
-                    .gestore(rs.getString("gestore"))
-                    .build()
-                );
+            while (rs.next()){
+                int id = rs.getInt(1);
+                String titolo = rs.getString(2);
+                LocalDate apertura = rs.getDate(2).toLocalDate();;
+                LocalDate chiusura = rs.getDate(3).toLocalDate();;
+                TipoVotazione votazione = TipoVotazione.valueOf(rs.getString(4));
+                TipoScrutinio scrutinio = TipoScrutinio.valueOf(rs.getString(5));
+                Boolean chiusa = rs.getBoolean(6);
+                Gestore g = new Gestore(rs.getString(7));
+                //System.out.printf("%s\n%s\n%s\n%s\n%s\n%s\n%s\n", titolo, apertura.toString(), chiusura.toString(), votazione, scrutinio, chiusa, g.toString());
+                res.add(new Sessione(id, titolo, apertura, chiusura, votazione, scrutinio, g.toString() ));
+
             }
             rs.close();
             stmt.close();

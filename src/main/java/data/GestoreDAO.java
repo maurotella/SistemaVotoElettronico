@@ -28,6 +28,9 @@ public interface GestoreDAO {
      *
      * @return una lista di sessioni
      */
-    List<Sessione> getSessioni(Gestore G);
+    List<Sessione> getSessioniAperte(Gestore G);
 
-    }
+    List<Sessione> getSessioniChiuse(Gestore G);
+
+    List<Sessione> getSessioni();
+}

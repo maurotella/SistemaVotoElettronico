@@ -24,9 +24,6 @@ import java.sql.ResultSet;
  * Controller di gestore_nuovaSessione.fmxl
  */
 public class NuovaSessioneController {
-
-
-
     /**
      * Gestore corrente
      */
@@ -112,7 +109,7 @@ public class NuovaSessioneController {
                 scrutinioChoicebox.getValue(),
                 G.toString()
         );
-       
+
 
         try{
             Scene prev = App.getStage().getScene();

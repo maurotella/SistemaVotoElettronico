@@ -62,32 +62,37 @@ public class ElettoreDAOImpl implements ElettoreDAO {
         return E;
     }
 
+    //Ha senso tenerlo in Elettore?
     @Override
-    public List<Sessione> getSessioni() {
+     public List<Sessione> getSessioni() {
         Connection db = DbManager.getInstance().getDb();
         String query = "SELECT * FROM \"Sessioni\" WHERE chiusa=false";
         ArrayList<Sessione> res = new ArrayList<>();
         try {
             PreparedStatement stmt = db.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                res.add(SessioneBuilder.newBuilder(rs.getInt("id"))
-                        .titolo(rs.getString("titolo"))
-                        .dataApertura(dateToLocal(rs.getDate("data_apertura")))
-                        .dataChiusura(dateToLocal(rs.getDate("data_chiusura")))
-                        .tipoVotazione(TipoVotazione.valueOf(rs.getString("tipo_votazione")))
-                        .tipoScrutinio(TipoScrutinio.valueOf(rs.getString("tipo_scrutinio")))
-                        .gestore(rs.getString("gestore"))
-                        .build()
-                );
+            while (rs.next()){
+                int id = rs.getInt(1);
+                String titolo = rs.getString(2);
+                LocalDate apertura = rs.getDate(3).toLocalDate();
+                LocalDate chiusura = rs.getDate(4).toLocalDate();
+                TipoVotazione votazione = TipoVotazione.valueOf(rs.getString(5));
+                TipoScrutinio scrutinio = TipoScrutinio.valueOf(rs.getString(6));
+                Boolean chiusa = rs.getBoolean(7);
+                Gestore g = new Gestore(rs.getString(8));
+
+                System.out.printf("SONO IN ELETTOREDAO.getSessioni: %s\t%s\n", titolo, apertura.toString());
+                res.add(new Sessione(id, titolo, apertura, chiusura, votazione, scrutinio, g.toString() ));
             }
             rs.close();
             stmt.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
             return null;
         }
+        //res.toString();
         return res;
+
     }
 
     @Override
