@@ -7,8 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
-import models.Elettore;
 import models.TipoUtente;
 import models.Utente;
 
@@ -25,7 +23,7 @@ public class LoginController {
     @FXML
     private Label msgLabel;
 
-    private Alert a = new Alert(Alert.AlertType.NONE);
+    Alert a = new Alert(Alert.AlertType.NONE);
 
     void initialize() {
         System.out.println("Initialize");
@@ -36,6 +34,8 @@ public class LoginController {
     void loginClick() {
         String userString = user.getText().toUpperCase();
         String pswString = psw.getText();
+        a.setHeaderText(null);
+        a.setTitle("Errore");
         // Controllo campi non vuoti
         if (userString.isEmpty()){
             a.setAlertType(Alert.AlertType.ERROR);
@@ -49,7 +49,7 @@ public class LoginController {
             // Login
             Utente U = ElettoreDAOImpl.getInstance().login(userString,pswString);
             if (U==null) {
-                U = GestoreDAOImpl.getIstance().login(userString,pswString);
+                U = GestoreDAOImpl.getInstance().login(userString,pswString);
                 if (U==null) {
                     a.setAlertType(Alert.AlertType.ERROR);
                     a.setContentText("Credenziali errate");
@@ -64,7 +64,7 @@ public class LoginController {
                 file = "elettore";
             } else {
                 titolo = "Gestore";
-                file = "gestore";
+                file = "gestoreMain";
             }
             Scene G = App.getStage().getScene();;
             try {
@@ -77,7 +77,7 @@ public class LoginController {
                 pS.setResizable(false);
                 if (U.tipoUtente()==TipoUtente.GESTORE) {
                     GestoreController GC = loader.getController();
-                    GC.init(PersonaDAOImpl.getInstance().getNominativo(U.getCF()));
+                    GC.init((Gestore)U);
                 } else {
                     ElettoreController EC = loader.getController();
                     //noinspection ConstantConditions
@@ -85,7 +85,7 @@ public class LoginController {
                 }
                 pS.show();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new RuntimeException("Errore in LoginController:\t" + e);
             }
         }
     }

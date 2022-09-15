@@ -1,5 +1,7 @@
 package models;
 
+import java.time.LocalDate;
+
 /**
  * Classe per rappresentare una sessione salvondo solo
  * titolo e id
@@ -21,6 +23,7 @@ public class SessioneSemplice {
     public String getTitolo() {
         return titolo;
     }
+
 
     @Override
     public String toString() {
