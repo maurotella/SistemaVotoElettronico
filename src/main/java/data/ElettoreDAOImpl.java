@@ -4,9 +4,9 @@ import models.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import util.Util;
 
 /**
  * Classe che utilizza il pattern SINGLETON
@@ -62,8 +62,9 @@ public class ElettoreDAOImpl implements ElettoreDAO {
         return E;
     }
 
+    //Ha senso tenerlo in Elettore?
     @Override
-    public List<Sessione> getSessioni() {
+     public List<Sessione> getSessioni() {
         Connection db = DbManager.getInstance().getDb();
         String query = "SELECT * FROM \"Sessioni\" WHERE chiusa=false";
         ArrayList<Sessione> res = new ArrayList<>();
@@ -84,11 +85,11 @@ public class ElettoreDAOImpl implements ElettoreDAO {
             rs.close();
             stmt.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
             return null;
         }
+        //res.toString();
         return res;
-    }
 
     @Override
     public void logout(Elettore E) {
@@ -116,6 +117,20 @@ public class ElettoreDAOImpl implements ElettoreDAO {
             System.out.println(e.getMessage());
         }
         return true;
+    }
+
+    /**
+     * Presa una Date D la converte il LocalDate
+     *
+     * @param D
+     * @return la data in LocalDate
+     */
+    private static LocalDate dateToLocal(Date D) {
+        String[] A = D.toString().split("-");
+        int y = Integer.valueOf(A[0]);
+        int m = Integer.valueOf(A[1]);
+        int d = Integer.valueOf(A[2]);
+        return LocalDate.of(y,m,d);
     }
 
 }
