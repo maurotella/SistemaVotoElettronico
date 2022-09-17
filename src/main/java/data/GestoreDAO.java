@@ -39,6 +39,6 @@ public interface GestoreDAO {
      *
      * @return una lista di sessioni
      */
-    List<Sessione> getSessioni();
+    List<Sessione> getSessioni(Gestore G);
 
 }

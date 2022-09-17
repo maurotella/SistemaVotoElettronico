@@ -2,6 +2,8 @@ package data;
 
 import models.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import util.Util;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -84,26 +86,27 @@ public class GestoreDAOImpl implements GestoreDAO {
     }
 
     @Override
-    public List<Sessione> getSessioni() {
+    public List<Sessione> getSessioni(Gestore G) {
         Connection db = DbManager.getInstance().getDb();
-        String query = "SELECT * FROM sve.\"Sessioni\" WHERE chiusa=false";
+        String query = "SELECT * FROM \"Sessioni\" WHERE gestore=?";
         ArrayList<Sessione> res = new ArrayList<>();
         try {
             PreparedStatement stmt = db.prepareStatement(query);
+            stmt.setString(1, G.getCF());
             ResultSet rs = stmt.executeQuery();
-            while (rs.next()){
-                int id = rs.getInt(1);
-                String titolo = rs.getString(2);
-                LocalDate apertura = rs.getDate(2).toLocalDate();;
-                LocalDate chiusura = rs.getDate(3).toLocalDate();;
-                TipoVotazione votazione = TipoVotazione.valueOf(rs.getString(4));
-                TipoScrutinio scrutinio = TipoScrutinio.valueOf(rs.getString(5));
-                Boolean chiusa = rs.getBoolean(6);
-                Gestore g = new Gestore(rs.getString(7));
-                Boolean votazioniPartiti = rs.getBoolean(9);
-                //System.out.printf("%s\n%s\n%s\n%s\n%s\n%s\n%s\n", titolo, apertura.toString(), chiusura.toString(), votazione, scrutinio, chiusa, g.toString());
-                res.add(new Sessione(id, titolo, apertura, chiusura, votazione,votazioniPartiti, scrutinio, g.toString() ));
-
+            while (rs.next()) {
+                Sessione S = SessioneBuilder.newBuilder(rs.getInt("id"))
+                        .titolo(rs.getString("titolo"))
+                        .dataApertura(Util.dateToLocal(rs.getDate("data_apertura")))
+                        .dataChiusura(Util.dateToLocal(rs.getDate("data_chiusura")))
+                        .tipoVotazione(TipoVotazione.valueOf(rs.getString("tipo_votazione")))
+                        .tipoScrutinio(TipoScrutinio.valueOf(rs.getString("tipo_scrutinio")))
+                        .gestore(rs.getString("gestore"))
+                        .votazionePartiti(rs.getBoolean("votazionePartiti"))
+                        .build();
+                if (rs.getBoolean("chiusa"))
+                    S.chiudi();
+                res.add(S);
             }
             rs.close();
             stmt.close();
@@ -117,7 +120,7 @@ public class GestoreDAOImpl implements GestoreDAO {
     /**
      * Presa una Date D la converte il LocalDate
      *
-     * @param D
+     * @param D data
      * @return la data in LocalDate
      */
     private static LocalDate dateToLocal(Date D) {

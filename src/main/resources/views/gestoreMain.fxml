@@ -65,7 +65,7 @@
                            </children>
                         </HBox>
                         <ListView fx:id="sessioniAttiveView" onMouseClicked="#infoSessione" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <ListView fx:id="sessioniChiuseView" prefHeight="135.0" prefWidth="217.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <ListView fx:id="sessioniChiuseView" onMouseClicked="#infoSessione" prefHeight="135.0" prefWidth="217.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                            <children>
                               <Label style="-fx-font-weight: bold;" text="Titolo:">
