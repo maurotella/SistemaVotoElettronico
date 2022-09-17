@@ -1,22 +1,20 @@
 package controllers;
 
 import data.ElettoreDAOImpl;
-import data.GestoreDAOImpl;
 import data.PersonaDAOImpl;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import data.SessioneDAOImpl;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import models.Elettore;
+import javafx.scene.input.MouseEvent;
 import models.Gestore;
 import models.Sessione;
 import models.SessioneSemplice;
 
-import java.util.List;
+import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
 public class GestoreController {
@@ -26,13 +24,28 @@ public class GestoreController {
     private Label nominativo;
 
     @FXML
+    private Label date;
+
+    @FXML
+    private Label id;
+
+    @FXML
+    private Label votazione;
+
+    @FXML
+    private Label scrutinio;
+
+    @FXML
+    private Label titolo;
+
+    @FXML
     private Button nuovaSessioneButton;
 
     @FXML
     private ListView<SessioneSemplice> sessioniAttiveView;
 
     @FXML
-    private ListView<Sessione> sessioniChiuseView;
+    private ListView<SessioneSemplice> sessioniChiuseView;
 
     public void  init(Gestore G) {
         this.G = G;
@@ -61,6 +74,25 @@ public class GestoreController {
             throw new RuntimeException("Errore nuovaSessioneClick():\t" + e.getMessage());
         }
 
+    }
+
+    /**
+     * Visualizza le info della sessione cliccata
+     *
+     * @param event l'evento del click
+     */
+    @FXML
+    void infoSessione(MouseEvent event) {
+        SessioneSemplice SS = ((ListView<SessioneSemplice>) event.getSource()).getSelectionModel().getSelectedItem();
+        Sessione S = SessioneDAOImpl.getInstance().getSessione(SS.getId());
+        titolo.setText(S.getTitolo());
+        id.setText(String.valueOf(S.getId()));
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String dateString = dtf.format(S.getDataApertura()) + " - " +
+                dtf.format(S.getDataChiusura());
+        date.setText(dateString);
+        votazione.setText(S.getTipoVotazione().toString());
+        scrutinio.setText(S.getTipoScrutinio().toString());
     }
 
 }

@@ -20,7 +20,7 @@ public interface SessioneDAO {
 
     /**
      * Dato l'id della sessione,
-     * restituisce l'evetnuale referendum collegato
+     * restituisce l'eventuale referendum collegato
      *
      * @param id id della sessione
      * @return il referendum della sessione se di tipo referendum,
