@@ -27,6 +27,7 @@ public class NuovaSessioneController {
     private Scene genitore;
     private SessioneSemplice s;
 
+    private Integer idxSessione = 0;
     @FXML
     private Button avantiButton;
 
@@ -115,7 +116,7 @@ public class NuovaSessioneController {
             return;
         }
         //prima salvo la sessione con i campi che ho inserito, dato che la devo passare alla scena successiva
-        Integer idxSessione = null;
+
         try {
             Connection db = DbManager.getInstance().getDb();
             String query = "SELECT id FROM sve.\"Sessioni\" WHERE ID = (SELECT MAX(ID) FROM sve.\"Sessioni\")";
