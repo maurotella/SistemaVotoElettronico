@@ -114,20 +114,15 @@ public class ReferendumController implements VotazioneController{
                 sfavorevoleCheck.isSelected() ? Referendum.Risposte.NO :
                         Referendum.Risposte.SCHEDA_BIANCA;
         switch (Ris) {
-            case SI:
-                VotazioneElettoreDAOImpl.getInstance().votoElettore(
-                        R.addSi(E)
-                );
-                break;
-            case NO:
-                VotazioneElettoreDAOImpl.getInstance().votoElettore(
-                        R.addSi(E)
-                );
-                break;
-            case SCHEDA_BIANCA:
-                VotazioneElettoreDAOImpl.getInstance().votoElettore(
-                        R.schedaBianca(E)
-                );
+            case SI -> VotazioneElettoreDAOImpl.getInstance().votoElettore(
+                    R.addSi(E)
+            );
+            case NO -> VotazioneElettoreDAOImpl.getInstance().votoElettore(
+                    R.addSi(E)
+            );
+            case SCHEDA_BIANCA -> VotazioneElettoreDAOImpl.getInstance().votoElettore(
+                    R.schedaBianca(E)
+            );
         }
         genitoreController.aggiornaSessioni();
         App.getStage().setScene(genitore);

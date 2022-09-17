@@ -71,7 +71,6 @@ public class NuovaSessioneController {
         votazioneChoicebox.getItems().addAll(TipoVotazione.REFERENDUM, TipoVotazione.CATEGORICO, TipoVotazione.CATEGORICO_PREFERENZA, TipoVotazione.ORDINALE);
         scrutinioChoicebox.getItems().addAll(TipoScrutinio.REFERENDUM_QUORUM, TipoScrutinio.REFERENDUM, TipoScrutinio.MAGGIORANZA, TipoScrutinio.MAGGIORANZA_ASSOLUTA);
         this.genitore = genitore;
-
     }
 
 

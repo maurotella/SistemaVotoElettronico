@@ -27,8 +27,6 @@ public class GestoreDAOImpl implements GestoreDAO {
         return istance;
     };
 
-
-
     @Override
     public Gestore login(String username, String password) {
         Connection db = DbManager.getInstance().getDb();
@@ -59,19 +57,10 @@ public class GestoreDAOImpl implements GestoreDAO {
         return G;
     }
 
-    @Override
-    public List<Sessione> getSessioniAperte(Gestore G) {
-        return null;
-    }
-
-    /**
-     * @param s Sessione da cercare nel DB
-     * @return True se s è già presente nellle sessioni nel DB , false altrimenti
-     */
     public boolean checkSessione (Sessione s) {
         try {
             Connection db = DbManager.getInstance().getDb();
-            String query = "SELECT * FROM sve.\"Sessioni\" ";
+            String query = "SELECT * FROM \"Sessioni\" ";
             query += String.format("WHERE titolo = '%s' AND data_apertura between '%s' and '%s'", s.getTitolo(), s.getDataApertura(), s.getDataApertura());
             PreparedStatement ps = db.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
@@ -82,15 +71,10 @@ public class GestoreDAOImpl implements GestoreDAO {
         }
     }
 
-    /**
-     * Aggiunge una sessione di Votazione al DataBase, se non è presente una altra sessione con lo stesso titolo e la stessa data di apertura
-     * @param G Gestore che ha creato la sessione (e che quindi può modificarla)
-     * @param s Sessione da aggiugnere al db
-     */
     public void addSessione(Gestore G, Sessione s){
         try {
             Connection db = DbManager.getInstance().getDb();
-            String query = "INSERT INTO sve.\"Sessioni\" (id, titolo, data_apertura, data_chiusura, tipo_votazione, tipo_scrutinio, chiusa, gestore) VALUES (";
+            String query = "INSERT INTO \"Sessioni\" (id, titolo, data_apertura, data_chiusura, tipo_votazione, tipo_scrutinio, chiusa, gestore) VALUES (";
             query += String.format("%d, '%s', '%s', '%s', '%s', '%s', %s, '%s')", s.getId(), s.getTitolo(), s.getDataApertura().toString(), s.getDataChiusura().toString(), s.getTipoVotazione(), s.getTipoScrutinio(), s.chiusa(), G.getCF());
             Statement stmt = db.createStatement();
             stmt.executeUpdate(query);
@@ -99,17 +83,6 @@ public class GestoreDAOImpl implements GestoreDAO {
         }
     }
 
-    public List<Sessione> getSessioniChiuse(Gestore G) {
-        return null;
-    }
-
-    /**
-     * Trova tutte le sessioni che il Gestore ha creato e che
-     * quindi può gestire
-     *
-     * @param G il gestore
-     * @return una lista di sessioni
-     */
     @Override
     public List<Sessione> getSessioni() {
         Connection db = DbManager.getInstance().getDb();

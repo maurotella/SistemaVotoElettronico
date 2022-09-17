@@ -3,7 +3,6 @@ package data;
 import models.Candidato;
 import models.Elettore;
 import models.Sessione;
-import models.TipoUtente;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,6 +38,21 @@ public class VotazioneCandidatiDAOImpl implements VotazioneCandidatiDAO {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+
+    @Override
+    public void addVotazioneCandidato(Sessione S, Candidato C) {
+        Connection db = DbManager.getInstance().getDb();
+        String query = "INSERT INTO \"VotiCandidati\" VALUES (?,?,?)";
+        try {
+            PreparedStatement stmt = db.prepareStatement(query);
+            stmt.setInt(1,C.getId());
+            stmt.setInt(2,S.getId());
+            stmt.setInt(3,0);
+            stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

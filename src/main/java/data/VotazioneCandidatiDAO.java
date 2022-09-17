@@ -19,4 +19,12 @@ public interface VotazioneCandidatiDAO {
      */
     void votaCandidato(Map<Candidato, Integer> C, Sessione S, Elettore E);
 
+    /**
+     * Aggiunge una votazione candidato con Candidato C e sessione S
+     *
+     * @param S la sessione
+     * @param C il candidato
+     */
+    void addVotazioneCandidato(Sessione S, Candidato C);
+
 }

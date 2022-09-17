@@ -79,6 +79,7 @@ public class LoginController {
                 pS.setResizable(false);
                 if (U.tipoUtente()==TipoUtente.GESTORE) {
                     GestoreController GC = loader.getController();
+                    //noinspection ConstantConditions
                     GC.init((Gestore)U);
                 } else {
                     ElettoreController EC = loader.getController();
