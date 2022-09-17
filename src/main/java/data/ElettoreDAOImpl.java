@@ -1,12 +1,14 @@
 package data;
 
 import models.*;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Classe che utilizza il pattern SINGLETON
@@ -62,7 +64,7 @@ public class ElettoreDAOImpl implements ElettoreDAO {
         return E;
     }
 
-    //Ha senso tenerlo in Elettore?
+
     @Override
      public List<Sessione> getSessioni() {
         Connection db = DbManager.getInstance().getDb();
@@ -81,22 +83,22 @@ public class ElettoreDAOImpl implements ElettoreDAO {
                 Boolean chiusa = rs.getBoolean(7);
                 Gestore g = new Gestore(rs.getString(8));
 
-                System.out.printf("SONO IN ELETTOREDAO.getSessioni: %s\t%s\n", titolo, apertura.toString());
+
                 res.add(new Sessione(id, titolo, apertura, chiusura, votazione, scrutinio, g.toString() ));
             }
             rs.close();
             stmt.close();
         } catch (SQLException e) {
-            //System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
             return null;
         }
-        //res.toString();
         return res;
 
     }
 
     @Override
     public boolean puoVotare(Elettore E, Sessione S) {
+        Objects.requireNonNull(E);
         if (!E.dirittoVoto())
             return false;
         Connection db = DbManager.getInstance().getDb();
