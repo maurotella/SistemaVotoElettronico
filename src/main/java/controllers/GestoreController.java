@@ -1,6 +1,6 @@
 package controllers;
 
-import data.ElettoreDAOImpl;
+import data.GestoreDAOImpl;
 import data.PersonaDAOImpl;
 import data.SessioneDAOImpl;
 import javafx.fxml.FXML;
@@ -16,7 +16,6 @@ import models.SessioneSemplice;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class GestoreController {
 
@@ -51,18 +50,17 @@ public class GestoreController {
     public void  init(Gestore G) {
         this.G = G;
         this.nominativo.setText(PersonaDAOImpl.getInstance().getNominativo(G.getCF()));
-        List<Sessione> sessioni = ElettoreDAOImpl.getInstance().getSessioni();
+        List<Sessione> sessioni = GestoreDAOImpl.getInstance().getSessioni(G);
+        System.out.println(sessioni);
         sessioniAttiveView.getItems().addAll(
                 sessioni.stream()
                         .filter(x -> !x.chiusa())
-                        .map(x -> new SessioneSemplice(x.getId(), x.getTitolo()))
-                        .collect(Collectors.toList())
+                        .map(x -> new SessioneSemplice(x.getId(), x.getTitolo())).toList()
         );
-        sessioniAttiveView.getItems().addAll(
+        sessioniChiuseView.getItems().addAll(
                 sessioni.stream()
-                        .filter(x -> x.chiusa())
-                        .map(x -> new SessioneSemplice(x.getId(), x.getTitolo()))
-                        .collect(Collectors.toList())
+                        .filter(Sessione::chiusa)
+                        .map(x -> new SessioneSemplice(x.getId(), x.getTitolo())).toList()
         );
 
     }
@@ -92,6 +90,8 @@ public class GestoreController {
     @FXML
     void infoSessione(MouseEvent event) {
         SessioneSemplice SS = ((ListView<SessioneSemplice>) event.getSource()).getSelectionModel().getSelectedItem();
+        if (SS==null)
+            return;
         Sessione S = SessioneDAOImpl.getInstance().getSessione(SS.getId());
         titolo.setText(S.getTitolo());
         id.setText(String.valueOf(S.getId()));
