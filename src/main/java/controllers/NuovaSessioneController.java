@@ -14,6 +14,7 @@ import models.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 
 /**
  * Controller di gestore_nuovaSessione.fmxl
@@ -54,11 +55,11 @@ public class NuovaSessioneController {
      * Svota tutti i campi di questa scena
      */
     public void svuota(){
-        scrutinioChoicebox.setValue(null);
-        votazioneChoicebox.setValue(null);
-        titoloVotazione.setText("");
-        dataFine.setValue(null);
-        dataInizio.setValue(null);
+        scrutinioChoicebox.getItems().clear();
+        votazioneChoicebox.getItems().clear();
+        titoloVotazione.clear();
+        dataFine.getEditor().clear();
+        dataInizio.getEditor().clear();
     }
 
     /**
@@ -68,17 +69,51 @@ public class NuovaSessioneController {
     void init(Gestore G, Scene genitore){
         this.G = G;
         this.nominativo.setText(PersonaDAOImpl.getInstance().getNominativo(G.getCF()));
-        votazioneChoicebox.getItems().addAll(TipoVotazione.REFERENDUM, TipoVotazione.CATEGORICO, TipoVotazione.CATEGORICO_PREFERENZA, TipoVotazione.ORDINALE);
-        scrutinioChoicebox.getItems().addAll(TipoScrutinio.REFERENDUM_QUORUM, TipoScrutinio.REFERENDUM, TipoScrutinio.MAGGIORANZA, TipoScrutinio.MAGGIORANZA_ASSOLUTA);
+        votazioneChoicebox.getItems().addAll(TipoVotazione.values());
+        scrutinioChoicebox.getItems().addAll(TipoScrutinio.values());
+        votazioneChoicebox.getSelectionModel().selectedItemProperty().addListener(
+                (obs, O, N) -> {
+                    scrutinioChoicebox.getItems().clear();
+                    scrutinioChoicebox.getItems().addAll(TipoScrutinio.values());
+                    if (N == TipoVotazione.REFERENDUM) {
+                        scrutinioChoicebox.getItems().removeAll(
+                                TipoScrutinio.MAGGIORANZA,
+                                TipoScrutinio.MAGGIORANZA_ASSOLUTA
+                        );
+                    } else {
+                        scrutinioChoicebox.getItems().removeAll(
+                                TipoScrutinio.REFERENDUM,
+                                TipoScrutinio.REFERENDUM_QUORUM
+                        );
+                    }
+                }
+        );
         this.genitore = genitore;
+        dataInizio.setValue(LocalDate.now());
     }
 
 
     @FXML
-    void indietroClick() {App.getStage().setScene(genitore);}
+    void indietroClick() {
+        App.getStage().setScene(genitore);
+        svuota();
+    }
 
     @FXML
     void avantiClick(){
+        // controlla dei campi
+        if (!checkAll()) {
+            Alert a = new Alert( Alert.AlertType.ERROR );
+            a.setContentText("Compilare tutti i campi");
+            a.show();
+            return;
+        }
+        if (dataInizio.getValue().compareTo(dataFine.getValue())>1) {
+            Alert a = new Alert( Alert.AlertType.ERROR );
+            a.setContentText("La data di fine non può essere prima di quella d'inizio");
+            a.show();
+            return;
+        }
         //prima salvo la sessione con i campi che ho inserito, dato che la devo passare alla scena successiva
         Integer idxSessione = null;
         try {
@@ -120,5 +155,22 @@ public class NuovaSessioneController {
         }
     }
 
+    /**
+     * Controlla che tutti i campi siano compilati
+     *
+     * @return true se tutti i campi sono compilati,
+     *         false altrimenti
+     */
+    boolean checkAll(){
+        if (
+                votazioneChoicebox.getValue()==null ||
+                scrutinioChoicebox.getValue()==null ||
+                titoloVotazione.getText()==null ||
+                dataInizio.getValue()==null ||
+                dataFine.getValue()==null
+        )
+            return false;
+        return true;
+    }
 
 }
