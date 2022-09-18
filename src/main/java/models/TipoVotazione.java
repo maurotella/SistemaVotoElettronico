@@ -6,8 +6,6 @@ public enum TipoVotazione {
     CATEGORICO_PREFERENZA,
     REFERENDUM
 
-
-
 }
 
 

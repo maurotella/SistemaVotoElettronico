@@ -51,7 +51,6 @@ public class GestoreController {
         this.G = G;
         this.nominativo.setText(PersonaDAOImpl.getInstance().getNominativo(G.getCF()));
         List<Sessione> sessioni = GestoreDAOImpl.getInstance().getSessioni(G);
-        System.out.println(sessioni);
         sessioniAttiveView.getItems().addAll(
                 sessioni.stream()
                         .filter(x -> !x.chiusa())
