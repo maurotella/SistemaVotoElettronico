@@ -1,10 +1,10 @@
 package data;
 
-import models.*;
+import models.Elettore;
+import models.Sessione;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ReferendumDAOImpl implements ReferendumDAO {
@@ -40,6 +40,21 @@ public class ReferendumDAOImpl implements ReferendumDAO {
         try {
             PreparedStatement stmt = db.prepareStatement(query);
             stmt.setInt(1,S.getId());
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void addReferendum(Sessione S, String domanda) {
+        Connection db = DbManager.getInstance().getDb();
+        String query = "INSERT INTO \"Referendum\" VALUES (?,?,0,0)";
+        try {
+            PreparedStatement stmt = db.prepareStatement(query);
+            stmt.setInt(1,S.getId());
+            stmt.setString(2, domanda);
             stmt.execute();
             stmt.close();
         } catch (SQLException e) {
