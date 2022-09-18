@@ -38,7 +38,6 @@ public class NuovoReferendumController {
         this.genitore = genitore;
         genitoreCtrl = scenaG;
         domanda.setOnKeyTyped( X -> {
-            System.out.println(wordCount.getText());
             wordCount.setText(String.valueOf(domanda.getText().length()));
         });
     }
