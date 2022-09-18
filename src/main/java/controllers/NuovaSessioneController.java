@@ -139,16 +139,22 @@ public class NuovaSessioneController {
                 scrutinioChoicebox.getValue(),
                 G.toString()
         );
-
-
+        String fileName = "gestoreSessione";
+        if (votazioneChoicebox.getValue()==TipoVotazione.REFERENDUM)
+            fileName = "domandaReferendum";
         try{
             Scene prev = App.getStage().getScene();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/gestoreSessione.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(String.format("/views/%s.fxml",fileName)));
             App.getStage().setScene(new Scene(loader.load()));
             App.getStage().setResizable(false);
             App.getStage().setTitle("Gestione Sessione");
-            GestioneSessioneController NEW = loader.getController();
-            NEW.init(G, prev, (Sessione)s, this);
+            if (votazioneChoicebox.getValue()==TipoVotazione.REFERENDUM) {
+                NuovoReferendumController NEW = loader.getController();
+                NEW.init((Sessione) s, G, prev, this);
+            } else {
+                GestioneSessioneController NEW = loader.getController();
+                NEW.init(G, prev, (Sessione) s, this);
+            }
             App.getStage().show();
         }catch (Exception e){
             throw new RuntimeException("Errore nuovaSessioneClick():\t" + e.getMessage());

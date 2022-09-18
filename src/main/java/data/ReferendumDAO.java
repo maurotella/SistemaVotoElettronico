@@ -9,5 +9,6 @@ public interface ReferendumDAO {
 
     void votaNo (Sessione S, Elettore E);
 
+    void addReferendum (Sessione S, String domanda);
 
 }
