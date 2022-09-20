@@ -30,7 +30,7 @@ public class SessioneDAOImpl implements SessioneDAO {
             ResultSet rs = stmt.executeQuery();
             if (!rs.next())
                 throw new RuntimeException("Id sessione inesistente");
-            return SessioneBuilder.newBuilder(id)
+            Sessione S = SessioneBuilder.newBuilder(id)
                     .titolo(rs.getString("titolo"))
                     .dataApertura(Util.dateToLocal(rs.getDate("data_apertura")))
                     .dataChiusura(Util.dateToLocal(rs.getDate("data_chiusura")))
@@ -38,6 +38,9 @@ public class SessioneDAOImpl implements SessioneDAO {
                     .tipoScrutinio(TipoScrutinio.valueOf(rs.getString("tipo_scrutinio")))
                     .gestore(rs.getString("gestore"))
                     .build();
+            if (rs.getBoolean("chiusa"))
+                    S.chiudi();
+            return S;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
