@@ -1,0 +1,71 @@
+@startuml
+participant Actor
+loop campi corretti
+    Actor -> NuovaSessioneController : avantiClick
+    activate NuovaSessioneController
+    NuovaSessioneController -> NuovaSessioneController : checkAll
+    activate NuovaSessioneController
+    NuovaSessioneController --> NuovaSessioneController
+    deactivate NuovaSessioneController
+end
+create SessioneBuilder
+NuovaSessioneController -> SessioneBuilder : newBuilder
+activate SessioneBuilder
+SessioneBuilder -> SessioneBuilder : new
+activate SessioneBuilder
+SessioneBuilder --> SessioneBuilder
+deactivate SessioneBuilder
+SessioneBuilder --> NuovaSessioneController
+NuovaSessioneController -> SessioneBuilder : titolo
+SessioneBuilder --> NuovaSessioneController
+NuovaSessioneController -> SessioneBuilder : dataApertura
+SessioneBuilder --> NuovaSessioneController
+NuovaSessioneController -> SessioneBuilder : dataChiusura
+SessioneBuilder --> NuovaSessioneController
+NuovaSessioneController -> SessioneBuilder : votazionePartiti
+SessioneBuilder --> NuovaSessioneController
+NuovaSessioneController -> SessioneBuilder : tipoVotazione
+SessioneBuilder --> NuovaSessioneController
+NuovaSessioneController -> SessioneBuilder : tipoScrutinio
+SessioneBuilder --> NuovaSessioneController
+NuovaSessioneController -> Gestore : toString
+activate Gestore
+Gestore -> Utente : toString
+activate Utente
+Utente --> Gestore
+deactivate Utente
+Gestore --> NuovaSessioneController
+deactivate Gestore
+NuovaSessioneController -> SessioneBuilder : gestore
+SessioneBuilder --> NuovaSessioneController
+NuovaSessioneController -> SessioneBuilder : build
+create Sessione
+SessioneBuilder -> Sessione : new
+activate Sessione
+create SessioneSemplice
+Sessione -> SessioneSemplice : new
+activate SessioneSemplice
+SessioneSemplice --> Sessione
+deactivate SessioneSemplice
+Sessione --> SessioneBuilder
+deactivate Sessione
+SessioneBuilder --> NuovaSessioneController
+deactivate SessioneBuilder
+
+alt tipologia=Referendum
+    NuovaSessioneController -> NuovoReferendumController : init
+    activate NuovoReferendumController
+    NuovoReferendumController --> NuovaSessioneController
+    NuovaSessioneController -> NuovoReferendumController : cambiaPagina
+    NuovoReferendumController --> Actor
+    deactivate NuovoReferendumController
+else
+    NuovaSessioneController -> GestioneSessioneController : init
+    activate GestioneSessioneController
+    GestioneSessioneController --> NuovaSessioneController
+    NuovaSessioneController -> GestioneSessioneController : cambiaPagina
+    GestioneSessioneController --> Actor
+    deactivate GestioneSessioneController
+    deactivate NuovaSessioneController
+end
+@enduml

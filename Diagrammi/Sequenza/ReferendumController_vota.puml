@@ -1,0 +1,90 @@
+@startuml
+loop voto non confermato
+    participant Actor
+    Actor -> ReferendumController : vota
+    activate ReferendumController
+    ReferendumController -> ReferendumController : confermaVoto
+    note left
+            Si apre la finestra
+            di conferma voto
+        end note
+end
+alt votazione="Sì"
+    activate ReferendumController
+    ReferendumController -> Referendum : addSi
+    activate Referendum
+    Referendum -> ReferendumDAOImpl : votaSi
+    activate ReferendumDAOImpl
+    ReferendumDAOImpl --> Referendum
+    deactivate ReferendumDAOImpl
+    Referendum -> Referendum : creaVotoElettore
+    activate Referendum
+    create VotazioneElettore
+    Referendum -> VotazioneElettore
+    activate VotazioneElettore
+    VotazioneElettore -> VotazioneElettore : new
+    activate VotazioneElettore
+    VotazioneElettore --> VotazioneElettore
+    deactivate VotazioneElettore
+    VotazioneElettore --> Referendum
+    deactivate VotazioneElettore
+    Referendum --> Referendum
+    deactivate Referendum
+    Referendum --> ReferendumController
+    deactivate Referendum
+else votazione="No"
+    ReferendumController -> Referendum : addNo
+    activate Referendum
+    Referendum -> ReferendumDAOImpl : votaNo
+    activate ReferendumDAOImpl
+    ReferendumDAOImpl --> Referendum
+    deactivate ReferendumDAOImpl
+    Referendum -> Referendum : creaVotoElettore
+    activate Referendum
+    create VotazioneElettore
+    Referendum -> VotazioneElettore : new
+    activate VotazioneElettore
+    VotazioneElettore -> VotazioneElettore : new
+    activate VotazioneElettore
+    VotazioneElettore --> VotazioneElettore
+    deactivate VotazioneElettore
+    VotazioneElettore --> Referendum
+    deactivate VotazioneElettore
+    Referendum --> Referendum
+    deactivate Referendum
+    Referendum --> ReferendumController
+    deactivate Referendum
+else votazione="Scheda bianca"
+    ReferendumController -> Referendum : schedaBianca
+    activate Referendum
+    Referendum -> Referendum : creaVotoElettore
+    activate Referendum
+    create VotazioneElettore
+    Referendum -> VotazioneElettore : new
+    activate VotazioneElettore
+    VotazioneElettore -> VotazioneElettore : new
+    activate VotazioneElettore
+    VotazioneElettore --> VotazioneElettore
+    deactivate VotazioneElettore
+    VotazioneElettore --> Referendum
+    deactivate VotazioneElettore
+    Referendum --> Referendum
+    deactivate Referendum
+    Referendum --> ReferendumController
+    deactivate Referendum
+end
+ReferendumController -> VotazioneElettoreDAOImpl : votoElettore
+activate VotazioneElettoreDAOImpl
+VotazioneElettoreDAOImpl -> Auditing : registraAzione
+activate Auditing
+Auditing -> Auditing : getAzioneId
+activate Auditing
+Auditing --> Auditing
+deactivate Auditing
+Auditing --> VotazioneElettoreDAOImpl
+deactivate Auditing
+VotazioneElettoreDAOImpl --> ReferendumController
+deactivate VotazioneElettoreDAOImpl
+
+return
+@enduml

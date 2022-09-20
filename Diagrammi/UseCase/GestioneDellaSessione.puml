@@ -1,0 +1,16 @@
+@startuml
+
+left to right direction
+
+usecase "Gestione della sessione" as GS
+usecase "Visualizzazione risultati" as VR
+usecase "Creazione della sessione" as CS
+usecase "Apertura della sessione" as AS
+usecase "Chiusura della sessione" as ChS
+
+ChS <. GS : <<include>>
+GS .> VR : <<include>>
+GS .> CS : <<include>>
+AS <. GS : <<include>>
+
+@enduml

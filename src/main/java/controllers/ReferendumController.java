@@ -118,7 +118,7 @@ public class ReferendumController implements VotazioneController{
                     R.addSi(E)
             );
             case NO -> VotazioneElettoreDAOImpl.getInstance().votoElettore(
-                    R.addSi(E)
+                    R.addNo(E)
             );
             case SCHEDA_BIANCA -> VotazioneElettoreDAOImpl.getInstance().votoElettore(
                     R.schedaBianca(E)

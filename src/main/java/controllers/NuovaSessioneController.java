@@ -47,6 +47,9 @@ public class NuovaSessioneController {
     private ChoiceBox<TipoScrutinio> scrutinioChoicebox;
 
     @FXML
+    private CheckBox votazionePartiti;
+
+    @FXML
     private TextField titoloVotazione;
 
     @FXML
@@ -93,7 +96,6 @@ public class NuovaSessioneController {
         dataInizio.setValue(LocalDate.now());
     }
 
-
     @FXML
     void indietroClick() {
         App.getStage().setScene(genitore);
@@ -130,16 +132,15 @@ public class NuovaSessioneController {
             throw new RuntimeException("Errore in confermaClick():\t" + e.getMessage());
         }
 
-        s = new Sessione(
-                idxSessione + 1,
-                titoloVotazione.getText(),
-                dataInizio.getValue(),
-                dataFine.getValue(),
-                votazioneChoicebox.getValue(),
-                false,
-                scrutinioChoicebox.getValue(),
-                G.toString()
-        );
+        s = SessioneBuilder.newBuilder(idxSessione + 1)
+                .titolo(titoloVotazione.getText())
+                .dataApertura(dataInizio.getValue())
+                .dataChiusura(dataFine.getValue())
+                .votazionePartiti(votazionePartiti.isSelected())
+                .tipoVotazione(votazioneChoicebox.getValue())
+                .tipoScrutinio(scrutinioChoicebox.getValue())
+                .gestore(G.toString())
+                .build();
         String fileName = "gestoreSessione";
         if (votazioneChoicebox.getValue()==TipoVotazione.REFERENDUM)
             fileName = "domandaReferendum";

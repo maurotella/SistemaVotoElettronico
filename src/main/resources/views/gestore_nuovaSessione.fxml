@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -10,6 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
@@ -22,7 +24,7 @@
                         <Font size="27.0" />
                     </font>
                 </Label>
-                <GridPane layoutX="38.8" layoutY="38.8" prefHeight="355.0" prefWidth="547.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="26.0">
+                <GridPane layoutX="51.8" layoutY="38.8" prefHeight="355.0" prefWidth="553.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="26.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="164.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="374.00001525878906" minWidth="10.0" prefWidth="317.00001525878906" />
@@ -37,7 +39,16 @@
                         <RowConstraints maxHeight="297.99999618530273" minHeight="10.0" prefHeight="297.99999618530273" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <ChoiceBox fx:id="votazioneChoicebox" focusTraversable="false" prefHeight="27.0" prefWidth="166.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                              <ChoiceBox fx:id="votazioneChoicebox" focusTraversable="false" prefHeight="27.0" prefWidth="166.0" />
+                        <CheckBox fx:id="votazionePartiti" mnemonicParsing="false" text="Votazione partiti">
+                           <HBox.margin>
+                              <Insets left="52.0" />
+                           </HBox.margin>
+                        </CheckBox>
+                     </children>
+                  </HBox>
                         <Label text="Tipologia di Votazione" GridPane.rowIndex="1" />
                         <ChoiceBox fx:id="scrutinioChoicebox" focusTraversable="false" prefHeight="27.0" prefWidth="166.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label alignment="CENTER" text="Tipologia di Scrutinio" GridPane.rowIndex="2" />

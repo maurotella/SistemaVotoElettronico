@@ -1,0 +1,17 @@
+@startuml
+left to right direction
+actor "Utente" as Ut
+actor "Elettore" as El
+actor "Gestore" as Ge
+El --|> Ut
+Ge --|> Ut
+rectangle "Sistema di voto elettronico" {
+  usecase "Accesso" as A
+  usecase "Gestione della sessione" as GS
+  usecase "Votazione" as V
+}
+
+Ut -- A
+Ge -- GS
+El -- V
+@enduml

@@ -1,0 +1,49 @@
+@startuml
+loop voto non confermato
+participant Actor
+Actor -> VotoOrdinaleController : vota
+    activate VotoOrdinaleController
+    VotoOrdinaleController -> Candidato : toString
+    activate Candidato
+    Candidato -> PersonaDAOImpl : getNominativo
+    activate PersonaDAOImpl
+    PersonaDAOImpl --> Candidato
+    deactivate PersonaDAOImpl
+    Candidato --> VotoOrdinaleController
+    deactivate Candidato
+    VotoOrdinaleController -> VotoOrdinaleController : confermaVoto
+    note left
+        Si apre la finestra
+        di conferma voto
+    end note
+    activate VotoOrdinaleController
+end
+alt votazione!="Scheda bianca"
+    VotoOrdinaleController -> VotazioneCandidatiDAOImpl : votaCandidato
+    activate VotazioneCandidatiDAOImpl
+    create VotazioneElettore
+    VotazioneCandidatiDAOImpl -> VotazioneElettore : new
+    activate VotazioneElettore
+    VotazioneElettore --> VotazioneCandidatiDAOImpl
+    deactivate VotazioneElettore
+    VotazioneCandidatiDAOImpl --> VotoOrdinaleController
+    deactivate VotazioneCandidatiDAOImpl
+end
+VotoOrdinaleController -> VotazioneElettoreDAOImpl : votoElettore
+activate VotazioneElettoreDAOImpl
+VotazioneElettoreDAOImpl -> Auditing : registraAzione
+activate Auditing
+Auditing -> Auditing : getAzioneId
+activate Auditing
+Auditing --> Auditing
+deactivate Auditing
+Auditing --> VotazioneElettoreDAOImpl
+deactivate Auditing
+VotazioneElettoreDAOImpl --> VotoOrdinaleController
+deactivate VotazioneElettoreDAOImpl
+deactivate VotoOrdinaleController
+VotoOrdinaleController --> Actor
+deactivate VotoOrdinaleController
+
+
+@enduml
