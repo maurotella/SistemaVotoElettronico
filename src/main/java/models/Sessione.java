@@ -58,6 +58,7 @@ public class Sessione extends SessioneSemplice {
      * Chiude la sessione di voto
      */
     public void chiudi () {
+
         chiusa = true;
     }
 

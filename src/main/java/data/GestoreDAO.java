@@ -22,7 +22,14 @@ public interface GestoreDAO {
      * @param s Sessione da cercare nel DB
      * @return True se s è già presente nellle sessioni nel DB , false altrimenti
      */
-    public boolean checkSessione (Sessione s);
+    public boolean checkSessione (Sessione s) ;
+
+    /**
+     * Chiude la sessione di Votazione nel DataBase
+     * @param s Sessione da chiudere
+     * @throws IllegalArgumentException se la sessione non è presente nel DB
+     */
+    public void chiudiSessione(Sessione s) throws IllegalArgumentException ;
 
     /**
      * Aggiunge una sessione di Votazione al DataBase, se non è presente una altra sessione con

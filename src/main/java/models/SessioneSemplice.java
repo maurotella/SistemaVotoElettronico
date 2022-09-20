@@ -11,6 +11,7 @@ public class SessioneSemplice {
     private final int id;
     private final String titolo;
 
+
     public SessioneSemplice(int id, String titolo) {
         this.id = id;
         this.titolo = titolo;
