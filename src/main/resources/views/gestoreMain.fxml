@@ -132,7 +132,19 @@
                         <Insets bottom="15.0" />
                      </VBox.margin>
                   </GridPane>
-                  <Button fx:id="nuovaSessioneButton" mnemonicParsing="false" onAction="#nuovaSessioneClick" text="Nuova Sessione di Voto" />
+                  <HBox alignment="CENTER" spacing="229.0">
+                     <children>
+                        <Button fx:id="nuovaSessioneButton" mnemonicParsing="false" onAction="#nuovaSessioneClick" text="Nuova Sessione di Voto" />
+                        <Button fx:id="chiudiButton" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#chiudiClick" text="Chiudi Sessione">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </Button>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </HBox>
                </children>
             </VBox>
          </children>

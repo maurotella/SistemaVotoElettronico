@@ -134,6 +134,7 @@ public class GestioneSessioneController {
         lista.keySet().forEach(
                 partito -> elencoPartiti.getItems().add(new PartitoStringato(partito))
         );
+
     }
 
     /**

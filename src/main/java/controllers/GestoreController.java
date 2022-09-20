@@ -1,8 +1,10 @@
 package controllers;
 
+import data.GestoreDAO;
 import data.GestoreDAOImpl;
 import data.PersonaDAOImpl;
 import data.SessioneDAOImpl;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,6 +22,9 @@ import java.util.List;
 public class GestoreController {
 
     private Gestore G ;
+
+    @FXML
+    private Button chiudiButton;
     @FXML
     private Label nominativo;
 
@@ -48,6 +53,7 @@ public class GestoreController {
     private ListView<SessioneSemplice> sessioniChiuseView;
 
     public void  init(Gestore G) {
+        //chiudiButton.setVisible(false);
         this.G = G;
         this.nominativo.setText(PersonaDAOImpl.getInstance().getNominativo(G.getCF()));
         List<Sessione> sessioni = GestoreDAOImpl.getInstance().getSessioni(G);
@@ -64,6 +70,9 @@ public class GestoreController {
 
     }
 
+    /**
+     * Cambia la scena in gestore_nuovaSessione,fxml
+     */
     @FXML
     void nuovaSessioneClick() {
         try{
@@ -100,6 +109,18 @@ public class GestoreController {
         date.setText(dateString);
         votazione.setText(S.getTipoVotazione().toString());
         scrutinio.setText(S.getTipoScrutinio().toString());
+        if (S.chiusa() == false) chiudiButton.setDisable(false);
+
     }
 
+
+
+    @FXML
+    void chiudiClick(ActionEvent event) {
+        //devo prendere la sessione corrente selezionata con il mouse, come faccio?
+        SessioneSemplice SS =  sessioniAttiveView.getSelectionModel().getSelectedItem();
+        Sessione S = SessioneDAOImpl.getInstance().getSessione(SS.getId());
+        GestoreDAOImpl.getInstance().chiudiSessione(S);
+        init(G);
+    }
 }

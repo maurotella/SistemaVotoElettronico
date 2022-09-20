@@ -29,6 +29,7 @@ public class GestoreDAOImpl implements GestoreDAO {
         return istance;
     };
 
+
     @Override
     public Gestore login(String username, String password) {
         Connection db = DbManager.getInstance().getDb();
@@ -59,6 +60,7 @@ public class GestoreDAOImpl implements GestoreDAO {
         return G;
     }
 
+
     public boolean checkSessione (Sessione s) {
         try {
             Connection db = DbManager.getInstance().getDb();
@@ -70,6 +72,22 @@ public class GestoreDAOImpl implements GestoreDAO {
             return false;
         } catch (Exception e) {
             throw new RuntimeException("Errore in checkSessione: \t" + e.getMessage());
+        }
+    }
+
+    @Override
+    public void chiudiSessione(Sessione s) {
+        if (!(checkSessione(s))) throw new IllegalArgumentException("Sessione " + s.toString() + " non trovata nel DB");
+        try {
+            Connection db = DbManager.getInstance().getDb();
+            String query = "UPDATE sve.\"Sessioni\" SET chiusa = true WHERE id = " + s.getId();
+                        System.out.println(query);
+
+            PreparedStatement ps = db.prepareStatement(query);
+            ps.execute();
+            s.chiudi();
+        } catch (Exception e){
+            throw new RuntimeException("Errore in chiudiSessione\t" + e.getMessage());
         }
     }
 
