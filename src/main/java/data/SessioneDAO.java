@@ -37,5 +37,45 @@ public interface SessioneDAO {
      */
     HashMap<Partito, ArrayList<Candidato>> getListaCandidati(Sessione S);
 
+    /**
+     * Restituisce il numero dei votanti della sessione S
+     *
+     * @param S la sessione
+     * @return il nr. dei votanti
+     */
+    int nrVotanti(Sessione S);
+
+    /**
+     * Restituisce il numero di elettori totali
+     *
+     * @return il nr. di elettori totali
+     */
+    int nrElettori();
+
+    /**
+     * Verifica che la sessione S sia chiusa o meno
+     *
+     * @param S la sessione
+     * @return true se la sessione è chiusa, false altrimenti
+     */
+    boolean chiusa(Sessione S);
+
+    /**
+     * Verifica se la Sessione S, con scrutinio referendumQuorum,
+     * ha raggiunto il quorum
+     *
+     * @param S la sessione
+     * @return true se la sessione S ha come scrutinio rQuorum
+     *         e ha raggiunto il quorum, false altrimenti
+     */
+    boolean quorum(Sessione S);
+
+    /**
+     * Restituisce una mappa contenente i risultati del referendum:
+     *  true = voti positivi, false = voti negativi
+     *
+     * @return gli esiti
+     */
+    HashMap<Boolean, Integer> esitiReferendum (Sessione S);
 
 }

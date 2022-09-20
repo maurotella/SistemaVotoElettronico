@@ -1,7 +1,6 @@
 package models;
 
 import data.ReferendumDAOImpl;
-import data.VotazioneElettoreDAOImpl;
 
 /**
  * Classe che tiene i conti sulle votazioni relative a un referendum
@@ -83,6 +82,11 @@ public class Referendum extends Votazione {
      * @param E elettore
      * @return il VotoElettore corrispondente
      */
+    public VotazioneElettore addSi (Elettore E, int n) {
+        votiFavorevoli+=n;
+        ReferendumDAOImpl.getInstance().votaSi(getSessione(),E);
+        return creaVotoElettore(E);
+    };
     public VotazioneElettore addSi (Elettore E) {
         votiFavorevoli++;
         ReferendumDAOImpl.getInstance().votaSi(getSessione(),E);

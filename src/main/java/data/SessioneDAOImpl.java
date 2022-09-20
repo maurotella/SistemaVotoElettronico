@@ -115,4 +115,87 @@ public class SessioneDAOImpl implements SessioneDAO {
         return res;
     }
 
+    @Override
+    public boolean chiusa(Sessione S) {
+        Connection db = DbManager.getInstance().getDb();
+        String query = "SELECT chiusa FROM \"Sessioni\" WHERE id=?";
+        try {
+            PreparedStatement stmt = db.prepareStatement(query);
+            stmt.setInt(1, S.getId());
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            return rs.getBoolean(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int nrElettori() {
+        Connection db = DbManager.getInstance().getDb();
+        String query = "SELECT count(*) FROM \"Elettori\"";
+        try {
+            PreparedStatement stmt = db.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            return rs.getInt(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public int nrVotanti(Sessione S) {
+        if (!chiusa(S))
+            throw new IllegalArgumentException("La sessione deve essere chiusa");
+        Connection db = DbManager.getInstance().getDb();
+        String query = "SELECT count(*) FROM \"VotiElettori\" WHERE sessione=?";
+        try {
+            PreparedStatement stmt = db.prepareStatement(query);
+            stmt.setInt(1, S.getId());
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            return rs.getInt(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public boolean quorum(Sessione S) {
+        if (!chiusa(S))
+            throw new IllegalArgumentException("La sessione deve essere chiusa");
+        Connection db = DbManager.getInstance().getDb();
+        String query = "SELECT count(*) FROM \"VotiElettori\" WHERE sessione=?";
+        try {
+            PreparedStatement stmt = db.prepareStatement(query);
+            stmt.setInt(1, S.getId());
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            return rs.getInt(1) >= (nrElettori()/2);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public HashMap<Boolean, Integer> esitiReferendum(Sessione S) {
+        if (!chiusa(S))
+            throw new IllegalArgumentException("La sessione deve essere chiusa");
+        Connection db = DbManager.getInstance().getDb();
+        String query = "SELECT si,no FROM \"Referendum\" WHERE sessione=?";
+        try {
+            PreparedStatement stmt = db.prepareStatement(query);
+            stmt.setInt(1, S.getId());
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            HashMap<Boolean, Integer> esiti = new HashMap<>();
+            esiti.put(true,rs.getInt("si"));
+            esiti.put(false,rs.getInt("no"));
+            stmt.close();
+            rs.close();
+            return esiti;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

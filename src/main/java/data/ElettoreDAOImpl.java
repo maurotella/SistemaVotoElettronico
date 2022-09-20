@@ -2,6 +2,7 @@ package data;
 
 import models.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import util.Util;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -90,6 +91,7 @@ public class ElettoreDAOImpl implements ElettoreDAO {
         }
         //res.toString();
         return res;
+    }
 
     @Override
     public void logout(Elettore E) {

@@ -1,10 +1,8 @@
 package controllers;
 
-import data.GestoreDAO;
 import data.GestoreDAOImpl;
 import data.PersonaDAOImpl;
 import data.SessioneDAOImpl;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,10 +10,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import models.Gestore;
 import models.Sessione;
 import models.SessioneSemplice;
 
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -23,8 +23,14 @@ public class GestoreController {
 
     private Gestore G ;
 
+    private Sessione selected=null;
+
     @FXML
     private Button chiudiButton;
+
+    @FXML
+    private Button esitiButton;
+
     @FXML
     private Label nominativo;
 
@@ -66,7 +72,6 @@ public class GestoreController {
                         .filter(Sessione::chiusa)
                         .map(x -> new SessioneSemplice(x.getId(), x.getTitolo())).toList()
         );
-
     }
 
     /**
@@ -98,30 +103,46 @@ public class GestoreController {
         SessioneSemplice SS = ((ListView<SessioneSemplice>) event.getSource()).getSelectionModel().getSelectedItem();
         if (SS==null)
             return;
-        Sessione S = SessioneDAOImpl.getInstance().getSessione(SS.getId());
-        System.out.println(S.toString());
-        if (S.chiusa() == false) chiudiButton.setDisable(false);
-        else chiudiButton.setDisable(true);
-        /**
-         * Non disabilita il button se sono nelle sessioni chiuse
-         */
-        titolo.setText(S.getTitolo());
-        id.setText(String.valueOf(S.getId()));
+        selected = SessioneDAOImpl.getInstance().getSessione(SS.getId());
+        chiudiButton.setDisable(selected.chiusa());
+        esitiButton.setDisable(!selected.chiusa());
+        titolo.setText(selected.getTitolo());
+        id.setText(String.valueOf(selected.getId()));
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String dateString = dtf.format(S.getDataApertura()) + " - " +
-                dtf.format(S.getDataChiusura());
+        String dateString = dtf.format(selected.getDataApertura()) + " - " +
+                dtf.format(selected.getDataChiusura());
         date.setText(dateString);
-        votazione.setText(S.getTipoVotazione().toString());
-        scrutinio.setText(S.getTipoScrutinio().toString());
-
+        votazione.setText(selected.getTipoVotazione().toString());
+        scrutinio.setText(selected.getTipoScrutinio().toString());
     }
 
     @FXML
-    void chiudiClick(ActionEvent event) {
+    void chiudiClick() {
         SessioneSemplice SS =  sessioniAttiveView.getSelectionModel().getSelectedItem();
         Sessione S = SessioneDAOImpl.getInstance().getSessione(SS.getId());
         GestoreDAOImpl.getInstance().chiudiSessione(S);
         sessioniAttiveView.getItems().remove(SS);
         sessioniChiuseView.getItems().add(SS);
+        chiudiButton.setDisable(true);
     }
+
+    @FXML
+    void visualizzaEsiti() {
+        if (SessioneDAOImpl.getInstance().chiusa(selected)) {
+            Scene This = App.getStage().getScene();
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/views/esiti.fxml")
+            );
+            Stage pS = App.getStage();
+            try {
+                pS.setScene(new Scene(loader.load()));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            pS.setTitle("Esiti");
+            pS.setResizable(false);
+            ((EsitoController)loader.getController()).init(selected,This,this);
+        }
+    }
+
 }

@@ -98,7 +98,6 @@ public class NuovaSessioneController {
     void indietroClick() {
         App.getStage().setScene(genitore);
         svuota();
-
     }
 
     @FXML
