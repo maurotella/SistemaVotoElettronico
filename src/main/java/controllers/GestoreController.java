@@ -53,7 +53,6 @@ public class GestoreController {
     private ListView<SessioneSemplice> sessioniChiuseView;
 
     public void  init(Gestore G) {
-        //chiudiButton.setVisible(false);
         this.G = G;
         this.nominativo.setText(PersonaDAOImpl.getInstance().getNominativo(G.getCF()));
         List<Sessione> sessioni = GestoreDAOImpl.getInstance().getSessioni(G);
@@ -87,7 +86,6 @@ public class GestoreController {
         }catch (Exception e){
             throw new RuntimeException("Errore nuovaSessioneClick():\t" + e.getMessage());
         }
-
     }
 
     /**
@@ -101,6 +99,12 @@ public class GestoreController {
         if (SS==null)
             return;
         Sessione S = SessioneDAOImpl.getInstance().getSessione(SS.getId());
+        System.out.println(S.toString());
+        if (S.chiusa() == false) chiudiButton.setDisable(false);
+        else chiudiButton.setDisable(true);
+        /**
+         * Non disabilita il button se sono nelle sessioni chiuse
+         */
         titolo.setText(S.getTitolo());
         id.setText(String.valueOf(S.getId()));
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -109,18 +113,15 @@ public class GestoreController {
         date.setText(dateString);
         votazione.setText(S.getTipoVotazione().toString());
         scrutinio.setText(S.getTipoScrutinio().toString());
-        if (S.chiusa() == false) chiudiButton.setDisable(false);
 
     }
 
-
-
     @FXML
     void chiudiClick(ActionEvent event) {
-        //devo prendere la sessione corrente selezionata con il mouse, come faccio?
         SessioneSemplice SS =  sessioniAttiveView.getSelectionModel().getSelectedItem();
         Sessione S = SessioneDAOImpl.getInstance().getSessione(SS.getId());
         GestoreDAOImpl.getInstance().chiudiSessione(S);
-        init(G);
+        sessioniAttiveView.getItems().remove(SS);
+        sessioniChiuseView.getItems().add(SS);
     }
 }

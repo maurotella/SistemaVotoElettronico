@@ -81,8 +81,6 @@ public class GestoreDAOImpl implements GestoreDAO {
         try {
             Connection db = DbManager.getInstance().getDb();
             String query = "UPDATE sve.\"Sessioni\" SET chiusa = true WHERE id = " + s.getId();
-                        System.out.println(query);
-
             PreparedStatement ps = db.prepareStatement(query);
             ps.execute();
             s.chiudi();

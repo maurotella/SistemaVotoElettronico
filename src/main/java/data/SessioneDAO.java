@@ -37,4 +37,5 @@ public interface SessioneDAO {
      */
     HashMap<Partito, ArrayList<Candidato>> getListaCandidati(Sessione S);
 
+
 }
