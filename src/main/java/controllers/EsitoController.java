@@ -1,5 +1,6 @@
 package controllers;
 
+import data.PersonaDAOImpl;
 import data.SessioneDAOImpl;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -7,10 +8,12 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import models.Candidato;
 import models.Sessione;
 import models.TipoScrutinio;
 import models.TipoVotazione;
 
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class EsitoController {
@@ -39,7 +42,7 @@ public class EsitoController {
         if (S.getTipoVotazione() == TipoVotazione.REFERENDUM) {
             setReferendum();
         } else {
-            return;
+            setVoto();
         }
     }
 
@@ -73,8 +76,40 @@ public class EsitoController {
         );
     }
 
+    /**
+     * Imposta la scena per visualizzare gli esiti di un voto ordinale o categorico
+     */
     void setVoto() {
-
+        String vincitoreCF = "";
+        if (!S.isVotazionePartiti()) {
+            HashMap<Candidato, Integer> esiti = SessioneDAOImpl.getInstance().esitiVotoCandidati(S);
+            vincitoreCF = esiti.keySet().stream().max(
+                    Comparator.comparing(esiti::get)
+            ).get().getPersona();
+            for (Candidato candidato : esiti.keySet()) {
+                int voti = esiti.get(candidato);
+                graficoEsiti.getData().add(
+                        new PieChart.Data(
+                                PersonaDAOImpl.getInstance().getNominativo(candidato.getPersona()) + ": " + voti,
+                                voti
+                        )
+                );
+            }
+        }
+        int vot = SessioneDAOImpl.getInstance().nrVotanti(S);
+        int nVot = SessioneDAOImpl.getInstance().nrElettori()-vot;
+        graficoAstenuti.getData().addAll(
+                new PieChart.Data("Votanti: "+vot, vot),
+                new PieChart.Data("Non votanti: "+(nVot), nVot)
+        );
+        String vincitore = PersonaDAOImpl.getInstance().getNominativo(vincitoreCF);
+        graficoEsiti.setTitle(
+                S.getTipoScrutinio()!=TipoScrutinio.MAGGIORANZA_ASSOLUTA ?
+                        String.format("Esito: %s", vincitore)
+                        :
+                        SessioneDAOImpl.getInstance().maggioranza(S) ?
+                                String.format("Esito: %s", vincitore) : "Esito: maggioranza assoluta non raggiunta"
+        );
     }
     @FXML
     void indietro() {
@@ -82,8 +117,8 @@ public class EsitoController {
     }
 
     public static void main(String[] args) {
-        Sessione S = SessioneDAOImpl.getInstance().getSessione(1);
-        System.out.println(SessioneDAOImpl.getInstance().quorum(S));
+        Sessione S = SessioneDAOImpl.getInstance().getSessione(4);
+        System.out.println(SessioneDAOImpl.getInstance().maggioranza(S));
     }
 
 }

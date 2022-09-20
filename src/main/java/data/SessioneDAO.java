@@ -76,6 +76,25 @@ public interface SessioneDAO {
      *
      * @return gli esiti
      */
-    HashMap<Boolean, Integer> esitiReferendum (Sessione S);
+    HashMap<Boolean, Integer> esitiReferendum(Sessione S);
+
+    /**
+     * Restituisce una mappa contenente i risultati della votazione:
+     *  true = voti positivi, false = voti negativi
+     *  { Partito1 : { Candidato1 : n, Candidato2 : m ... } }
+     * @param S la sessione
+     * @return gli esiti della sessione
+     */
+    HashMap<Candidato, Integer> esitiVotoCandidati(Sessione S);
+
+    /**
+     * Indica il raggiungimento della maggioranza assoluta in una sessione
+     * con tipo di scrutinio Maggioranza_assoluta
+     *
+     * @param S la sessione
+     * @return true se il tipo di scrutinio è Maggioranza_assoluta
+     *         e si è raggiunta la magg. assol, false altrimenti
+     */
+    boolean maggioranza(Sessione S);
 
 }

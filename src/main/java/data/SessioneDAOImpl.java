@@ -12,7 +12,7 @@ public class SessioneDAOImpl implements SessioneDAO {
 
     private static SessioneDAOImpl istance = null;
 
-    private SessioneDAOImpl() {};
+    private SessioneDAOImpl() {}
 
     public static SessioneDAOImpl getInstance() {
         if (istance==null)
@@ -117,6 +117,7 @@ public class SessioneDAOImpl implements SessioneDAO {
 
     @Override
     public boolean chiusa(Sessione S) {
+        boolean res;
         Connection db = DbManager.getInstance().getDb();
         String query = "SELECT chiusa FROM \"Sessioni\" WHERE id=?";
         try {
@@ -124,10 +125,13 @@ public class SessioneDAOImpl implements SessioneDAO {
             stmt.setInt(1, S.getId());
             ResultSet rs = stmt.executeQuery();
             rs.next();
-            return rs.getBoolean(1);
+            res = rs.getBoolean(1);
+            rs.close();
+            stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return res;
     }
 
     public int nrElettori() {
@@ -162,6 +166,7 @@ public class SessioneDAOImpl implements SessioneDAO {
 
     @Override
     public boolean quorum(Sessione S) {
+        boolean res;
         if (!chiusa(S))
             throw new IllegalArgumentException("La sessione deve essere chiusa");
         Connection db = DbManager.getInstance().getDb();
@@ -171,10 +176,11 @@ public class SessioneDAOImpl implements SessioneDAO {
             stmt.setInt(1, S.getId());
             ResultSet rs = stmt.executeQuery();
             rs.next();
-            return rs.getInt(1) >= (nrElettori()/2);
+            res = rs.getInt(1) >= (nrElettori()/2);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return res;
     }
 
     @Override
@@ -198,4 +204,57 @@ public class SessioneDAOImpl implements SessioneDAO {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public HashMap<Candidato, Integer> esitiVotoCandidati(Sessione S) {
+        Connection db = DbManager.getInstance().getDb();
+        String query = """
+                        SELECT C.id,VC.voti,C.persona,C.partito,C.ruolo FROM "VotiCandidati" as VC
+                            JOIN "Candidati" C on C.id = VC.candidato
+                            WHERE sessione=?;""";
+        HashMap<Candidato, Integer> res = new HashMap<>();
+        try {
+            PreparedStatement stmt = db.prepareStatement(query);
+            stmt.setInt(1,S.getId());
+            ResultSet rs = stmt.executeQuery();
+            Candidato C;
+            while (rs.next()) {
+                C = new Candidato(
+                        rs.getInt("id"),
+                        rs.getString("persona"),
+                        rs.getInt("partito"),
+                        rs.getString("ruolo")
+                );
+                res.put(C,rs.getInt("voti"));
+            }
+            stmt.close();
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+
+    @Override
+    public boolean maggioranza(Sessione S) {
+        boolean res = false;
+        Connection db = DbManager.getInstance().getDb();
+        String query = """
+                SELECT max(voti)::float/sum(voti) as percentuale FROM "VotiCandidati"
+                                         WHERE sessione=?;""";
+        try {
+            PreparedStatement stmt = db.prepareStatement(query);
+            stmt.setInt(1,S.getId());
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            if (rs.getFloat("percentuale")>0.5)
+                res = true;
+            stmt.close();
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+
 }
