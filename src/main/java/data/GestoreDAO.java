@@ -1,5 +1,6 @@
 package data;
 
+import models.Elettore;
 import models.Gestore;
 import models.Sessione;
 
@@ -47,5 +48,13 @@ public interface GestoreDAO {
      * @return una lista di sessioni
      */
     List<Sessione> getSessioni(Gestore G);
+
+    /**
+     * Effettua il logout del gestore E,
+     * segnalando l'azione al Auditing
+     *
+     * @param G il gestore
+     */
+    void logout(Gestore G);
 
 }

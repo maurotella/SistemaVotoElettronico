@@ -6,8 +6,10 @@ package models;
 public abstract class Votazione {
 
     // sessione relativa ai voti
+    //@ invariant sessione!=null;
     private Sessione sessione;
     // numero di votazioni effetuate dagli elettori
+    //@ invariant numeroVoti>=0;
     private int numeroVoti;
 
     /**
@@ -36,7 +38,7 @@ public abstract class Votazione {
      *
      * @return numero di votazioni
      */
-    public int getNumeroVoti () {
+    public int getVoti () {
         return numeroVoti;
     }
 

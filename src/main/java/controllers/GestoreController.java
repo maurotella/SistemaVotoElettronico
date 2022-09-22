@@ -5,6 +5,7 @@ import data.PersonaDAOImpl;
 import data.SessioneDAOImpl;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,6 +19,7 @@ import models.SessioneSemplice;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
 
 public class GestoreController {
 
@@ -50,6 +52,9 @@ public class GestoreController {
     private Label titolo;
 
     @FXML
+    private Button logout;
+
+    @FXML
     private Button nuovaSessioneButton;
 
     @FXML
@@ -58,7 +63,7 @@ public class GestoreController {
     @FXML
     private ListView<SessioneSemplice> sessioniChiuseView;
 
-    public void  init(Gestore G) {
+    public void init(Gestore G) {
         this.G = G;
         this.nominativo.setText(PersonaDAOImpl.getInstance().getNominativo(G.getCF()));
         List<Sessione> sessioni = GestoreDAOImpl.getInstance().getSessioni(G);
@@ -142,6 +147,22 @@ public class GestoreController {
             pS.setTitle("Esiti");
             pS.setResizable(false);
             ((EsitoController)loader.getController()).init(selected,This,this);
+        }
+    }
+
+    @FXML
+    void logout() {
+        GestoreDAOImpl.getInstance().logout(G);
+        Stage pStage = App.getStage();
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(App.class.getResource("/views/login.fxml")));
+            Scene scene = new Scene(root);
+            pStage.setScene(scene);
+            pStage.setTitle("Login");
+            pStage.setResizable(false);
+            pStage.show();
+        } catch(Exception e){
+            e.printStackTrace();
         }
     }
 

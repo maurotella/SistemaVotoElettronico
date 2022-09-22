@@ -8,7 +8,6 @@ public class SessioneBuilder {
     private LocalDate dataApertura;
     private LocalDate dataChiusura;
     private TipoVotazione tipoVotazione;
-
     private boolean votazionePartiti;
     private TipoScrutinio tipoScrutinio;
     private String gestore;

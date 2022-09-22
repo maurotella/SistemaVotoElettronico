@@ -1,7 +1,5 @@
 package models;
 
-import java.time.LocalDate;
-
 /**
  * Classe per rappresentare una sessione salvondo solo
  * titolo e id
@@ -9,6 +7,7 @@ import java.time.LocalDate;
 public class SessioneSemplice {
 
     private final int id;
+    //@ invariant titolo!=null && titolo.length()>0;
     private final String titolo;
 
 

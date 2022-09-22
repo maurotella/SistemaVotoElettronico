@@ -64,11 +64,14 @@ public class GestoreDAOImpl implements GestoreDAO {
     public boolean checkSessione (Sessione s) {
         try {
             Connection db = DbManager.getInstance().getDb();
-            String query = "SELECT * FROM \"Sessioni\" ";
-            query += String.format("WHERE titolo = '%s' AND data_apertura between '%s' and '%s'", s.getTitolo(), s.getDataApertura(), s.getDataApertura());
+            String query = "SELECT * FROM \"Sessioni\" where id=?";
             PreparedStatement ps = db.prepareStatement(query);
+            ps.setInt(1,s.getId());
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) return true;
+            if (rs.next()) {
+                System.out.println(rs.getInt(1));
+                return true;
+            }
             return false;
         } catch (Exception e) {
             throw new RuntimeException("Errore in checkSessione: \t" + e.getMessage());
@@ -77,7 +80,6 @@ public class GestoreDAOImpl implements GestoreDAO {
 
     @Override
     public void chiudiSessione(Sessione s) {
-        if (!(checkSessione(s))) throw new IllegalArgumentException("Sessione " + s.toString() + " non trovata nel DB");
         try {
             Connection db = DbManager.getInstance().getDb();
             String query = "UPDATE sve.\"Sessioni\" SET chiusa = true WHERE id = " + s.getId();
@@ -146,5 +148,14 @@ public class GestoreDAOImpl implements GestoreDAO {
         int d = Integer.valueOf(A[2]);
         return LocalDate.of(y,m,d);
     }
+
+    public void logout(Gestore G) {
+        Auditing.getInstance().registraAzione(
+                AzioniAuditing.LOGOUT,
+                TipoUtente.GESTORE,
+                G
+        );
+    }
+
 
 }

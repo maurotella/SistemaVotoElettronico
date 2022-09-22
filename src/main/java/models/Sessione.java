@@ -6,17 +6,18 @@ import java.time.LocalDate;
 
 public class Sessione extends SessioneSemplice {
 
+    //@ invariant dataApertura!=null && dataApertura.compareTo(dataChiusura)<=0;
     private final LocalDate dataApertura;
+    //@ invariant dataChiusura!=null && dataChiusura.compareTo(dataApertura)>0;
     private final LocalDate dataChiusura;
+    //@ invariant tipoVotazione!=null;
     private final TipoVotazione tipoVotazione;
     private final boolean votazionePartiti;
+    //@ invariant tipoScrutinio!=null;
     private final TipoScrutinio tipoScrutinio;
     private boolean chiusa;
+    //@ invariant gestore!=null && gestore.length()>0;
     private final String gestore;
-
-    public TipoVotazione getTipoVotazione() {
-        return tipoVotazione;
-    }
 
     public Sessione (
             int i,
@@ -53,6 +54,10 @@ public class Sessione extends SessioneSemplice {
         chiusa = false;
         gestore = g;
     };
+
+    public TipoVotazione getTipoVotazione() {
+        return tipoVotazione;
+    }
 
     /**
      * Chiude la sessione di voto

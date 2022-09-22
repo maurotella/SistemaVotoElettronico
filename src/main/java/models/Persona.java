@@ -4,13 +4,21 @@ import java.time.LocalDate;
 
 public class Persona {
 
+    //@ invariant nome!=null && nome.length()>0;
     private final String nome;
+    //@ invariant cognome!=null && cognome.length()>0;
     private final String cognome;
     // Codice fiscale
+    //@ invariant CF!=null && CF.length()>0 && checkCF(nome,cognome,dataNascita,sesso,nazionalita,CF);
     private final String CF;
+    //@ invariant sesso=='M' || sesso=='F';
     private final char sesso;
+    // nazionalità in formato iso (3 lettere)
+    //@ invariant nazionalita!=null && nazionalita.length()==3;
     private final String nazionalita;
+    //@ invariant luogoNascita!=null && luogoNascita.length()>0;
     private final String luogoNascita;
+    //@ invariant dataNascita!=null && dataNascita.compareTo(LocalDate.now())<0;
     private final LocalDate dataNascita;
 
     /**

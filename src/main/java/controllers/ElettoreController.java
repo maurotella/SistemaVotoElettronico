@@ -27,6 +27,7 @@ public class ElettoreController {
     @FXML
     private Button votaButton;
 
+
     @FXML
     private Button logout;
 
